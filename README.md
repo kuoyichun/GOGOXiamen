@@ -11,10 +11,11 @@
 - `assets/style.css`：樣式
 - `assets/land.js`：廈門、金門海岸線（OpenStreetMap）
 - `img/`：照片（Wikimedia Commons，來源列在網頁最下面）
+- `audio/`：每個喇叭按鈕的語音檔（台灣國語女聲 HsiaoChen）
+- `tools/make_audio.py`：重新產生語音檔
 - `sw.js`：沒網路時也能打開看過的頁面
 
 ## 常見修改
 
-- **船班時間確定後**：在 `assets/data.js` 改那一項的 `t`，順便把 `tbd: true` 拿掉、改 `say` 裡唸的時間。
+- **船班時間確定後**：在 `assets/data.js` 改那一項的 `t`，順便把 `tbd: true` 拿掉、改 `say` 裡唸的時間，再跑 `python3 tools/make_audio.py` 重錄有改到的語音。
 - **測試「現在」列**：網址後面加 `?now=2026-12-18T15:20`，就會假裝現在是那個時間。
-- **傳到 LINE**：網址後面加 `?openExternalBrowser=1`，點開會直接用手機瀏覽器開，語音按鈕才能用（LINE 內建瀏覽器在 Android 上不能唸）。

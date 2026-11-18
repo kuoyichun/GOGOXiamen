@@ -52,9 +52,9 @@
       <b>看到喇叭，按一下</b>
       <span>就會唸給你聽，再按一次停止</span>
     </div>
-    <button type="button" class="spk big" data-on="試聽" data-off="停止" data-say="你好！這是我們廈門旅行的行程表。看到喇叭的按鈕，按一下就會唸給你聽，再按一次就會停止。最上面黑色那一條，會顯示現在正在做什麼、下一個要去哪裡。" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/></svg><span class="spk-l">試聽</span></button>
+    <button type="button" class="spk big" id="howtoSpk" data-on="試聽" data-off="停止" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/></svg><span class="spk-l">試聽</span></button>
   </section>
-  <p class="novoice" id="novoice" hidden>這個 App 裡不能播放聲音，請點右上角「…」，選「用瀏覽器開啟」（Safari 或 Chrome）。</p>
+  <p class="novoice" id="novoice" hidden>聲音放不出來：請確認音量有打開；還是不行的話，請改用 Safari 或 Chrome 打開這個網頁。</p>
 
   <section class="hotel" aria-label="飯店">
     <div class="hotel-l">
@@ -62,6 +62,7 @@
       <b>壺香悅</b>
       <span>中山路步行街店</span>
     </div>
+    <button type="button" class="spk sm" id="hotelSpk" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/></svg><span class="spk-l">聽</span></button>
     <button type="button" class="hotel-btn solid" data-open-hotel>
       <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
       迷路時<br>給人看地址
@@ -93,7 +94,6 @@
   <section class="eat" id="eat">
     <h2 class="sec-h">附近吃什麼</h2>
     <p class="sec-p">中山路一帶，評價好的店。看到想吃的就進去。</p>
-    <img class="eat-ph" src="img/noodle.webp" alt="廈門沙茶麵" loading="lazy" decoding="async" width="960" height="540">
     <ul class="eatlist" id="eatlist"></ul>
   </section>
 

@@ -8,11 +8,13 @@
  *   mode  交通方式：car 車、ship 船、walk 走路、plane 飛機
  *   nb    上方「現在」列顯示的短名稱
  *   say   喇叭按鈕唸的內容（時間寫成國字，語音才唸得順）
+ *         改了 say 之後，要跑 python3 tools/make_audio.py 重新產生 audio/ 裡的語音檔
  */
 window.TRIP = {
   year: 2026,
   month: 12,
   endAt: { d: 20, t: '19:00' },
+  howto: '你好！這是我們廈門旅行的行程表。看到喇叭的按鈕，按一下就會唸給你聽，再按一次就會停止。最上面深色那一條，會顯示現在正在做什麼、下一個要去哪裡。',
   hotel: {
     name: '壺香悅（中山路步行街店）',
     show: ['壶香悦', '（厦门中山路步行街店）'],
@@ -38,7 +40,7 @@ window.TRIP = {
           pts: ['辦入境、拿行李'],
           say: '兩點半左右到廈門五通碼頭，辦入境，拿好行李。' },
         { id: 'd1-car', t: '15:15', kind: 'move', mode: 'car', text: '叫車到飯店 約 40 分鐘', nb: '前往飯店' },
-        { id: 'd1-hotel', t: '16:00', kind: 'stop', icon: 'bed', title: '入住飯店', sub: '壺香悅（中山路步行街店）', nb: '入住飯店', img: 'hotel-street', hotel: true,
+        { id: 'd1-hotel', t: '16:00', kind: 'stop', icon: 'bed', title: '入住飯店', sub: '壺香悅（中山路步行街店）', nb: '入住飯店', hotel: true,
           pts: ['就在中山路步行街旁邊', '先休息一下'],
           say: '下午四點住進壺香悅飯店，就在中山路步行街旁邊。先休息一下。' },
         { id: 'd1-zs', t: '17:00', kind: 'stop', icon: 'food', title: '逛中山路・吃晚餐', nb: '逛中山路', img: 'zhongshan',
@@ -62,7 +64,7 @@ window.TRIP = {
         { id: 'd2-lunch', t: '12:30', kind: 'mini', icon: 'food', title: '在土樓吃午餐', nb: '土樓午餐',
           say: '中午十二點半，在土樓當地吃午餐。' },
         { id: 'd2-back', t: '13:30', kind: 'move', mode: 'car', text: '坐車回中山路 約 2 小時', nb: '坐車回中山路' },
-        { id: 'd2-ear', t: '15:45', kind: 'stop', icon: 'spa', title: '採耳放鬆', nb: '採耳', img: 'ear',
+        { id: 'd2-ear', t: '15:45', kind: 'stop', icon: 'spa', title: '採耳放鬆', nb: '採耳',
           pts: ['躺著清耳朵，約 1 小時', '不想做的人回飯店休息'],
           say: '下午三點四十五分回到中山路，去採耳，就是請師傅清耳朵，躺著休息大約一個小時。不想做的人可以先回飯店休息。' },
         { kind: 'move', mode: 'car', text: '叫車 約 10 分鐘' },
@@ -90,17 +92,17 @@ window.TRIP = {
         { id: 'd3-back', t: '12:00', kind: 'move', mode: 'ship', text: '坐船回廈門', nb: '坐船回廈門' },
         { id: 'd3-lunch', t: '12:30', kind: 'mini', icon: 'food', title: '中山路附近吃午餐', nb: '午餐',
           say: '中午十二點半，回到中山路附近吃午餐。' },
-        { id: 'd3-bashi', kind: 'opt', icon: 'basket', title: '沒累的話：八市', sub: '第八市場', img: 'market', map: 'bashi',
+        { id: 'd3-bashi', kind: 'opt', icon: 'basket', title: '沒累的話：八市', sub: '第八市場', map: 'bashi',
           pts: ['在市場裡吃小吃當午餐', '看活海鮮、買芒果乾', '地板濕滑，慢慢走'],
           say: '如果還不累，可以去八市，就是第八市場。在市場裡吃麵線糊、海蠣煎當午餐，看看活海鮮，也可以買芒果乾當伴手禮。地板比較濕滑，要慢慢走，逛一個小時就好。' },
         { id: 'd3-nap', t: '13:15', kind: 'mini', icon: 'bed', title: '回飯店午休', nb: '回飯店午休',
           say: '下午一點十五分，回飯店睡午覺。' },
         { kind: 'move', mode: 'walk', text: '走路就到（同一條路）' },
-        { id: 'd3-foot', t: '15:00', kind: 'stop', icon: 'spa', title: '泡腳＋按摩', nb: '泡腳按摩', img: 'foot',
+        { id: 'd3-foot', t: '15:00', kind: 'stop', icon: 'spa', title: '泡腳＋按摩', nb: '泡腳按摩',
           pts: ['約 1 個半小時，四個人一間', '太大力就說「輕一點」'],
           say: '下午三點，走路到同一條路上的悅馨，泡腳加按摩，大約一個半小時，四個人一間包廂。如果按得太大力，就跟師傅說「輕一點」。有人推銷辦卡，就說我們是遊客，不辦卡，謝謝。' },
         { kind: 'move', mode: 'walk', text: '走到海邊' },
-        { id: 'd3-tea', t: '16:30', kind: 'stop', icon: 'tea', title: '喝功夫茶・看夕陽', nb: '喝茶看夕陽', img: 'tea',
+        { id: 'd3-tea', t: '16:30', kind: 'stop', icon: 'tea', title: '喝功夫茶・看夕陽', nb: '喝茶看夕陽', img: 'gulangyu-view',
           pts: ['大窗戶正對鼓浪嶼', '有鋼琴演奏'],
           say: '四點半，走到海邊的「不只有茶」喝功夫茶。大窗戶正對著鼓浪嶼，還有鋼琴演奏，可以坐著看夕陽。' },
         { id: 'd3-dinner', t: '17:45', kind: 'mini', icon: 'food', title: '中山路一帶吃晚餐', nb: '晚餐',
@@ -125,7 +127,7 @@ window.TRIP = {
           pts: ['窗外是海和演武大橋'],
           say: '十一點半，到世茂雙子塔五樓的一席吃午餐，窗外是海和演武大橋。' },
         { id: 'd4-car', t: '13:00', kind: 'move', mode: 'car', text: '叫車 約 30 分鐘', nb: '前往嶼見閩南' },
-        { id: 'd4-show', t: '13:30', kind: 'stop', icon: 'show', title: '嶼見閩南 看表演', nb: '嶼見閩南', img: 'puppet',
+        { id: 'd4-show', t: '13:30', kind: 'stop', icon: 'show', title: '嶼見閩南 看表演', nb: '嶼見閩南',
           pts: ['都在室內，有冷氣，坐著看', '表演都付過了', '換衣服、做手工、買吃的才另外付錢'],
           say: '下午一點半進嶼見閩南，全部在室內，有冷氣。裡面有大型表演、提線木偶、飛天表演，還有坐著看的鼓浪風雲。表演全部都已經付過錢了，只有換衣服、做手工、買吃的才要另外付錢。需要的話，有免費輪椅可以借。' },
         { id: 'd4-dinner', t: '17:00', kind: 'mini', icon: 'food', title: '館內小吃街吃晚餐', nb: '晚餐',
@@ -153,12 +155,12 @@ window.TRIP = {
         { id: 'd5-tour', t: '10:30', kind: 'stop', icon: 'car', title: '包車逛金門', nb: '逛金門', img: 'kinmen',
           pts: ['行李放車上就好'],
           say: '十點半，包計程車逛金門，行李放在車上就好。' },
-        { id: 'd5-lunch', t: '12:00', kind: 'stop', icon: 'food', title: '金城吃午餐・買貢糖', nb: '金城午餐', img: 'kinmen-old',
+        { id: 'd5-lunch', t: '12:00', kind: 'stop', icon: 'food', title: '金城吃午餐・買貢糖', nb: '金城午餐', img: 'jincheng',
           pts: ['金門貢糖是伴手禮'],
           say: '中午在金城吃午餐，然後買金門貢糖當伴手禮。' },
         { id: 'd5-air', t: '15:45', kind: 'mini', icon: 'ticket', title: '金門機場報到', nb: '機場報到',
           say: '下午三點四十五分到金門機場報到。' },
-        { id: 'd5-fly', t: '17:40', kind: 'stop', icon: 'plane', title: '飛回台北松山', nb: '飛回松山', img: 'plane',
+        { id: 'd5-fly', t: '17:40', kind: 'stop', icon: 'plane', title: '飛回台北松山', nb: '飛回松山', img: 'kinmen-airport-2',
           pts: ['17:40 起飛'],
           say: '傍晚五點四十分，坐飛機回台北松山機場。旅途愉快，辛苦了！' }
       ]

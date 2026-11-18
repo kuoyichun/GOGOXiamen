@@ -1,5 +1,5 @@
-/* 離線也能看：頁面、程式先上網拿最新的，沒網路就用存下來的；照片存起來重複用 */
-var CACHE = 'xiamen-v1';
+/* 離線也能看：頁面、程式先上網拿最新的，沒網路就用存下來的；照片和語音存起來重複用 */
+var CACHE = 'xiamen-v2';
 var CORE = ['./', 'index.html', 'assets/style.css', 'assets/data.js', 'assets/credits.js', 'assets/land.js', 'assets/map.js', 'assets/app.js'];
 
 self.addEventListener('install', function (e) {
@@ -13,7 +13,7 @@ self.addEventListener('activate', function (e) {
 self.addEventListener('fetch', function (e) {
   var req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
-  var isImg = /\/img\//.test(req.url);
+  var isImg = /\/(img|audio)\//.test(req.url);
   if (isImg) {
     e.respondWith(caches.match(req).then(function (hit) {
       return hit || fetch(req).then(function (res) {

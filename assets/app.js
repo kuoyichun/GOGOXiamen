@@ -24,15 +24,17 @@
   function icon(k, cls) { return '<svg class="' + (cls || 'ic') + '" viewBox="0 0 24 24" aria-hidden="true">' + (IC[k] || IC.pin) + '</svg>'; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-  /* ---------- 語音 ---------- */
-  var synth = window.speechSynthesis, voice = null, playing = null, queue = [];
+  /* ---------- 語音：播放事先錄好的台灣國語女聲（audio/*.mp3），失敗才改用手機內建語音 ---------- */
+  var audio = new Audio(), playing = null, queue = [];
+  audio.preload = 'none';
+  var synth = window.speechSynthesis, voice = null;
   function pickVoice() {
     if (!synth) return;
     var vs = synth.getVoices();
     function find(re) { for (var i = 0; i < vs.length; i++) if (re.test(vs[i].lang.replace('_', '-'))) return vs[i]; return null; }
-    voice = find(/^zh-TW/i) || find(/^zh-Hant/i) || find(/^cmn-Hant/i) || find(/^zh-CN/i) || find(/^zh/i) || null;
+    voice = find(/^zh-TW/i) || find(/^zh-Hant/i) || find(/^zh/i) || null;
   }
-  if (synth) { pickVoice(); if (synth.addEventListener) synth.addEventListener('voiceschanged', pickVoice); else synth.onvoiceschanged = pickVoice; }
+  if (synth) { pickVoice(); if (synth.addEventListener) synth.addEventListener('voiceschanged', pickVoice); }
 
   function setBtn(btn, on) {
     if (!btn) return;
@@ -42,31 +44,41 @@
     btn.querySelector('svg').innerHTML = on ? IC.stop : IC.speaker;
     if (lab) lab.textContent = on ? (btn.dataset.off || '停止') : (btn.dataset.on || '聽');
   }
+  function done(btn) { if (playing === btn) { setBtn(btn, false); playing = null; } }
   function stopSpeak() {
     queue = [];
+    audio.pause();
     if (synth) synth.cancel();
     setBtn(playing, false);
     playing = null;
   }
-  function speak(text, btn) {
-    if (!synth || !window.SpeechSynthesisUtterance) { showNoVoice(); return; }
+  function speak(btn) {
     var same = playing === btn;
     stopSpeak();
     if (same) return;
     playing = btn; setBtn(btn, true);
-    // 一句一句唸，避免有些手機唸太長會中斷
-    queue = (text.match(/[^。！？]+[。！？]?/g) || [text]).map(function (s) { return s.trim(); }).filter(Boolean);
-    next();
+    if (!btn.dataset.audio) { speakTTS(btn); return; }
+    audio.onended = function () { done(btn); };
+    audio.onerror = function () { if (playing === btn) speakTTS(btn); };
+    audio.src = 'audio/' + btn.dataset.audio + '.mp3';
+    var pr = audio.play();
+    if (pr && pr.catch) pr.catch(function (e) { if (playing === btn && e && e.name !== 'AbortError') speakTTS(btn); });
   }
-  function next() {
-    if (!queue.length) { setBtn(playing, false); playing = null; return; }
+  function speakTTS(btn) {
+    audio.pause();
+    if (!synth || !window.SpeechSynthesisUtterance) { done(btn); showNoVoice(); return; }
+    queue = (btn.dataset.say.match(/[^。！？]+[。！？]?/g) || [btn.dataset.say]).map(function (s) { return s.trim(); }).filter(Boolean);
+    next(btn);
+  }
+  function next(btn) {
+    if (playing !== btn) return;
+    if (!queue.length) { done(btn); return; }
     var u = new SpeechSynthesisUtterance(queue.shift());
     u.lang = 'zh-TW';
     if (voice) u.voice = voice;
-    u.rate = 0.88;
-    var me = playing;
-    u.onend = function () { if (playing === me) next(); };
-    u.onerror = function () { if (playing === me) { setBtn(playing, false); playing = null; } };
+    u.rate = 0.9;
+    u.onend = function () { next(btn); };
+    u.onerror = function () { done(btn); };
     synth.speak(u);
   }
   function showNoVoice() {
@@ -76,11 +88,15 @@
   }
   document.addEventListener('visibilitychange', function () { if (document.hidden) stopSpeak(); });
 
-  function spkBtn(text, extra, on, off) {
-    return '<button type="button" class="spk' + (extra ? ' ' + extra : '') + '" data-say="' + esc(text) + '"' +
+  function spkBtn(text, id, extra, on, off) {
+    return '<button type="button" class="spk' + (extra ? ' ' + extra : '') + '" data-say="' + esc(text) + '" data-audio="' + esc(id) + '"' +
       (on ? ' data-on="' + esc(on) + '"' : '') + (off ? ' data-off="' + esc(off) + '"' : '') +
       ' aria-pressed="false">' + icon('speaker') + '<span class="spk-l">' + esc(on || '聽') + '</span></button>';
   }
+  var how = document.getElementById('howtoSpk');
+  how.dataset.say = T.howto; how.dataset.audio = 'howto';
+  var hs = document.getElementById('hotelSpk');
+  if (hs) { hs.dataset.say = T.hotel.say; hs.dataset.audio = 'hotel'; }
 
   /* ---------- 畫出每天的行程 ---------- */
   var MODE = { car: '坐車', ship: '坐船', walk: '走路', plane: '飛機' };
@@ -94,18 +110,18 @@
       return '<li class="it mini" id="' + it.id + '"><div class="rail"><span class="dot"></span></div>' +
         '<div class="card mini-c"><span class="mini-i">' + icon(it.icon) + '</span>' +
         '<div class="mini-t"><b class="time">' + it.t + '</b><span class="mini-n">' + esc(it.title) + '</span></div>' +
-        spkBtn(it.say, 'sm') + '</div></li>';
+        spkBtn(it.say, it.id, 'sm') + '</div></li>';
     }
     var opt = it.kind === 'opt';
     var h = '<li class="it ' + (opt ? 'opt' : 'stop') + '"' + (it.id ? ' id="' + it.id + '"' : '') + '>' +
       '<div class="rail"><span class="dot"></span></div><article class="card">';
-    if (it.img) h += '<div class="ph-w"><img class="ph" src="img/' + it.img + '.webp" alt="" loading="lazy" decoding="async" width="960" height="540">' + spkBtn(it.say, 'float') + '</div>';
+    if (it.img) h += '<div class="ph-w"><img class="ph" src="img/' + it.img + '.webp" alt="" loading="lazy" decoding="async" width="960" height="540">' + spkBtn(it.say, it.id, 'float') + '</div>';
     h += '<div class="cb' + (it.img ? ' has-float' : '') + '"><div class="ch"><div class="ct">';
     if (opt) h += '<span class="tag-opt">沒累再去</span>';
     else h += '<b class="time">' + it.t + '</b>' + (it.tbd ? '<span class="tag-tbd">時間待確認</span>' : '');
     h += '<h3>' + icon(it.icon, 'ic h-ic') + '<span>' + esc(it.title) + '</span></h3>';
     if (it.sub) h += '<div class="sub">' + esc(it.sub) + '</div>';
-    h += '</div>' + (it.img ? '' : spkBtn(it.say)) + '</div>';
+    h += '</div>' + (it.img ? '' : spkBtn(it.say, it.id)) + '</div>';
     if (it.pts && it.pts.length) h += '<ul class="pts">' + it.pts.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>';
     if (it.hotel) h += '<button type="button" class="hotel-btn" data-open-hotel>' + icon('pin') + '飯店地址（給司機看）</button>';
     h += '</div></article></li>';
@@ -117,7 +133,7 @@
     return '<section class="day" id="' + d.id + '" style="--c:' + d.color + '">' +
       '<header class="day-hd"><div class="seal"><small>第</small>' + (i + 1) + '<small>天</small></div>' +
       '<div class="dh-t"><div class="dh-date">' + T.month + '/' + d.d + '（' + d.wk + '）</div><h2>' + esc(d.title) + '</h2></div></header>' +
-      '<div class="day-say">' + spkBtn(d.say, 'wide', '聽今天的行程', '停止播放') + '</div>' +
+      '<div class="day-say">' + spkBtn(d.say, d.id, 'wide', '聽今天的行程', '停止播放') + '</div>' +
       '<ol class="tl">' + d.items.map(function (it) { return itemHTML(it, d); }).join('') + '</ol></section>';
   }).join('');
 
@@ -136,7 +152,7 @@
     if (b) { hov.hidden = false; document.body.classList.add('lock'); hov.querySelector('.hc-close').focus(); return; }
     if (e.target.closest('[data-close-hotel]') || e.target === hov) { hov.hidden = true; document.body.classList.remove('lock'); }
     var s = e.target.closest('.spk');
-    if (s) speak(s.dataset.say, s);
+    if (s) speak(s);
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !hov.hidden) { hov.hidden = true; document.body.classList.remove('lock'); } });
 
@@ -182,9 +198,10 @@
     E.forEach(function (e, k) { if (ms >= e.s) i = k; });
     document.querySelectorAll('nav a[data-day]').forEach(function (a) { a.classList.toggle('today', +a.dataset.day === today); });
     if (i < 0) {
-      var left = E[0].s - ms, dd = Math.ceil(left / 864e5);
+      // 用日曆天算：今天是幾號、出發是幾號
+      var dd = Math.round((Date.UTC(Y, MON, E[0].d) - Date.UTC(p.y, p.m, p.d)) / 864e5);
       put(nb.prev, '', '', '', true);
-      put(nb.cur, left > 864e5 ? '還有 ' + dd + ' 天出發' : '今天出發', T.month + '/' + E[0].d + ' ' + E[0].n, E[0].id);
+      put(nb.cur, dd > 1 ? '還有 ' + dd + ' 天出發' : dd === 1 ? '明天出發' : '今天出發', T.month + '/' + E[0].d + ' ' + E[0].n, E[0].id);
       put(nb.next, stamp(E[1], today), E[1].n, E[1].id);
       mark(null); return;
     }
