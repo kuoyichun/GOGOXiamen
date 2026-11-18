@@ -100,6 +100,7 @@ nav a.today{background:#fff;color:var(--ink);border-color:#fff}
 .novoice{margin-top:10px;background:var(--ink);color:#fff;border-radius:14px;padding:12px 16px;font-size:19px;font-weight:700}
 
 .hotel{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-left:10px solid var(--brick);border-radius:20px;padding:14px 14px 14px 16px}
+.hotel-ph{order:-1;display:block;width:calc(100% + 30px);max-width:none;height:auto;aspect-ratio:16/9;object-fit:cover;margin:-14px -14px 2px -16px;border-radius:10px 18px 0 0;background:#EADCC8}
 .hotel-l{flex:1;min-width:0;line-height:1.25}
 .hotel-l b{display:block;font-size:32px;font-weight:900;margin:2px 0}
 .hotel-l span{display:block;font-size:18px;color:var(--ink2);font-weight:700}
