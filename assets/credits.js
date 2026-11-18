@@ -37,10 +37,16 @@ window.IMG_CREDITS = [
   "page": "https://commons.wikimedia.org/wiki/File:Huang_Zehe_peanut_soup.jpg"
  },
  {
-  "what": "土樓",
-  "author": "rheins",
-  "lic": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E6%80%80%E8%BF%9C%E6%A5%BC_-_Huaiyuan_Lou_-_2013.11_-_panoramio.jpg"
+  "what": "集美鰲園",
+  "author": "Quin",
+  "lic": "CC BY 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:%E9%B3%8C%E5%9B%AD%E6%96%9C%E5%85%A8%E8%A7%88.jpg"
+ },
+ {
+  "what": "集美龍舟池",
+  "author": "JamesYoung8167",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Dragon_Boat_Pond_2019-10-18.jpg"
  },
  {
   "what": "鼓浪嶼黃昏",

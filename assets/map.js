@@ -17,7 +17,9 @@
     gly:     { n: '鼓浪嶼',     ll: [118.0632, 24.4470], pr: 1 },
     huli:    { n: '胡里山砲台', ll: [118.1016, 24.4315], pr: 2 },
     shimao:  { n: '一席（雙子塔）', ll: [118.0850, 24.4384], pr: 4 },
-    yujian:  { n: '嶼見閩南',   ll: [118.0711, 24.4935], pr: 2 }
+    yujian:  { n: '嶼見閩南',   ll: [118.0711, 24.4935], pr: 2 },
+    aoyuan:  { n: '鰲園',       ll: [118.0874, 24.5689], pr: 2 },
+    longzhou:{ n: '龍舟池',     ll: [118.0936, 24.5672], pr: 3 }
   };
 
   // 每天的路線；via 是經過點，bend 是弧度；mode：car 坐車、ship 坐船、walk 走路
@@ -28,6 +30,9 @@
       { a: 'wutong', b: 'hotel', m: 'car', via: [[118.135, 24.505]] }
     ],
     d2: [
+      { a: 'hotel', b: 'aoyuan', m: 'car', via: [[118.0880, 24.4800], [118.1040, 24.5300], [118.1000, 24.5560]] },
+      { a: 'aoyuan', b: 'longzhou', m: 'walk', bend: 0.25 },
+      { a: 'longzhou', b: 'hotel', m: 'car', via: [[118.1090, 24.5560], [118.1110, 24.5300], [118.0920, 24.4800]] },
       { a: 'hotel', b: 'heping', m: 'car', bend: 0.6 }
     ],
     d3: [
@@ -55,6 +60,7 @@
   // 背景地名（淡色，擠不下就不顯示）
   var CTX = [
     { n: '廈門島', ll: [118.128, 24.497], fs: 22 },
+    { n: '集美', ll: [118.070, 24.590], fs: 18, skip: 'aoyuan' },
     { n: '金門島', ll: [118.392, 24.478], fs: 20 },
     { n: '小金門', ll: [118.238, 24.448], fs: 16 },
     { n: '鼓浪嶼', ll: [118.0628, 24.4445], fs: 16, skip: 'gly' }
@@ -104,7 +110,6 @@
     add(P(PTS.hotel.ll));
     days.forEach(function (d) {
       ROUTES[d].forEach(function (l) { legPoints(l).forEach(add); });
-      if (d === 'd2') add(P([118.050, 24.4561])); // 留位置畫往土樓的箭頭
     });
     var x0 = Math.min.apply(0, xs), x1 = Math.max.apply(0, xs), y0 = Math.min.apply(0, ys), y1 = Math.max.apply(0, ys);
     return { x0: x0, x1: x1, y0: y0, y1: y1 };
@@ -151,18 +156,12 @@
           }
         } catch (e) {}
       });
-      if (d === 'd2') tulouArrow(v, c, g);
     });
 
     // 地標點
     var list = Object.keys(used).concat(used.hotel ? [] : ['hotel']).map(function (k) { return k; });
     list.sort(function (a, b) { return PTS[a].pr - PTS[b].pr; });
     var placed = [];
-    if (days.indexOf('d2') >= 0) {
-      var hh = P(PTS.hotel.ll), hy = (hh[1] - v.y) * s, hx = (hh[0] - v.x) * s;
-      placed.push({ x0: 0, x1: 100, y0: hy - 30, y1: hy + (s < 2.5 ? 4 : 28) });
-      placed.push({ x0: 0, x1: hx - 10, y0: hy - 8, y1: hy + 6 });
-    }
     var dots = list.map(function (k) { var p = P(PTS[k].ll); return { k: k, x: (p[0] - v.x) * s, y: (p[1] - v.y) * s }; });
     // 先畫次要的點，飯店最後畫，才會在最上面
     dots.slice().reverse().forEach(function (dt) {
@@ -217,20 +216,6 @@
       el('text', { x: p[0], y: p[1], 'font-size': c.fs / s, 'font-weight': c.color ? 900 : 800, fill: c.color || '#9A7E58', 'text-anchor': 'middle',
         'letter-spacing': (c.color ? 0 : 3) / s, stroke: c.color ? '#fff' : 'none', 'stroke-width': 4 / s, 'paint-order': 'stroke' }, overG).textContent = c.n;
     });
-  }
-
-  function tulouArrow(v, c, g) {
-    var s = v.s, h = P(PTS.hotel.ll), x0 = v.x + 10 / s, y = h[1] - 2 / s;
-    el('path', { d: 'M' + (h[0] - 16 / s) + ' ' + y + ' L' + x0 + ' ' + y, stroke: c, 'stroke-width': 3.6 / s, fill: 'none', 'stroke-linecap': 'round' }, g);
-    el('path', { d: 'M' + (x0 + 9 / s) + ' ' + (y - 7 / s) + ' L' + x0 + ' ' + y + ' L' + (x0 + 9 / s) + ' ' + (y + 7 / s), stroke: c,
-      'stroke-width': 3.6 / s, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
-    var t = el('text', { x: x0, y: y - 12 / s, 'font-size': 15 / s, 'font-weight': 900, fill: c, stroke: '#fff', 'stroke-width': 4.5 / s,
-      'paint-order': 'stroke', 'stroke-linejoin': 'round' }, g);
-    t.textContent = '往土樓';
-    if (s < 2.5) return;
-    var t2 = el('text', { x: x0, y: y + 22 / s, 'font-size': 13.5 / s, 'font-weight': 700, fill: c, stroke: '#fff', 'stroke-width': 4.5 / s,
-      'paint-order': 'stroke', 'stroke-linejoin': 'round' }, g);
-    t2.textContent = '車程 2 小時';
   }
 
   function update(instant) {
