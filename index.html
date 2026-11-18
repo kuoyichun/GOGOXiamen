@@ -94,9 +94,16 @@
   <div id="days"></div>
 
   <section class="eat" id="eat">
-    <h2 class="sec-h">附近吃什麼</h2>
-    <p class="sec-p">中山路一帶，評價好的店。看到想吃的就進去。</p>
-    <ul class="eatlist" id="eatlist"></ul>
+    <h2 class="sec-h">廈門必吃</h2>
+    <p class="sec-p">往左右滑，或按「上一道、下一道」換。</p>
+    <div class="car-nav">
+      <button type="button" class="car-btn" id="foodPrev" aria-label="上一道"><span aria-hidden="true">‹</span>上一道</button>
+      <span class="car-count" id="foodCount" aria-live="polite">1 / 10</span>
+      <button type="button" class="car-btn" id="foodNext" aria-label="下一道">下一道<span aria-hidden="true">›</span></button>
+    </div>
+    <div class="car" role="region" aria-roledescription="輪播" aria-label="廈門必吃">
+      <div class="car-track" id="foodTrack" tabindex="0"></div>
+    </div>
   </section>
 
   <footer class="foot">

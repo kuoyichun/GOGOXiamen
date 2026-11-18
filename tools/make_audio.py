@@ -35,6 +35,8 @@ def jobs(trip):
         for it in d['items']:
             if it.get('id') and it.get('say'):
                 out[it['id']] = it['say']
+    for f in trip.get('foods', []):
+        out[f['id']] = f['say']
     return out
 
 

@@ -113,5 +113,41 @@ window.IMG_CREDITS = [
   "author": "cathy lee",
   "lic": "CC BY 2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Kinmen_Airport_01.jpg"
+ },
+ {
+  "what": "沙茶麵",
+  "author": "Windmemories",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:20230131_Seafood_Shacha_Noodle.jpg"
+ },
+ {
+  "what": "閩南薑母鴨（泉州式）",
+  "author": "N509FZ",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Quanzhou-style_Kiu%E2%81%BF-b%C3%B3-ah_(Ginger_Duck)_at_Yipin_Xiangqing_Restaurant,_Beijing_(20240908174515).jpg"
+ },
+ {
+  "what": "麵線糊（泉州）",
+  "author": "N509FZ",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:M%C4%AB-su%C3%A0nn-k%C3%B4o_in_Quanzhou_(20200929220207).jpg"
+ },
+ {
+  "what": "燒肉粽",
+  "author": "向史公哲曰",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:1980%E7%83%A7%E8%82%89%E7%B2%BD%E5%89%8D%E5%9F%94%E5%BA%97%E7%9A%84%E8%8F%9C%E5%93%81.jpg"
+ },
+ {
+  "what": "鼓浪嶼海鮮攤",
+  "author": "Don Ramey Logan",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_China_Gulangyu_Island_shellfish_for_sale_by_Don_Ramey_Logan.jpg"
+ },
+ {
+  "what": "土筍凍",
+  "author": "Slyronit",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Sand_worm_in_jelly,_Xiamen.jpg"
  }
 ];

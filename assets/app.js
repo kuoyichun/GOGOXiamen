@@ -159,11 +159,47 @@
       '<ol class="tl">' + d.items.map(function (it) { return itemHTML(it, d); }).join('') + '</ol></section>';
   }).join('');
 
-  /* ---------- 附近吃什麼 ---------- */
-  document.getElementById('eatlist').innerHTML = T.eats.map(function (e) {
-    return '<li style="--c:var(--brick)"><div class="eat-n">' + esc(e.name) + '</div><div class="eat-w">' + esc(e.what) +
-      ' <span class="eat-p">一人約 ¥' + e.price + '</span></div>' + placeHTML(e.at) + '</li>';
+  /* ---------- 廈門必吃：左右滑動的卡片 ---------- */
+  var track = document.getElementById('foodTrack'), FN = T.foods.length;
+  track.innerHTML = T.foods.map(function (f, i) {
+    var pl = typeof f.at === 'string' ? T.places[f.at] : f.at;
+    return '<article class="fd card" style="--c:var(--brick)" aria-roledescription="卡片" aria-label="' + (i + 1) + ' / ' + FN + ' ' + esc(f.name) + '">' +
+      '<div class="ph-w' + (f.img ? '' : ' ph-none') + '">' +
+      (f.img ? '<img class="ph" src="img/' + f.img + '.webp" alt="' + esc(f.name) + '" loading="lazy" decoding="async" width="960" height="540">' : '<span aria-hidden="true">' + esc(f.name) + '</span>') +
+      spkBtn(f.say, f.id, 'float') + '</div>' +
+      '<div class="cb has-float"><div class="ct"><h3><span>' + esc(f.name) + '</span></h3><div class="sub fd-what">' + esc(f.what) + '</div></div>' +
+      '<ul class="pts">' + f.pts.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' +
+      (pl ? '<div class="fd-where">想吃可以去</div>' + placeHTML(pl) : '') + '</div></article>';
   }).join('');
+  var slides = track.children, fPrev = document.getElementById('foodPrev'), fNext = document.getElementById('foodNext'), fCount = document.getElementById('foodCount');
+  function curSlide() {
+    var best = 0, bd = 1e9, mid = track.scrollLeft + track.clientWidth / 2;
+    for (var i = 0; i < slides.length; i++) {
+      var c = slides[i].offsetLeft + slides[i].offsetWidth / 2, d = Math.abs(c - mid);
+      if (d < bd) { bd = d; best = i; }
+    }
+    return best;
+  }
+  function goSlide(i) {
+    i = Math.max(0, Math.min(FN - 1, i));
+    var el = slides[i];
+    track.scrollTo({ left: el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
+  }
+  function syncCar() {
+    var i = curSlide();
+    fCount.textContent = (i + 1) + ' / ' + FN;
+    fPrev.disabled = i === 0;
+    fNext.disabled = i === FN - 1;
+  }
+  var st;
+  track.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(syncCar, 60); }, { passive: true });
+  fPrev.addEventListener('click', function () { goSlide(curSlide() - 1); });
+  fNext.addEventListener('click', function () { goSlide(curSlide() + 1); });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goSlide(curSlide() - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goSlide(curSlide() + 1); }
+  });
+  syncCar();
 
   /* ---------- 給司機看：全螢幕大字地址 ---------- */
   var hov = document.getElementById('hotelCard');
