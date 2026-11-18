@@ -61,12 +61,14 @@
       <span class="hotel-k">四晚都住</span>
       <b>壺香悅</b>
       <span>中山路步行街店</span>
+      <span class="hotel-a" lang="zh-Hans">厦门市思明区定安路61-2号</span>
     </div>
     <button type="button" class="spk sm" id="hotelSpk" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/></svg><span class="spk-l">聽</span></button>
-    <button type="button" class="hotel-btn solid" data-open-hotel>
+    <button type="button" class="hotel-btn solid" data-place="hotel">
       <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
       迷路時<br>給人看地址
     </button>
+    <div class="pl-b hotel-links" id="hotelLinks"></div>
   </section>
 
   <section class="mapsec" id="map">
@@ -101,15 +103,15 @@
     <p>時間都是當地時間（跟台灣一樣）。船班時間以領隊通知為準。</p>
     <details>
       <summary>照片與地圖來源</summary>
-      <p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。照片來自 Wikimedia Commons：</p>
+      <p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。嶼見閩南照片為自行提供，其他照片來自 Wikimedia Commons：</p>
       <ul id="credits"></ul>
     </details>
   </footer>
 </main>
 
-<div class="hcard" id="hotelCard" hidden role="dialog" aria-modal="true" aria-label="飯店地址">
+<div class="hcard" id="hotelCard" hidden role="dialog" aria-modal="true" aria-label="給司機看的地址">
   <div class="hc-in" lang="zh-Hans">
-    <p class="hc-k">请送我到这里，谢谢</p>
+    <p class="hc-k" id="hcK">请送我到这里，谢谢</p>
     <p class="hc-name" id="hcName"></p>
     <p class="hc-addr" id="hcAddr"></p>
     <button type="button" class="hc-close" data-close-hotel>關閉</button>

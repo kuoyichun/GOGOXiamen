@@ -19,7 +19,8 @@
     bag: '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
     speaker: '<path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/>',
     stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>',
-    pin: '<path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>'
+    pin: '<path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
+    map: '<path d="M14.1 5.6a2 2 0 0 0 1.8 0l3.7-1.9A1 1 0 0 1 21 4.6v12.8a1 1 0 0 1-.6.9l-4.5 2.3a2 2 0 0 1-1.8 0l-4.2-2.1a2 2 0 0 0-1.8 0l-3.7 1.9A1 1 0 0 1 3 19.4V6.6a1 1 0 0 1 .6-.9l4.5-2.3a2 2 0 0 1 1.8 0z"/><path d="M15 5.8v15"/><path d="M9 3.2v15"/>'
   };
   function icon(k, cls) { return '<svg class="' + (cls || 'ic') + '" viewBox="0 0 24 24" aria-hidden="true">' + (IC[k] || IC.pin) + '</svg>'; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -98,6 +99,27 @@
   var hs = document.getElementById('hotelSpk');
   if (hs) { hs.dataset.say = T.hotel.say; hs.dataset.audio = 'hotel'; }
 
+  /* ---------- 地點：店名、地址、給司機看、地圖連結 ---------- */
+  var PL = [];
+  function enc(x) { return encodeURIComponent(x); }
+  function amapURL(pl) {
+    // 高德地圖網頁版，不用裝 App 也能開
+    return 'https://uri.amap.com/search?keyword=' + enc(pl.kw || pl.sc) + '&city=' + enc(pl.city || '厦门') + '&view=map&src=trip&callnative=0';
+  }
+  function gURL(pl) {
+    return 'https://www.google.com/maps/search/?api=1&query=' + enc(pl.g || (pl.tw ? pl.sc : (pl.kw || pl.sc) + ' 厦门'));
+  }
+  function mapLinks(pl) {
+    return (pl.tw ? '' : '<a class="pl-l amap" href="' + amapURL(pl) + '" target="_blank" rel="noopener">' + icon('map') + '高德地圖</a>') +
+      '<a class="pl-l gmap" href="' + gURL(pl) + '" target="_blank" rel="noopener">' + icon('map') + 'Google 地圖</a>';
+  }
+  function placeHTML(pl) {
+    var i = PL.push(pl) - 1;
+    return '<div class="place"><div class="pl-n">' + icon('pin') + '<b>' + esc(pl.n) + '</b></div>' +
+      '<div class="pl-a" lang="' + (pl.tw ? 'zh-Hant-TW' : 'zh-Hans') + '">' + esc(pl.addr) + '</div>' +
+      '<div class="pl-b"><button type="button" class="pl-drv" data-place="' + i + '">' + icon('car') + '給司機看</button>' + mapLinks(pl) + '</div></div>';
+  }
+
   /* ---------- 畫出每天的行程 ---------- */
   var MODE = { car: '坐車', ship: '坐船', walk: '走路', plane: '飛機' };
   function itemHTML(it, day) {
@@ -123,7 +145,7 @@
     if (it.sub) h += '<div class="sub">' + esc(it.sub) + '</div>';
     h += '</div>' + (it.img ? '' : spkBtn(it.say, it.id)) + '</div>';
     if (it.pts && it.pts.length) h += '<ul class="pts">' + it.pts.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>';
-    if (it.hotel) h += '<button type="button" class="hotel-btn" data-open-hotel>' + icon('pin') + '飯店地址（給司機看）</button>';
+    if (it.at) h += placeHTML(T.places[it.at]);
     h += '</div></article></li>';
     return h;
   }
@@ -139,17 +161,25 @@
 
   /* ---------- 附近吃什麼 ---------- */
   document.getElementById('eatlist').innerHTML = T.eats.map(function (e) {
-    return '<li><div class="eat-n">' + esc(e.name) + '</div><div class="eat-w">' + esc(e.what) + '</div>' +
-      '<div class="eat-m"><span class="eat-p">一人約 ¥' + e.price + '</span><span class="eat-a">' + esc(e.addr) + '</span></div></li>';
+    return '<li style="--c:var(--brick)"><div class="eat-n">' + esc(e.name) + '</div><div class="eat-w">' + esc(e.what) +
+      ' <span class="eat-p">一人約 ¥' + e.price + '</span></div>' + placeHTML(e.at) + '</li>';
   }).join('');
 
-  /* ---------- 飯店地址卡 ---------- */
+  /* ---------- 給司機看：全螢幕大字地址 ---------- */
   var hov = document.getElementById('hotelCard');
-  document.getElementById('hcName').innerHTML = esc(T.hotel.show[0]) + '<small>' + esc(T.hotel.show[1]) + '</small>';
-  document.getElementById('hcAddr').textContent = T.hotel.addr;
+  var HOTEL = PL.push(T.places.hotel) - 1;
+  document.getElementById('hotelLinks').innerHTML = mapLinks(T.places.hotel);
+  function openPlace(pl) {
+    var cut = pl.sc.indexOf('（');
+    document.getElementById('hcK').textContent = pl.tw ? '請送我到這裡，謝謝' : '请送我到这里，谢谢';
+    document.getElementById('hcName').innerHTML = cut > 0 ? esc(pl.sc.slice(0, cut)) + '<small>' + esc(pl.sc.slice(cut)) + '</small>' : esc(pl.sc);
+    document.getElementById('hcAddr').textContent = pl.addr;
+    hov.querySelector('.hc-in').setAttribute('lang', pl.tw ? 'zh-Hant-TW' : 'zh-Hans');
+    hov.hidden = false; document.body.classList.add('lock'); hov.querySelector('.hc-close').focus();
+  }
   document.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-open-hotel]');
-    if (b) { hov.hidden = false; document.body.classList.add('lock'); hov.querySelector('.hc-close').focus(); return; }
+    var b = e.target.closest('[data-place]');
+    if (b) { openPlace(PL[b.dataset.place === 'hotel' ? HOTEL : +b.dataset.place]); return; }
     if (e.target.closest('[data-close-hotel]') || e.target === hov) { hov.hidden = true; document.body.classList.remove('lock'); }
     var s = e.target.closest('.spk');
     if (s) speak(s);
