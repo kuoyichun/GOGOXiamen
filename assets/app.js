@@ -1,0 +1,231 @@
+(function () {
+  var T = window.TRIP, Y = T.year, MON = T.month - 1;
+
+  /* ---------- 圖示（改自 Lucide，ISC 授權） ---------- */
+  var IC = {
+    plane: '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
+    ship: '<path d="M12 10.2V14"/><path d="M12 2v3"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M19.4 20A11.6 11.6 0 0 0 21 14l-8.2-3.6a2 2 0 0 0-1.6 0L3 14a11.6 11.6 0 0 0 2.8 7.8"/><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>',
+    car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
+    walk: '<path d="M4 16v-2.4C4 11.5 3 10.5 3 8c0-2.7 1.5-6 4.5-6C9.4 2 10 3.8 10 5.5c0 3.1-2 5.7-2 8.7V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.4c0-2.1 1-3.1 1-5.6 0-2.7-1.5-6-4.5-6C14.6 6 14 7.8 14 9.5c0 3.1 2 5.7 2 8.7V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/>',
+    ticket: '<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/>',
+    bed: '<path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/>',
+    food: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+    home: '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .7-1.5l7-6a2 2 0 0 1 2.6 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+    camera: '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>',
+    spa: '<path d="M9.9 15.5a2 2 0 0 0-1.4-1.4l-6.1-1.6a.5.5 0 0 1 0-1l6.1-1.6a2 2 0 0 0 1.4-1.4l1.6-6.1a.5.5 0 0 1 1 0l1.6 6.1a2 2 0 0 0 1.4 1.4l6.1 1.6a.5.5 0 0 1 0 1l-6.1 1.6a2 2 0 0 0-1.4 1.4l-1.6 6.1a.5.5 0 0 1-1 0z"/>',
+    tea: '<path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/>',
+    basket: '<path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/><path d="m9 11 1 9"/>',
+    show: '<path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7a2.1 2.1 0 0 0 1.6 1.2l5.2.7a.5.5 0 0 1 .3.9l-3.7 3.6a2.1 2.1 0 0 0-.6 1.9l.9 5.1a.5.5 0 0 1-.8.6l-4.6-2.4a2.1 2.1 0 0 0-2 0l-4.6 2.4a.5.5 0 0 1-.8-.6l.9-5.1a2.1 2.1 0 0 0-.6-1.9L2.2 9.8a.5.5 0 0 1 .3-.9l5.2-.7a2.1 2.1 0 0 0 1.6-1.2z"/>',
+    bag: '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+    speaker: '<path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/>',
+    stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>',
+    pin: '<path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>'
+  };
+  function icon(k, cls) { return '<svg class="' + (cls || 'ic') + '" viewBox="0 0 24 24" aria-hidden="true">' + (IC[k] || IC.pin) + '</svg>'; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  /* ---------- 語音 ---------- */
+  var synth = window.speechSynthesis, voice = null, playing = null, queue = [];
+  function pickVoice() {
+    if (!synth) return;
+    var vs = synth.getVoices();
+    function find(re) { for (var i = 0; i < vs.length; i++) if (re.test(vs[i].lang.replace('_', '-'))) return vs[i]; return null; }
+    voice = find(/^zh-TW/i) || find(/^zh-Hant/i) || find(/^cmn-Hant/i) || find(/^zh-CN/i) || find(/^zh/i) || null;
+  }
+  if (synth) { pickVoice(); if (synth.addEventListener) synth.addEventListener('voiceschanged', pickVoice); else synth.onvoiceschanged = pickVoice; }
+
+  function setBtn(btn, on) {
+    if (!btn) return;
+    btn.classList.toggle('on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    var lab = btn.querySelector('.spk-l');
+    btn.querySelector('svg').innerHTML = on ? IC.stop : IC.speaker;
+    if (lab) lab.textContent = on ? (btn.dataset.off || '停止') : (btn.dataset.on || '聽');
+  }
+  function stopSpeak() {
+    queue = [];
+    if (synth) synth.cancel();
+    setBtn(playing, false);
+    playing = null;
+  }
+  function speak(text, btn) {
+    if (!synth || !window.SpeechSynthesisUtterance) { showNoVoice(); return; }
+    var same = playing === btn;
+    stopSpeak();
+    if (same) return;
+    playing = btn; setBtn(btn, true);
+    // 一句一句唸，避免有些手機唸太長會中斷
+    queue = (text.match(/[^。！？]+[。！？]?/g) || [text]).map(function (s) { return s.trim(); }).filter(Boolean);
+    next();
+  }
+  function next() {
+    if (!queue.length) { setBtn(playing, false); playing = null; return; }
+    var u = new SpeechSynthesisUtterance(queue.shift());
+    u.lang = 'zh-TW';
+    if (voice) u.voice = voice;
+    u.rate = 0.88;
+    var me = playing;
+    u.onend = function () { if (playing === me) next(); };
+    u.onerror = function () { if (playing === me) { setBtn(playing, false); playing = null; } };
+    synth.speak(u);
+  }
+  function showNoVoice() {
+    var m = document.getElementById('novoice');
+    m.hidden = false;
+    setTimeout(function () { m.hidden = true; }, 6000);
+  }
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stopSpeak(); });
+
+  function spkBtn(text, extra, on, off) {
+    return '<button type="button" class="spk' + (extra ? ' ' + extra : '') + '" data-say="' + esc(text) + '"' +
+      (on ? ' data-on="' + esc(on) + '"' : '') + (off ? ' data-off="' + esc(off) + '"' : '') +
+      ' aria-pressed="false">' + icon('speaker') + '<span class="spk-l">' + esc(on || '聽') + '</span></button>';
+  }
+
+  /* ---------- 畫出每天的行程 ---------- */
+  var MODE = { car: '坐車', ship: '坐船', walk: '走路', plane: '飛機' };
+  function itemHTML(it, day) {
+    if (it.kind === 'move') {
+      return '<li class="it move m-' + it.mode + '"' + (it.id ? ' id="' + it.id + '"' : '') + '>' +
+        '<div class="rail"></div><div class="mv"><span class="mv-i">' + icon(it.mode) + '</span>' +
+        (it.t ? '<b class="mv-t">' + it.t + '</b>' : '') + '<span>' + esc(it.text) + '</span></div></li>';
+    }
+    if (it.kind === 'mini') {
+      return '<li class="it mini" id="' + it.id + '"><div class="rail"><span class="dot"></span></div>' +
+        '<div class="card mini-c"><span class="mini-i">' + icon(it.icon) + '</span>' +
+        '<div class="mini-t"><b class="time">' + it.t + '</b><span class="mini-n">' + esc(it.title) + '</span></div>' +
+        spkBtn(it.say, 'sm') + '</div></li>';
+    }
+    var opt = it.kind === 'opt';
+    var h = '<li class="it ' + (opt ? 'opt' : 'stop') + '"' + (it.id ? ' id="' + it.id + '"' : '') + '>' +
+      '<div class="rail"><span class="dot"></span></div><article class="card">';
+    if (it.img) h += '<div class="ph-w"><img class="ph" src="img/' + it.img + '.webp" alt="" loading="lazy" decoding="async" width="960" height="540">' + spkBtn(it.say, 'float') + '</div>';
+    h += '<div class="cb' + (it.img ? ' has-float' : '') + '"><div class="ch"><div class="ct">';
+    if (opt) h += '<span class="tag-opt">沒累再去</span>';
+    else h += '<b class="time">' + it.t + '</b>' + (it.tbd ? '<span class="tag-tbd">時間待確認</span>' : '');
+    h += '<h3>' + icon(it.icon, 'ic h-ic') + '<span>' + esc(it.title) + '</span></h3>';
+    if (it.sub) h += '<div class="sub">' + esc(it.sub) + '</div>';
+    h += '</div>' + (it.img ? '' : spkBtn(it.say)) + '</div>';
+    if (it.pts && it.pts.length) h += '<ul class="pts">' + it.pts.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>';
+    if (it.hotel) h += '<button type="button" class="hotel-btn" data-open-hotel>' + icon('pin') + '飯店地址（給司機看）</button>';
+    h += '</div></article></li>';
+    return h;
+  }
+
+  var daysEl = document.getElementById('days');
+  daysEl.innerHTML = T.days.map(function (d, i) {
+    return '<section class="day" id="' + d.id + '" style="--c:' + d.color + '">' +
+      '<header class="day-hd"><div class="seal"><small>第</small>' + (i + 1) + '<small>天</small></div>' +
+      '<div class="dh-t"><div class="dh-date">' + T.month + '/' + d.d + '（' + d.wk + '）</div><h2>' + esc(d.title) + '</h2></div></header>' +
+      '<div class="day-say">' + spkBtn(d.say, 'wide', '聽今天的行程', '停止播放') + '</div>' +
+      '<ol class="tl">' + d.items.map(function (it) { return itemHTML(it, d); }).join('') + '</ol></section>';
+  }).join('');
+
+  /* ---------- 附近吃什麼 ---------- */
+  document.getElementById('eatlist').innerHTML = T.eats.map(function (e) {
+    return '<li><div class="eat-n">' + esc(e.name) + '</div><div class="eat-w">' + esc(e.what) + '</div>' +
+      '<div class="eat-m"><span class="eat-p">一人約 ¥' + e.price + '</span><span class="eat-a">' + esc(e.addr) + '</span></div></li>';
+  }).join('');
+
+  /* ---------- 飯店地址卡 ---------- */
+  var hov = document.getElementById('hotelCard');
+  document.getElementById('hcName').innerHTML = esc(T.hotel.show[0]) + '<small>' + esc(T.hotel.show[1]) + '</small>';
+  document.getElementById('hcAddr').textContent = T.hotel.addr;
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-open-hotel]');
+    if (b) { hov.hidden = false; document.body.classList.add('lock'); hov.querySelector('.hc-close').focus(); return; }
+    if (e.target.closest('[data-close-hotel]') || e.target === hov) { hov.hidden = true; document.body.classList.remove('lock'); }
+    var s = e.target.closest('.spk');
+    if (s) speak(s.dataset.say, s);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !hov.hidden) { hov.hidden = true; document.body.classList.remove('lock'); } });
+
+  /* ---------- 上方「現在」列 ---------- */
+  function at(d, hm) { var p = hm.split(':'); return Date.UTC(Y, MON, d, +p[0] - 8, +p[1]); }
+  var E = [];
+  T.days.forEach(function (d) {
+    d.items.forEach(function (it) {
+      if (!it.t || !it.id) return;
+      E.push({ d: d.d, t: it.t, n: it.nb || it.title, id: it.id, move: it.kind === 'move', s: at(d.d, it.t) });
+    });
+  });
+  E.sort(function (a, b) { return a.s - b.s; });
+  var END = at(T.endAt.d, T.endAt.t);
+
+  // 測試用：網址加上 ?now=2026-12-17T10:30（當地時間）
+  var fake = null, q = /[?&]now=(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/.exec(location.search);
+  if (q) fake = Date.UTC(+q[1], +q[2] - 1, +q[3], +q[4] - 8, +q[5]);
+  var t0 = Date.now();
+  function now() { return fake === null ? Date.now() : fake + (Date.now() - t0); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function parts(ms) { var d = new Date(ms + 8 * 3600e3); return { d: d.getUTCDate(), m: d.getUTCMonth(), y: d.getUTCFullYear(), h: d.getUTCHours(), mi: d.getUTCMinutes() }; }
+
+  var nb = { prev: document.getElementById('nbPrev'), cur: document.getElementById('nbCur'), next: document.getElementById('nbNext') };
+  function put(el, time, name, target, empty) {
+    el.querySelector('.nb-time').textContent = time || '';
+    el.querySelector('.nb-name').textContent = name || '';
+    el.dataset.target = target || '';
+    el.classList.toggle('empty', !!empty);
+    el.disabled = !target;
+  }
+  function stamp(e, today) { return (e.d !== today ? T.month + '/' + e.d + ' ' : '') + e.t; }
+  var flow = [].slice.call(document.querySelectorAll('.tl > .it[id]'));
+  function mark(id) {
+    var idx = -1;
+    flow.forEach(function (el, i) { if (el.id === id) idx = i; });
+    flow.forEach(function (el, i) { el.classList.toggle('is-now', i === idx); el.classList.toggle('is-past', idx >= 0 && i < idx); });
+  }
+  function render() {
+    var ms = now(), p = parts(ms), today = (p.y === Y && p.m === MON) ? p.d : 0;
+    var clock = pad(p.h) + ':' + pad(p.mi);
+    var i = -1;
+    E.forEach(function (e, k) { if (ms >= e.s) i = k; });
+    document.querySelectorAll('nav a[data-day]').forEach(function (a) { a.classList.toggle('today', +a.dataset.day === today); });
+    if (i < 0) {
+      var left = E[0].s - ms, dd = Math.ceil(left / 864e5);
+      put(nb.prev, '', '', '', true);
+      put(nb.cur, left > 864e5 ? '還有 ' + dd + ' 天出發' : '今天出發', T.month + '/' + E[0].d + ' ' + E[0].n, E[0].id);
+      put(nb.next, stamp(E[1], today), E[1].n, E[1].id);
+      mark(null); return;
+    }
+    if (ms >= END) {
+      var L = E[E.length - 1];
+      put(nb.prev, stamp(L, today), L.n, L.id);
+      put(nb.cur, '旅程結束', '平安回家，辛苦了', 'top');
+      put(nb.next, '', '', '', true);
+      mark(null); return;
+    }
+    var e = E[i], nx = E[i + 1], pv = E[i - 1];
+    if (pv) put(nb.prev, stamp(pv, today), pv.n, pv.id); else put(nb.prev, '', '', '', true);
+    put(nb.cur, (e.move ? '移動中 ' : '現在 ') + clock, e.n, e.id);
+    if (nx) put(nb.next, stamp(nx, today), nx.n, nx.id); else put(nb.next, '', '', '', true);
+    mark(e.id);
+  }
+  [nb.prev, nb.cur, nb.next].forEach(function (el) {
+    el.addEventListener('click', function () {
+      var t = el.dataset.target && document.getElementById(el.dataset.target);
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  render();
+  setInterval(render, 30000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) render(); });
+
+  /* ---------- 地圖：旅行中預設只看今天 ---------- */
+  var pn = parts(now()), todayDay = null;
+  T.days.forEach(function (d) { if (pn.y === Y && pn.m === MON && pn.d === d.d) todayDay = d.id; });
+  window.initMap(todayDay ? [todayDay] : T.days.map(function (d) { return d.id; }));
+
+  /* ---------- 照片來源 ---------- */
+  var cr = document.getElementById('credits');
+  if (cr && window.IMG_CREDITS) {
+    cr.innerHTML = window.IMG_CREDITS.map(function (c) {
+      return '<li>' + esc(c.what) + '：<a href="' + esc(c.page) + '" target="_blank" rel="noopener">' + esc(c.author) + '</a>，' + esc(c.lic) + '</li>';
+    }).join('');
+  }
+
+  /* ---------- 離線也能看 ---------- */
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  }
+})();

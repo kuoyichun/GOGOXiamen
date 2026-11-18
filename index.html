@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#3A1D14">
+<title>廈門 12/16–12/20 行程</title>
+<meta name="description" content="廈門五天四夜自由行：金門、土樓、鼓浪嶼、環島路。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B23A26'/%3E%3Ctext x='32' y='45' font-size='36' font-weight='900' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E廈%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body id="top">
+
+<div class="top">
+  <div class="nowbar" role="status" aria-live="polite" aria-label="目前行程">
+    <div class="nb-track">
+      <button type="button" class="nb-st side" id="nbPrev"><span class="nb-time"></span><span class="nb-dot"></span><span class="nb-name"></span></button>
+      <button type="button" class="nb-st cur" id="nbCur"><span class="nb-time">廈門時間</span><span class="nb-dot"></span><span class="nb-name">行程</span></button>
+      <button type="button" class="nb-st side" id="nbNext"><span class="nb-time"></span><span class="nb-dot"></span><span class="nb-name"></span></button>
+    </div>
+  </div>
+  <nav aria-label="跳到">
+    <a href="#d1" data-day="16" style="--c:#C0392B">16 三</a>
+    <a href="#d2" data-day="17" style="--c:#2E7D4F">17 四</a>
+    <a href="#d3" data-day="18" style="--c:#1F6FB2">18 五</a>
+    <a href="#d4" data-day="19" style="--c:#C26A12">19 六</a>
+    <a href="#d5" data-day="20" style="--c:#7B4FA8">20 日</a>
+    <a href="#map" class="plain">地圖</a>
+    <a href="#eat" class="plain">吃什麼</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="hero-in">
+    <p class="kicker">2026 冬天・五天四夜</p>
+    <h1>廈門<span>自由行</span></h1>
+    <p class="dates">12/16（三）<i>→</i> 12/20（日）</p>
+    <ul class="facts">
+      <li><b>4</b>個人</li>
+      <li><b>5</b>天</li>
+      <li><b>4</b>晚住<br>同一間</li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="howto" aria-label="怎麼用">
+    <div class="howto-t">
+      <b>看到喇叭，按一下</b>
+      <span>就會唸給你聽，再按一次停止</span>
+    </div>
+    <button type="button" class="spk big" data-on="試聽" data-off="停止" data-say="你好！這是我們廈門旅行的行程表。看到喇叭的按鈕，按一下就會唸給你聽，再按一次就會停止。最上面黑色那一條，會顯示現在正在做什麼、下一個要去哪裡。" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.4 18.4a9 9 0 0 0 0-12.8"/></svg><span class="spk-l">試聽</span></button>
+  </section>
+  <p class="novoice" id="novoice" hidden>這個 App 裡不能播放聲音，請點右上角「…」，選「用瀏覽器開啟」（Safari 或 Chrome）。</p>
+
+  <section class="hotel" aria-label="飯店">
+    <div class="hotel-l">
+      <span class="hotel-k">四晚都住</span>
+      <b>壺香悅</b>
+      <span>中山路步行街店</span>
+    </div>
+    <button type="button" class="hotel-btn solid" data-open-hotel>
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+      迷路時<br>給人看地址
+    </button>
+  </section>
+
+  <section class="mapsec" id="map">
+    <h2 class="sec-h">五天去哪裡</h2>
+    <p class="sec-p">勾選哪幾天，地圖就放大到那裡。</p>
+    <div class="mapday" role="group" aria-label="選天數">
+      <label style="--c:#C0392B"><input type="checkbox" value="d1"><span>16 三</span></label>
+      <label style="--c:#2E7D4F"><input type="checkbox" value="d2"><span>17 四</span></label>
+      <label style="--c:#1F6FB2"><input type="checkbox" value="d3"><span>18 五</span></label>
+      <label style="--c:#C26A12"><input type="checkbox" value="d4"><span>19 六</span></label>
+      <label style="--c:#7B4FA8"><input type="checkbox" value="d5"><span>20 日</span></label>
+      <button type="button" id="mapAll">全部</button>
+    </div>
+    <div class="mapbox" id="mapbox"></div>
+    <ul class="legend" aria-label="線條說明">
+      <li><i class="lg car"></i>坐車</li>
+      <li><i class="lg ship"></i>坐船</li>
+      <li><i class="lg walk"></i>走路</li>
+      <li><i class="lg home">住</i>飯店</li>
+    </ul>
+  </section>
+
+  <div id="days"></div>
+
+  <section class="eat" id="eat">
+    <h2 class="sec-h">附近吃什麼</h2>
+    <p class="sec-p">中山路一帶，評價好的店。看到想吃的就進去。</p>
+    <img class="eat-ph" src="img/noodle.webp" alt="廈門沙茶麵" loading="lazy" decoding="async" width="960" height="540">
+    <ul class="eatlist" id="eatlist"></ul>
+  </section>
+
+  <footer class="foot">
+    <p>時間都是當地時間（跟台灣一樣）。船班時間以領隊通知為準。</p>
+    <details>
+      <summary>照片與地圖來源</summary>
+      <p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。照片來自 Wikimedia Commons：</p>
+      <ul id="credits"></ul>
+    </details>
+  </footer>
+</main>
+
+<div class="hcard" id="hotelCard" hidden role="dialog" aria-modal="true" aria-label="飯店地址">
+  <div class="hc-in" lang="zh-Hans">
+    <p class="hc-k">请送我到这里，谢谢</p>
+    <p class="hc-name" id="hcName"></p>
+    <p class="hc-addr" id="hcAddr"></p>
+    <button type="button" class="hc-close" data-close-hotel>關閉</button>
+  </div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/credits.js"></script>
+<script src="assets/land.js"></script>
+<script src="assets/map.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
