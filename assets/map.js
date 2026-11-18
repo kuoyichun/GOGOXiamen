@@ -15,8 +15,9 @@
     bashi:   { n: '八市',       ll: [118.0697, 24.4612], pr: 6 },
     xiagu:   { n: '廈鼓碼頭',   ll: [118.0698, 24.4829], pr: 3 },
     gly:     { n: '鼓浪嶼',     ll: [118.0632, 24.4470], pr: 1 },
-    huli:    { n: '胡里山砲台', ll: [118.1016, 24.4315], pr: 2 },
-    shimao:  { n: '一席（雙子塔）', ll: [118.0850, 24.4384], pr: 4 },
+    spw:     { n: '沙坡尾',     ll: [118.0829, 24.4399], pr: 2 },
+    shimao:  { n: '一席（雙子塔）', ll: [118.0850, 24.4378], pr: 3 },
+    zhcity:  { n: '中華城',     ll: [118.0777, 24.4553], pr: 6 },
     yujian:  { n: '嶼見閩南',   ll: [118.0711, 24.4935], pr: 2 },
     aoyuan:  { n: '鰲園',       ll: [118.0874, 24.5689], pr: 2 },
     longzhou:{ n: '龍舟池',     ll: [118.0936, 24.5672], pr: 3 }
@@ -41,11 +42,12 @@
       { a: 'gly', b: 'xiagu', m: 'ship', via: [[118.0592, 24.4560], [118.0610, 24.4700]] },
       { a: 'xiagu', b: 'bashi', m: 'car', bend: 0.25 },
       { a: 'bashi', b: 'hotel', m: 'walk', bend: 0.2 },
-      { a: 'hotel', b: 'tea', m: 'walk', bend: 0.5 }
+      { a: 'hotel', b: 'tea', m: 'walk', bend: 0.5 },
+      { a: 'tea', b: 'zhcity', m: 'walk', bend: 0.3 }
     ],
     d4: [
-      { a: 'hotel', b: 'huli', m: 'car', via: [[118.0795, 24.4475], [118.0890, 24.4390], [118.0960, 24.4335]] },
-      { a: 'huli', b: 'shimao', m: 'car', bend: -0.35 },
+      { a: 'hotel', b: 'spw', m: 'car', via: [[118.0800, 24.4480]] },
+      { a: 'spw', b: 'shimao', m: 'walk', bend: 0.4 },
       { a: 'shimao', b: 'yujian', m: 'car', via: [[118.0880, 24.4700]] },
       { a: 'yujian', b: 'hotel', m: 'car', bend: -0.3 }
     ],
@@ -206,7 +208,6 @@
         'text-anchor': c.a, stroke: '#fff', 'stroke-width': 4.5 / s, 'paint-order': 'stroke', 'stroke-linejoin': 'round' }, overG).textContent = pt.n;
     });
     var extra = CTX.slice();
-    if (days.indexOf('d4') >= 0) extra.unshift({ n: '環島路', ll: [118.122, 24.4262], fs: 15, color: TRIP_COLOR.d4 });
     extra.forEach(function (c) {
       if (c.skip && used[c.skip]) return;
       var p = P(c.ll), x = (p[0] - v.x) * s, y = (p[1] - v.y) * s, tw = textW(c.n, c.fs);

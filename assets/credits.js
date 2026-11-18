@@ -73,16 +73,16 @@ window.IMG_CREDITS = [
   "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_Island_from_Zhongshan_Road,_Xiamen.jpg"
  },
  {
-  "what": "環島路",
-  "author": "Zhangzhugang",
-  "lic": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_Hulishan_Paotai_20120226-01.jpg"
+  "what": "中華城",
+  "author": "Augustohai",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%8D%8E%E5%9F%8E084744.jpg"
  },
  {
-  "what": "胡里山砲台",
-  "author": "Tyg728",
+  "what": "沙坡尾",
+  "author": "向史公哲曰",
   "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Hulishan_Fort_Krupp_artillery_02_20170728.jpg"
+  "page": "https://commons.wikimedia.org/wiki/File:%E7%BD%91%E7%BA%A2%E5%8C%96%E6%B2%99%E5%9D%A1%E5%B0%BE1.jpg"
  },
  {
   "what": "世茂雙子塔",
