@@ -19,8 +19,7 @@
     shimao:  { n: '一席（雙子塔）', ll: [118.0850, 24.4378], pr: 3 },
     zhcity:  { n: '中華城',     ll: [118.0777, 24.4553], pr: 6 },
     yujian:  { n: '嶼見閩南',   ll: [118.0711, 24.4935], pr: 2 },
-    aoyuan:  { n: '鰲園',       ll: [118.0874, 24.5689], pr: 2 },
-    longzhou:{ n: '龍舟池',     ll: [118.0936, 24.5672], pr: 3 }
+    npt:     { n: '南普陀寺',   ll: [118.0915, 24.4433], pr: 2 }
   };
 
   // 每天的路線；via 是經過點，bend 是弧度；mode：car 坐車、ship 坐船、walk 走路
@@ -31,17 +30,16 @@
       { a: 'wutong', b: 'hotel', m: 'car', via: [[118.135, 24.505]] }
     ],
     d2: [
-      { a: 'hotel', b: 'aoyuan', m: 'car', via: [[118.0880, 24.4800], [118.1040, 24.5300], [118.1000, 24.5560]] },
-      { a: 'aoyuan', b: 'longzhou', m: 'walk', bend: 0.25 },
-      { a: 'longzhou', b: 'hotel', m: 'car', via: [[118.1090, 24.5560], [118.1110, 24.5300], [118.0920, 24.4800]] },
+      { a: 'hotel', b: 'bashi', m: 'walk', bend: 0.3 },
+      { a: 'bashi', b: 'npt', m: 'car', via: [[118.0820, 24.4520]] },
+      { a: 'npt', b: 'hotel', m: 'car', bend: 0.25 },
       { a: 'hotel', b: 'heping', m: 'car', bend: 0.6 }
     ],
     d3: [
       { a: 'hotel', b: 'xiagu', m: 'car', via: [[118.0772, 24.470]] },
       { a: 'xiagu', b: 'gly', m: 'ship', via: [[118.0662, 24.4640], [118.0648, 24.4535]] },
       { a: 'gly', b: 'xiagu', m: 'ship', via: [[118.0592, 24.4560], [118.0610, 24.4700]] },
-      { a: 'xiagu', b: 'bashi', m: 'car', bend: 0.25 },
-      { a: 'bashi', b: 'hotel', m: 'walk', bend: 0.2 },
+      { a: 'xiagu', b: 'hotel', m: 'car', bend: 0.2 },
       { a: 'hotel', b: 'tea', m: 'walk', bend: 0.5 },
       { a: 'tea', b: 'zhcity', m: 'walk', bend: 0.3 }
     ],
@@ -62,7 +60,6 @@
   // 背景地名（淡色，擠不下就不顯示）
   var CTX = [
     { n: '廈門島', ll: [118.128, 24.497], fs: 22 },
-    { n: '集美', ll: [118.070, 24.590], fs: 18, skip: 'aoyuan' },
     { n: '金門島', ll: [118.392, 24.478], fs: 20 },
     { n: '小金門', ll: [118.238, 24.448], fs: 16 },
     { n: '鼓浪嶼', ll: [118.0628, 24.4445], fs: 16, skip: 'gly' }
