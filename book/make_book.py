@@ -151,24 +151,23 @@ SPOT = {
                  photos=[('u-xiagu1', '郵輪中心裡的「廈鼓輪渡」入口'), ('u-xiagu2', '候船大廳'), ('glyship', '去鼓浪嶼的船')],
                  pts=['碼頭在國際郵輪中心裡面，找「廈鼓輪渡」', '每個人用自己的台胞證換上船憑證', '坐船約 15 分鐘，在三丘田碼頭上岸'],
                  place='xiagu'),
-    'spa': dict(day='d3', t='15:00', title='泰印象主題 SPA', photo='massage', place='foot', book=True,
-                pts=['跟飯店同一條路，在 2 樓', '足療＋全身按摩，約 80 分鐘', '包廂裡可以看電影']),
-    'tea': dict(day='d3', t='16:40', title='不只有茶', photo='glyview', place='tea', book=True,
-                pts=['海景茶館，大窗正對鼓浪嶼', '喝功夫茶、看夕陽', '12 月大約五點半天黑']),
-    'zhcity': dict(day='d3', t='17:45', title='中華城逛逛・吃晚餐', layout='one',
-                   photos=[('u-zhcity', '中華城'), ('zhcity', '中華城一角')],
-                   pts=['從茶館走過來約 10 分鐘，回飯店也近', '閩南風格的街區，有小吃和文創小店', '看到想吃的就進去吃晚餐'],
-                   place='zhcity'),
+    'spa': dict(day='d3', t='15:00', title='泰印象主題 SPA', layout='one', place='foot', book=True,
+                photos=[('massage', '泰印象 SPA 的包廂')],
+                pts=['跟飯店同一條路，在 2 樓', '足療＋全身按摩，約 80 分鐘', '包廂裡可以看電影', '太大力就說「輕一點」']),
+    'zcc': dict(day='d3', t='16:50', title='曾厝垵：逛小巷、吃晚餐', layout='two',
+                photos=[('zcc', '曾厝垵的牌坊'), ('zcc2', '晚上的小吃街'), ('zcc3', '巷子裡的小吃攤'), ('zcc4', '旁邊就是海灘'), ('zcc5', '村子裡的老廟')],
+                pts=['按摩完叫車約 20 分鐘，沿著環島路看海', '巷子裡都是小吃、甜品、茶飲和小店', '晚餐不用訂位，看到想吃的就進去', '想吃閩南菜：推薦<b>阿里元餐廳</b>（文青街）', '19:00 左右叫車回飯店'],
+                story='「厝」是房子、「垵」是海邊的小村，以前這裡住的大多姓曾，是有八百多年歷史的漁村，明朝時商船出海前會在這裡停靠檢查。2000 年環島路開通後，老房子慢慢變成民宿、小吃和小店，現在被叫做「最文藝的漁村」。',
+                place='zcc'),
     'spw': dict(day='d4', t='09:45', title='沙坡尾', layout='two',
                 photos=[('u-spw1', '彩繪小店，後面就是雙子塔'), ('u-spw2', '沙坡尾的街角'), ('spw', '掛著燈籠的老街'), ('spw2', '港邊的漁船'), ('spw3', '避風塢')],
                 pts=['以前的老漁港，漁船還停在港邊', '彩色老房子、咖啡店、文創小店', '散步看風景，看到喜歡的咖啡店就坐坐'],
                 story='這一帶以前叫「玉沙坡」，是廈門最早的漁港。1920 年代廈門沿著海邊築堤蓋馬路，原本的小漁港被填掉，漁船就搬到沙坡尾，蓋了新的避風塢，颱風天可以躲進來。後來漁業慢慢沒落，老工廠、老倉庫改成藝術區和咖啡店。',
                 place='spw'),
-    'yixi': dict(day='d4', t='11:30', title='雙子塔・一席海景午餐', layout='two', book=True,
-                 photos=[('shimao', '世茂雙子塔'), ('shimao2', '雙子塔和海邊'), ('shimao3', '從雙子塔往下看'), ('yanwu', '演武大橋夜景'), ('yanwu2', '演武大橋日落')],
-                 pts=['從沙坡尾走路約 5 分鐘', '在 5 樓的一席吃海景午餐', '窗外就是海和演武大橋'],
-                 tip='世茂海峽大廈是兩棟像船帆的高樓，大約 300 公尺高，2015 年完工，大家都叫它「雙子塔」，是廈門很醒目的地標。',
-                 place='yixi'),
+    'lunch4': dict(day='d4', t='11:30', title='沙坡尾找午餐', layout='one',
+                   photos=[('shacha', '沙茶麵'), ('oyster', '海蠣煎')],
+                   pts=['不用訂位，看到想吃的就進去', '推薦<b>沙坡尾吃堡</b>：像美食街，沙茶麵、海蠣煎、魚丸都有', '吃不下就少點一點，大家分著吃'],
+                   place='chibao'),
     'yj': dict(day='d4', t='13:30', title='嶼見閩南・看表演', layout='two', book='門票要事先訂',
                photos=[('yujian', '嶼見閩南'), ('u-yj1', '館內像一座閩南古城'), ('u-yj2', '表演舞台')],
                pts=['坐車約 30 分鐘，在海上世界 4–5 樓', '全部在室內，有冷氣', '像走進一座閩南古城，表演一場接一場', '晚餐在館內的小吃街吃'],
@@ -589,7 +588,7 @@ page(head('碼頭怎麼走・回程', '廈門 → 金門 → 台北') + steps([
 page(head('住宿資訊', '12/16 – 12/20・四晚') + pol('hotel', '壺香悅：紅白色的洋樓，門口是圓拱玻璃門', 'big', 'rot1 fit') +
      '<div class="card tape"><div class="ct">壺香悅<small>中山路步行街店</small></div>' + ul([
          '就在中山路步行街旁邊',
-         '走路可到：中山路、八市、中華城、泰印象 SPA、悅享採耳、不只有茶',
+         '走路可到：中山路、八市、泰印象 SPA、悅享採耳',
      ]) + '</div>' + addr('hotel', '飯店地址（迷路時給人看）'), 'spot', PREP, 0, mark='住宿資訊')
 
 # ---------------------------------------------------------------- 每一天
@@ -598,15 +597,15 @@ MEAL = ('早餐', '午餐', '晚餐')
 DAY_NOTE = {
     'd1': ['起飛前 1 小時到松山機場', '入境後<b>護照收好</b>，不要拿出來', '連飯店 Wi-Fi，LINE、YouTube、臉書不能用'],
     'd2': ['<b>台胞證</b>帶在身上，護照收好', '南普陀寺要事先預約', '下午採耳前可以回飯店午休'],
-    'd3': ['<b>台胞證一定要帶</b>，坐船去鼓浪嶼要用', '鼓浪嶼走路多，走累了就坐電瓶車'],
+    'd3': ['<b>台胞證一定要帶</b>，坐船去鼓浪嶼要用', '鼓浪嶼走路多，走累了就坐電瓶車', '曾厝垵人多、巷子窄，大家走在一起'],
     'd4': ['<b>台胞證</b>帶在身上，護照收好', '嶼見閩南的表演提早 10 分鐘到', '晚上收行李，<b>大袋子</b>拿出來裝伴手禮'],
     'd5': ['早點起床，退房別忘了東西', '廈門出境用<b>台胞證</b>，到金門才拿護照', '肉做的東西不能帶回台灣'],
 }
 ORDER = {
     'd1': [('one', 'plane'), ('two', 'ship'), ('two', 'zs')],
     'd2': [('one', 'peanut'), ('two', 'bashi'), ('two', 'npt'), ('pair', 'veg', 'ear'), ('two', 'xcx')],
-    'd3': [('one', 'pier'), ('gly',), ('pair', 'spa', 'tea'), ('one', 'zhcity')],
-    'd4': [('two', 'spw'), ('two', 'yixi'), ('two', 'yj'), ('one', 'pack')],
+    'd3': [('one', 'pier'), ('gly',), ('one', 'spa'), ('two', 'zcc')],
+    'd4': [('two', 'spw'), ('one', 'lunch4'), ('two', 'yj'), ('one', 'pack')],
     'd5': [('one', 'back'), ('two', 'km'), ('two', 'mofan'), ('one', 'home')],
 }
 
@@ -721,7 +720,7 @@ page(head('台灣說法・廈門說法') + '<div class="card tape"><table class=
      '<p class="note" style="text-align:center;margin-top:1.6mm">廈門人也講閩南話，跟台語很像，可以說說看！</p>', 'info', PREP, mark='台灣說法・廈門說法')
 
 # ---------------------------------------------------------------- 給司機看
-DRIVER = ['hotel', 'npt', 'xcx', 'xiagu', 'spw', 'yixi', 'yujian', 'wutong']
+DRIVER = ['hotel', 'npt', 'xcx', 'xiagu', 'zcc', 'spw', 'yujian', 'wutong']
 
 
 def drv(key):
@@ -758,7 +757,7 @@ def credits_page():
         groups.setdefault((clean_author(c['author']), c['lic']), []).append(c['what'])
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
-            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、中華城、沙坡尾、嶼見閩南、金城模範街、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
+            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、沙坡尾、嶼見閩南、金城模範街、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
             '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。貼紙和圖示：Microsoft Fluent Emoji（MIT）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 

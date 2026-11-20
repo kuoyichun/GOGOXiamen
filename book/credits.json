@@ -168,20 +168,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_beach_2011_12.jpg"
  },
  {
-  "key": "glyview",
-  "what": "從廈門看鼓浪嶼",
-  "author": "Slyronit",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_Island_from_Zhongshan_Road,_Xiamen.jpg"
- },
- {
-  "key": "zhcity",
-  "what": "中華城",
-  "author": "Augustohai",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%8D%8E%E5%9F%8E084744.jpg"
- },
- {
   "key": "spw",
   "what": "沙坡尾",
   "author": "向史公哲曰",
@@ -201,41 +187,6 @@
   "author": "https://pxhere.com/zh/photo/875404",
   "lic": "CC0",
   "page": "https://commons.wikimedia.org/wiki/File:2015%E5%B9%B4%E7%9A%84%E6%B2%99%E5%9D%A1%E5%B0%BE%E9%81%BF%E9%A3%8E%E5%9D%9E.jpg"
- },
- {
-  "key": "shimao",
-  "what": "世茂雙子塔",
-  "author": "周流劲火",
-  "lic": "CC BY 2.5",
-  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_Shimao_Straits_Tower_at_dusk.jpg"
- },
- {
-  "key": "shimao2",
-  "what": "雙子塔與海邊",
-  "author": "JamesYoung8167",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_Shimao_Straits_Tower_2016-02-09.jpg"
- },
- {
-  "key": "shimao3",
-  "what": "從雙子塔往下看",
-  "author": "Mx. Granger",
-  "lic": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:View_from_Shimao_Cross-Strait_Plaza_2.jpg"
- },
- {
-  "key": "yanwu",
-  "what": "演武大橋夜景",
-  "author": "JULIANISME",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Night_view_of_Xiamen_Yanwu_Bridge_20230826_01.jpg"
- },
- {
-  "key": "yanwu2",
-  "what": "演武大橋日落",
-  "author": "rheins",
-  "lic": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E6%BC%94%E6%AD%A6%E5%A4%A7%E6%A1%A5%E6%97%A5%E8%90%BD_-_Sunset_at_Yanwu_Bridge_-_2014.01_-_panoramio.jpg"
  },
  {
   "key": "juguang",
@@ -341,5 +292,40 @@
   "author": "Don Ramey Logan",
   "lic": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Xiamen_China_Gulangyu_Island_shellfish_for_sale_by_Don_Ramey_Logan.jpg"
+ },
+ {
+  "key": "zcc",
+  "what": "曾厝垵牌坊",
+  "author": "董辰兴",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E5%8E%9D%E5%9E%B5%E7%89%8C%E5%9D%8A%E5%86%85%E4%BE%A7.jpg"
+ },
+ {
+  "key": "zcc2",
+  "what": "曾厝垵小吃街",
+  "author": "董辰兴",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E5%8E%9D%E5%9E%B5%E7%89%8C%E5%9D%8A%E5%86%85.jpg"
+ },
+ {
+  "key": "zcc3",
+  "what": "曾厝垵小吃街",
+  "author": "Augustohai",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%A4%9C%E5%B8%82230634.jpg"
+ },
+ {
+  "key": "zcc4",
+  "what": "曾厝垵海邊",
+  "author": "rheins",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E5%8E%9D%E5%9E%B5%E6%B5%B7%E6%BB%A9_-_Zengcuo%E2%80%98an_Beach_-_2015.01_-_panoramio.jpg"
+ },
+ {
+  "key": "zcc5",
+  "what": "曾厝垵的廟",
+  "author": "Han Zheng",
+  "lic": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%8E%A6%E9%97%A8%E6%9B%BE%E5%8E%9D%E5%9E%B5_(53047248522).jpg"
  }
 ]
