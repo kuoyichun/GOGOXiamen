@@ -562,7 +562,7 @@ for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
 
 # ---------------------------------------------------------------- 必吃美食
 FOOD_IMG = {'f-shacha': 'shacha', 'f-oyster': 'oyster', 'f-duck': 'duck', 'f-peanut': 'peanut', 'f-mianxian': 'mianxian',
-            'f-zongzi': 'zongzi', 'f-crab': None, 'f-congee': None, 'f-seafood': 'shellfish', 'f-tusun': 'tusun'}
+            'f-zongzi': 'zongzi', 'f-crab': 'u-crab', 'f-congee': 'u-congee', 'f-seafood': 'shellfish', 'f-tusun': 'tusun'}
 FOOD_EMO = {'f-crab': '1f980', 'f-congee': '1f372'}
 foods = T['foods']
 for i in range(0, len(foods), 2):
@@ -580,23 +580,24 @@ for i in range(0, len(foods), 2):
 # ---------------------------------------------------------------- 伴手禮
 def gifts(items):
     out = ''
-    for name, note, ph, emo in items:
+    for name, note, ph, emo, *bad in items:
         inner = '<img class="p" src="%s" alt="">' % src(ph) if ph else icon(emo, 'e')
-        out += '<div class="gift"><div class="cir">%s</div><b>%s</b><span>%s</span></div>' % (inner, e(name), e(note))
+        cls = ' bad' if bad else ''
+        out += '<div class="gift%s"><div class="cir">%s</div><b>%s</b><span>%s</span></div>' % (cls, inner, e(name), e(note))
     return '<div class="gifts">%s</div>' % out
 
 
 page(head('必買伴手禮', '廈門') + '<div class="card tape">' + gifts([
-    ('鼓浪嶼餡餅', '挑綠豆口味；肉鬆口味不能帶回台灣', None, '1f96e'),
-    ('南普陀素餅', '素的，可以安心帶', None, '1f36a'),
+    ('南普陀素餅', '全素，可以安心帶', 'u-subing', None),
+    ('沙茶醬', '成分有肉的不要買；放託運', 'u-shacha', None),
     ('鐵觀音', '福建有名的烏龍茶', 'tea', None),
     ('芒果乾', '八市、中山路都買得到', None, '1f96d'),
-    ('沙茶醬', '沙茶麵的味道，放託運', None, '1fad9'),
     ('青津果', '鼓浪嶼的蜜餞橄欖', None, '1fad2'),
-]) + '</div><div class="warn">%s肉做的東西不能帶回台灣</div>' % icon('26a0'), 'food', BUY, '買', mark='必買伴手禮')
+    ('不能帶回台灣', '肉鬆口味的餅、肉乾、香腸', None, '1f356', True),
+]) + '</div><div class="warn">%s包裝寫「肉松」「肉」的不要買</div>' % icon('26a0'), 'food', BUY, '買', mark='必買伴手禮')
 
 page(head('必買伴手禮', '金門') + '<div class="card tape pink">' + gifts([
-    ('貢糖', '花生做的，酥酥的', None, '1f95c'),
+    ('貢糖', '花生做的，酥酥的', 'u-gongtang', None),
     ('菜刀', '砲彈鋼做的，要託運', 'knife', None),
     ('高粱酒', '放託運行李', 'liquor', None),
     ('風獅爺小物', '金門的守護神', 'lion', None),
@@ -652,7 +653,7 @@ def credits_page():
         groups.setdefault((clean_author(c['author']), c['lic']), []).append(c['what'])
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
-            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、中華城、沙坡尾、嶼見閩南、金城模範街的部分照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
+            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、中華城、沙坡尾、嶼見閩南、金城模範街、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
             '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。圖示：Twemoji（CC BY 4.0）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 

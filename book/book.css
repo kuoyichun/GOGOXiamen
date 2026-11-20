@@ -330,3 +330,7 @@ img { display: block; }
 .in > .row.fit { flex-direction: row; }
 .tl-top { padding-right: 0; }
 .dayrib { top: -4.2mm; right: 5mm; }
+.gift.bad .cir { background: #FFE3DD; border-color: var(--red); position: relative; }
+.gift.bad .cir::after { content: ""; position: absolute; inset: 18%; border-radius: 50%; border: 1.1mm solid var(--red);
+  background: linear-gradient(45deg, transparent 46%, var(--red) 46%, var(--red) 54%, transparent 54%); }
+.gift.bad b { color: var(--red); }
