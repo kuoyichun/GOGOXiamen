@@ -1,24 +1,6 @@
 /* 照片都來自 Wikimedia Commons，依各自授權使用 */
 window.IMG_CREDITS = [
  {
-  "what": "金門機場",
-  "author": "Livewireshock",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Kinmen_Airport_and_Surrounds_03.JPG"
- },
- {
-  "what": "水頭碼頭",
-  "author": "賈夢龍",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Shuitou_Wharf_20190128.jpg"
- },
- {
-  "what": "金廈小三通船",
-  "author": "lienyuan lee",
-  "lic": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E9%A0%AD%E7%A2%BC%E9%A0%AD_Shuitou_Pier_-_panoramio.jpg"
- },
- {
   "what": "五通碼頭",
   "author": "Shwangtianyuan",
   "lic": "CC BY-SA 4.0",
@@ -65,18 +47,6 @@ window.IMG_CREDITS = [
   "author": "姜 明雄",
   "lic": "CC0",
   "page": "https://commons.wikimedia.org/wiki/File:Juguang_Tower_20180727_(cropped).jpg"
- },
- {
-  "what": "金門金城模範街",
-  "author": "Cpc3711",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E9%96%80%E6%A8%A1%E7%AF%84%E8%A1%97%E4%B9%8B%E7%BE%8E-%E5%BC%B5%E5%88%A9%E8%81%B0.jpg"
- },
- {
-  "what": "金門機場",
-  "author": "cathy lee",
-  "lic": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Kinmen_Airport_01.jpg"
  },
  {
   "what": "沙茶麵",

@@ -21,27 +21,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Kinmen_Airport_front_view_20090401c.jpg"
  },
  {
-  "key": "kmair2",
-  "what": "金門機場",
-  "author": "Livewireshock",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Kinmen_Airport_and_Surrounds_03.JPG"
- },
- {
-  "key": "ferry",
-  "what": "金廈小三通船",
-  "author": "lienyuan lee",
-  "lic": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E9%A0%AD%E7%A2%BC%E9%A0%AD_Shuitou_Pier_-_panoramio.jpg"
- },
- {
-  "key": "ferry2",
-  "what": "水頭港",
-  "author": "User:Vmenkov",
-  "lic": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Kinmen_-_Shuitou_Harbor_-_DSCF9376.JPG"
- },
- {
   "key": "wutong",
   "what": "五通碼頭",
   "author": "Shwangtianyuan",
@@ -105,25 +84,11 @@
   "page": "https://commons.wikimedia.org/wiki/File:South_Putuo_Temple_07235-Xiamen_(48814044816).jpg"
  },
  {
-  "key": "npt3",
-  "what": "南普陀寺山門",
-  "author": "lienyuan lee",
-  "lic": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E6%99%AE%E9%99%80%E5%AF%BA%E5%B1%B1%E9%96%80_Gate_of_South_Putuo_Temple_-_panoramio.jpg"
- },
- {
   "key": "npt4",
   "what": "南普陀寺「佛」字石",
   "author": "lienyuan lee",
   "lic": "CC BY 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E6%99%AE%E9%99%80%E5%AF%BA_Nan_Putuo_Temple_-_panoramio.jpg"
- },
- {
-  "key": "npt5",
-  "what": "南普陀寺與五老峰",
-  "author": "Mx. Granger",
-  "lic": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E6%99%AE%E9%99%80%E5%AF%BA.jpg"
  },
  {
   "key": "heping",
@@ -145,20 +110,6 @@
   "author": "JULIANISME",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Night_view_of_Gulangyu_20230826.jpg"
- },
- {
-  "key": "lujiang",
-  "what": "鷺江道夜景",
-  "author": "https://pxhere.com/en/photo/793051",
-  "lic": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%AD%E6%B1%9F%E9%81%93%E4%B9%8B%E8%93%9D%E5%A4%9C.jpg"
- },
- {
-  "key": "cruise",
-  "what": "郵輪中心",
-  "author": "Shwangtianyuan",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_International_Cruise_Terminal_South_gate-20191215.jpg"
  },
  {
   "key": "glyship",
@@ -189,13 +140,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Xiamen_Gulangyu_20120226-25.jpg"
  },
  {
-  "key": "gly3",
-  "what": "鼓浪嶼老洋房",
-  "author": "Rolfmueller",
-  "lic": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_mansion_2011_12.jpg"
- },
- {
   "key": "church",
   "what": "鼓浪嶼天主堂",
   "author": "Siyuwj",
@@ -222,13 +166,6 @@
   "author": "Rolfmueller",
   "lic": "CC BY-SA 3.0",
   "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_beach_2011_12.jpg"
- },
- {
-  "key": "shuzhuang",
-  "what": "菽莊花園",
-  "author": "Popolon",
-  "lic": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Xiamen-Gulangyu-Jardin_traditionnel.jpg"
  },
  {
   "key": "glyview",
@@ -264,20 +201,6 @@
   "author": "https://pxhere.com/zh/photo/875404",
   "lic": "CC0",
   "page": "https://commons.wikimedia.org/wiki/File:2015%E5%B9%B4%E7%9A%84%E6%B2%99%E5%9D%A1%E5%B0%BE%E9%81%BF%E9%A3%8E%E5%9D%9E.jpg"
- },
- {
-  "key": "spw4",
-  "what": "沙坡尾",
-  "author": "向史公哲曰",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E7%BD%91%E7%BA%A2%E5%8C%96%E6%B2%99%E5%9D%A1%E5%B0%BE4.jpg"
- },
- {
-  "key": "spw5",
-  "what": "沙坡尾與雙子塔",
-  "author": "向史公哲曰",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E8%BF%98%E6%9C%89%E6%B8%94%E6%B0%91%E7%9A%84%E6%B2%99%E5%9D%A1%E5%B0%BE2.jpg"
  },
  {
   "key": "shimao",
@@ -329,20 +252,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E9%96%80%E6%A8%A1%E7%AF%84%E8%A1%97%E4%B9%8B%E7%BE%8E-%E5%BC%B5%E5%88%A9%E8%81%B0.jpg"
  },
  {
-  "key": "mofan2",
-  "what": "模範街",
-  "author": "林高志",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E9%96%80%E6%A8%A1%E7%AF%84%E8%A1%972.jpg"
- },
- {
-  "key": "mofan3",
-  "what": "金城老街",
-  "author": "rheins",
-  "lic": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E5%9F%8E%E8%80%81%E8%A1%97_-_Old_Street_in_Jincheng_Township_-_2014.05_-_panoramio.jpg"
- },
- {
   "key": "settle",
   "what": "水頭聚落",
   "author": "rheins",
@@ -362,13 +271,6 @@
   "author": "P95521708",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Wind_Lion_God_in_Kimmen_DSC_3309.jpg"
- },
- {
-  "key": "lion2",
-  "what": "風獅爺",
-  "author": "LiCheng Shih",
-  "lic": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Stone_(lion)_worship_in_Kinmen_2016-06-25.jpg"
  },
  {
   "key": "knife",
