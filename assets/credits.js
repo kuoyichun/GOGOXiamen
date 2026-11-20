@@ -31,12 +31,6 @@ window.IMG_CREDITS = [
   "page": "https://commons.wikimedia.org/wiki/File:%E5%BB%88%E9%96%80%E6%AD%A5%E8%A1%8C%E8%A1%97%E5%B0%8F%E5%90%83%E6%94%A4_snack_stalls_at_Xiamen_pedestrian_street_-_panoramio.jpg"
  },
  {
-  "what": "金門莒光樓",
-  "author": "姜 明雄",
-  "lic": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:Juguang_Tower_20180727_(cropped).jpg"
- },
- {
   "what": "沙茶麵",
   "author": "Windmemories",
   "lic": "CC BY-SA 4.0",
@@ -77,5 +71,11 @@ window.IMG_CREDITS = [
   "author": "董辰兴",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E5%8E%9D%E5%9E%B5%E7%89%8C%E5%9D%8A%E5%86%85%E4%BE%A7.jpg"
+ },
+ {
+  "what": "水頭聚落得月樓",
+  "author": "rheins",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E5%A4%B4%E5%BE%97%E6%9C%88%E6%A5%BC_-_Deyue_Tower_in_Shuitou_Settlement_-_2014.05_-_panoramio.jpg"
  }
 ];
