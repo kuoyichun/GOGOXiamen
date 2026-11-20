@@ -363,30 +363,75 @@ page(head('行李清單', '衣服・日用品') + '<div class="card tape pink">'
     ('1f6cd', '環保袋', '裝伴手禮'),
 ]) + '<ul class="chk"><li><i class="box"></i><span></span><div class="fill" style="height:8mm"></div></li></ul></div>', 'info', PREP, 0)
 
-# 7 行李規定
-page(head('託運和隨身行李', '飛機和船的規定不一樣') +
+# 7 託運？手提？（給不常出國的人）
+def flow(items):
+    out = ''
+    for i, (ic, t) in enumerate(items):
+        if i:
+            out += '<i class="fl-a">›</i>'
+        out += '<div class="fl-s">%s<span>%s</span></div>' % (icon(ic), t)
+    return '<div class="flow">%s</div>' % out
+
+
+page(head('託運？手提？', '行李有兩種') +
+     '<div class="card tape kind"><div class="rule-h">%s<div class="ct">託運行李<small>大的行李箱，交給櫃台</small></div></div>' % icon('1f9f3') +
+     flow([('1f6c5', '報到時<br>交給櫃台'), ('1f3f7', '過秤、<br>貼行李條'), ('2708', '放進飛機<br>或船的貨艙'), ('1f6c4', '到了<br>再領回來')]) +
+     '<p class="kind-n">路上<b>拿不到</b>，到了以後在「行李轉盤」或領行李的地方拿回來。</p></div>'
+     '<div class="card tape pink r kind"><div class="rule-h">%s<div class="ct">手提行李<small>也叫「隨身行李」</small></div></div>' % icon('1f392') +
+     flow([('1f6b6', '自己<br>帶著走'), ('1f50d', '先過<br>X 光檢查'), ('1f4ba', '放座位上方<br>或腳前面')]) +
+     '<p class="kind-n">一路都在自己身邊，<b>隨時拿得到</b>。小包包、外套、雨傘不算件數。</p></div>'
+     '<div class="warn">%s藥、證件、錢、手機，一定放手提</div>' % icon('26a0'),
+     'info', PREP, 0, mark='託運？手提？')
+
+# 8 能帶多重
+page(head('能帶多重？', '飛機和船的規定不一樣') +
      '<div class="card tape"><div class="rule-h">%s<div class="ct">飛機<small>台北松山 ⇄ 金門（國內線）</small></div></div>'
-     '<div class="nums"><div class="num"><div class="k">手提行李</div><div class="v">7<small>公斤</small></div><div class="s">1 件・56×36×23 公分以內</div></div>'
-     '<div class="num"><div class="k">免費託運</div><div class="v">10<small>公斤</small></div><div class="s">經濟艙每人</div></div></div></div>' % icon('2708') +
+     '<div class="nums"><div class="num"><div class="k">手提</div><div class="v">7<small>公斤</small></div><div class="s">1 件・約 20 吋登機箱大小</div></div>'
+     '<div class="num"><div class="k">免費託運</div><div class="v">10<small>公斤</small></div><div class="s">每人</div></div></div></div>' % icon('2708') +
      '<div class="card tape blue r"><div class="rule-h">%s<div class="ct">小三通船<small>金門水頭 ⇄ 廈門五通</small></div></div>'
-     '<div class="nums"><div class="num"><div class="k">隨身行李</div><div class="v">17<small>公斤</small></div><div class="s">最多 2 件，合計</div></div>'
+     '<div class="nums"><div class="num"><div class="k">手提</div><div class="v">17<small>公斤</small></div><div class="s">最多 2 件，加起來</div></div>'
      '<div class="num hot"><div class="k">免費託運</div><div class="v">5<small>公斤</small></div><div class="s">超過就要付錢</div></div></div></div>' % icon('26f4') +
      '<div class="card"><div class="ct" style="font-size:14pt">建議這樣帶</div>' + ul([
          '一人一個 20 吋登機箱（7 公斤內）',
-         '證件、藥、行動電源放隨身小包',
+         '再加一個隨身小包',
      ]) + '<p class="note" style="margin-top:1.6mm">2026 年 10 月的規定，以航空公司、船公司現場為準。</p></div>',
-     'info', PREP, 0, mark='行李規定')
+     'info', PREP, 0)
 
-# 8 不能帶的東西
+# 9 放哪裡
+def tiles(items):
+    return '<div class="tiles">%s</div>' % ''.join('<div class="tile">%s<span>%s</span></div>' % (icon(c), t) for c, t in items)
+
+
 BAN_PAGE = len(pages) + 1
-page(head('這些東西要注意') + '<div class="card tape">' + ''.join(
-    '<div class="ban">%s<div><b>%s</b>%s<p>%s</p></div></div>' % (icon(c), e(t), tag, e(d)) for c, t, tag, d in [
-        ('1f50b', '行動電源', '<span class="no-x">不能託運</span>', '一定放隨身包。飛機上不能使用、不能充電，每人最多帶 2 個。'),
-        ('1f52a', '刀子、金門菜刀', '<span class="no-x">不能手提</span>', '要放託運行李。在金門買了菜刀，記得託運。'),
-        ('1f356', '肉做的食物', '<span class="no-x">不能帶</span>', '肉乾、肉鬆、香腸、肉餡的餅，帶去廈門不行，帶回台灣也不行，被查到會重罰。'),
-        ('1f34e', '新鮮水果', '<span class="no-x">不能帶</span>', '去廈門、回台灣都不要帶。'),
-        ('1f376', '高粱酒、沙茶醬', '<span class="no-x ok-o">放託運</span>', '瓶瓶罐罐放託運行李最安心。'),
-    ]) + '</div>', 'info', PREP, 0)
+page(head('東西放哪裡？') +
+     '<div class="card sort ok"><div class="sort-h">%s放手提（隨身包）</div>' % icon('2705') +
+     tiles([('1faaa', '證件'), ('1f45b', '錢包'), ('1f4f1', '手機'), ('1f50b', '行動電源'), ('1f48a', '常吃的藥'), ('1f453', '眼鏡')]) +
+     '<p class="sort-n">行動電源<b>不能託運</b>；飛機上不能用、不能充電，每人最多 2 個。</p></div>'
+     '<div class="card sort ck"><div class="sort-h">%s放託運</div>' % icon('1f9f3') +
+     tiles([('1f52a', '刀子<br>菜刀'), ('2702', '剪刀'), ('1f9f4', '大瓶乳液<br>洗髮精'), ('1f376', '高粱酒'), ('1fad9', '沙茶醬<br>瓶罐醬料')]) +
+     '<p class="sort-n">刀剪<b>不能手提</b>。小瓶的乳液、藥水放手提沒關係。</p></div>'
+     '<div class="card sort bad"><div class="sort-h">%s都不能帶</div>' % icon('274c') +
+     tiles([('1f356', '肉乾肉鬆<br>香腸'), ('1f34e', '新鮮水果'), ('1f525', '瓦斯罐<br>噴漆')]) +
+     '<p class="sort-n">肉做的食物去廈門、回台灣都不行，會被<b>重罰</b>。</p></div>',
+     'info', PREP, 0, mark='東西放哪裡？')
+
+# 10 打包和安檢小撇步
+page(head('打包和安檢', '小撇步') +
+     '<div class="card tape"><div class="rule-h">%s<div class="ct">打包的時候</div></div>' % icon('1f9f3') + ul([
+         '行李箱掛名牌，寫名字和電話',
+         '綁一條彩色帶子，領行李時好認',
+         '瓶子蓋緊，裝進夾鏈袋',
+         '藥多帶兩天份，放手提',
+         '在家先秤，手提箱 7 公斤以內',
+     ]) + '</div>'
+     '<div class="card tape pink r"><div class="rule-h">%s<div class="ct">過安全檢查</div></div>' % icon('1f50d') + ul([
+         '包包、外套放進籃子過 X 光',
+         '口袋的手機、鑰匙、零錢先拿出來',
+         '被叫住檢查不用緊張，照著做就好',
+     ]) + '</div>'
+     '<div class="card tape blue"><div class="rule-h">%s<div class="ct">領行李</div></div>' % icon('1f6c4') + ul([
+         '行李條的收據收好，行李不見要用',
+     ]) + '</div>', 'info', PREP, 0)
 
 # 9–10 交通資訊（票卡）
 def ticket(ic, kind, date, a, b, ta, tb, foot):
@@ -697,6 +742,8 @@ const { chromium } = require('playwright');
     const el = s.querySelector('.in'); if (!el) return null;
     const kids = [...el.children]; const bottom = Math.max(...kids.map(k => k.getBoundingClientRect().bottom));
     const lim = el.getBoundingClientRect().bottom;
+    const toc = s.querySelector('.toc');
+    if (toc && toc.scrollHeight > toc.clientHeight + 1) return (i + 1) + ':toc';
     return bottom > lim + 1 ? (i + 1) + ':' + Math.round(bottom - lim) + 'px' : null;
   }).filter(Boolean));
   console.log('overflow pages:', over.join(' ') || 'none');
