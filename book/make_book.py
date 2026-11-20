@@ -153,7 +153,7 @@ SPOT = {
                 place='xcx'),
     'pier': dict(day='d3', t='08:15', title='廈鼓碼頭：坐船去鼓浪嶼', layout='one', book='船票由代表預訂',
                  photos=[('u-xiagu1', '郵輪中心裡的「廈鼓輪渡」入口'), ('u-xiagu2', '候船大廳'), ('glyship', '去鼓浪嶼的船')],
-                 pts=['碼頭在國際郵輪中心裡面，找「廈鼓輪渡」', '在閘門刷自己的台胞證進站；刷不過到自助機或窗口印上船憑證', '坐船約 15 分鐘，在三丘田碼頭上岸'],
+                 pts=['碼頭在國際郵輪中心裡面，找「廈鼓輪渡」', '刷台胞證進站，刷不過到自助機印憑證', '坐船約 15 分鐘，在三丘田碼頭上岸'],
                  place='xiagu'),
     'spa': dict(day='d3', t='15:00', title='泰印象主題 SPA', layout='one', place='foot', book=True,
                 photos=[('massage', '泰印象 SPA 的包廂')],
