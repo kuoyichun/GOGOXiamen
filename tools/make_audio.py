@@ -72,6 +72,10 @@ async def main():
                 os.remove(p)
             del man[name]
     json.dump(man, open(man_path, 'w'), ensure_ascii=False, indent=1, sort_keys=True)
+    # 網頁用這個版本號抓語音：語音重錄後網址會變，手機就不會一直播舊的
+    ver = os.path.join(os.path.dirname(OUT), 'assets', 'audio-version.js')
+    open(ver, 'w').write('/* 由 tools/make_audio.py 產生，不要手改 */\nwindow.AUDIO_V = '
+                         + json.dumps(man, ensure_ascii=False, sort_keys=True) + ';\n')
     print('完成，共', len(todo), '個檔案')
 
 

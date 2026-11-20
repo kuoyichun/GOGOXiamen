@@ -61,7 +61,8 @@
     if (!btn.dataset.audio) { speakTTS(btn); return; }
     audio.onended = function () { done(btn); };
     audio.onerror = function () { if (playing === btn) speakTTS(btn); };
-    audio.src = 'audio/' + btn.dataset.audio + '.mp3';
+    var v = window.AUDIO_V && window.AUDIO_V[btn.dataset.audio];
+    audio.src = 'audio/' + btn.dataset.audio + '.mp3' + (v ? '?v=' + v : '');
     var pr = audio.play();
     if (pr && pr.catch) pr.catch(function (e) { if (playing === btn && e && e.name !== 'AbortError') speakTTS(btn); });
   }
