@@ -615,7 +615,8 @@ def gly_pages():
     body += '<div class="card tape"><div class="meta"><span class="label">09:45</span></div>' + ul([
         '島上沒有汽車，到處是百年老洋房',
         '散步看建築、看海景，放慢腳步輕鬆逛',
-        '島上也有電瓶車可以坐',
+        '12:00 在島上吃午餐，龍頭路一帶小吃很多',
+        '13:00 坐船回廈門，回飯店休息',
     ]) + '</div>'
     page(body, 'spot', c, 3)
     body = '<div class="kick">%s</div><h1 class="hd" style="font-size:17pt"><span>鼓浪嶼散步看什麼</span></h1>' % daykick(did)
