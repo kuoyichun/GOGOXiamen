@@ -380,3 +380,32 @@ img { display: block; }
 .warn + .card, .card + .warn { margin-top: 3.4mm; }
 .toc { padding: 3mm 5mm; }
 .toc li { padding: .55mm 0; line-height: 1.24; }
+
+/* ---------- 兩欄清單 ---------- */
+.chk2 { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 3mm; }
+.chk2 li { display: grid; grid-template-columns: 5mm 7.5mm 1fr; gap: 1.6mm; align-items: center; padding: 1.5mm 0; border-bottom: .3mm dashed #CFE0E6; }
+.chk2 .box { width: 5mm; height: 5mm; border: .5mm solid var(--ink); border-radius: 1.1mm; background: #fff; }
+.chk2 img { width: 7.5mm; height: 7.5mm; }
+.chk2 b { font-family: "Huninn", sans-serif; font-weight: 400; font-size: 13.5pt; line-height: 1.25; display: block; }
+.chk2 span { font-size: 10.5pt; line-height: 1.3; color: var(--ink2); display: block; }
+.chk2 li.blank { grid-template-columns: 5mm 1fr; }
+.chk2 li.blank .fill { height: 7mm; border-bottom: 0; padding: 0; }
+
+/* ---------- 洋蔥式穿法 ---------- */
+.layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4mm; margin-top: 2.6mm; }
+.layer { text-align: center; background: #F3F8F9; border-radius: 2.4mm; padding: 2mm 1mm 2.2mm; }
+.layer img { width: 11mm; height: 11mm; margin: 0 auto; }
+.layer b { display: block; font-family: "Huninn", sans-serif; font-weight: 400; font-size: 11pt; color: var(--red); margin-top: .8mm; }
+.layer span { display: block; font-family: "Huninn", sans-serif; font-size: 12.5pt; line-height: 1.3; }
+
+/* ---------- 行李怎麼帶 ---------- */
+.plan .pl-r { display: grid; grid-template-columns: 10mm 1fr; gap: 2.4mm; align-items: center; padding: 1.8mm 0; border-bottom: .3mm dashed #CFE0E6; }
+.plan .pl-r:last-child { border-bottom: 0; padding-bottom: 0; }
+.plan .pl-r img { width: 10mm; height: 10mm; }
+.plan .pl-r b { display: block; font-family: "Huninn", sans-serif; font-weight: 400; font-size: 14pt; line-height: 1.3; }
+.plan .pl-r span { display: block; font-size: 11.5pt; line-height: 1.4; color: var(--ink2); }
+.plan .ct + .pl-r { margin-top: 1mm; }
+.bigbag { display: grid; grid-template-columns: 13mm 1fr; gap: 3mm; align-items: center; }
+.bigbag > img { width: 13mm; height: 13mm; }
+.bigbag p { font-size: 12pt; line-height: 1.5; margin-top: .8mm; }
+.card + .note { margin-top: 2mm; }

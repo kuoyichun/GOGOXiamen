@@ -335,33 +335,93 @@ for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
 page(head('五天總覽') + '<div class="card mapcard"><img class="mapimg" src="img/map-all.png" alt="" style="height:76mm;object-fit:cover"></div>'
      '<div class="card" style="padding:1.6mm 4mm">%s</div>' % rows, 'info', PREP, mark='五天總覽')
 
-# 5–6 行李清單
+# 5–8 行李清單
 def chk(items):
     return '<ul class="chk">%s</ul>' % ''.join(
         '<li><i class="box"></i>%s<div><b>%s</b>%s</div></li>' % (icon(c), e(t), ('<span>%s</span>' % e(n)) if n else '') for c, t, n in items)
 
 
-page(head('行李清單', '證件・錢・手機') + '<div class="card tape">' + chk([
+def chk2(items, blanks=0):
+    """兩欄的小清單：(圖示, 名稱, 小字)"""
+    li = ''.join('<li><i class="box"></i>%s<div><b>%s</b>%s</div></li>' % (icon(c), e(t), ('<span>%s</span>' % e(n)) if n else '')
+                 for c, t, n in items)
+    li += '<li class="blank"><i class="box"></i><div class="fill"></div></li>' * blanks
+    return '<ul class="chk2">%s</ul>' % li
+
+
+page(head('行李清單', '1・證件和電子用品') + '<div class="card tape">' + chk([
     ('1faaa', '身分證', '坐國內線飛機要用'),
-    ('1f4d7', '護照', '金門出入境用；到廈門後收好，不要拿出來'),
+    ('1f4d7', '護照', '金門出入境用；到廈門後收好'),
     ('1f4b3', '台胞證', '到廈門後每天帶著，景點、坐船都會用到'),
     ('1f45b', '一點人民幣和新台幣', '大部分由同行夥伴先代付'),
-    ('1f4f1', '手機和充電線', ''),
-    ('1f50b', '行動電源', '放隨身包，不能託運'),
-    ('1f48a', '平常吃的藥', '放隨身包'),
+    ('1f4f1', '手機、充電線、充電頭', '兩腳扁插頭在廈門可以直接插'),
+    ('1f50b', '行動電源', '放手提，不能託運'),
     ('1f453', '眼鏡、老花眼鏡', ''),
+    ('1f4d4', '這本旅行手札', ''),
 ]) + '</div><div class="warn">%s證件效期要夠，出發前看一下</div>' % icon('26a0'), 'info', PREP, 0, mark='行李清單')
 
-page(head('行李清單', '衣服・日用品') + '<div class="card tape pink">' + chk([
-    ('1f9e5', '防風外套', '海邊風大，早晚冷'),
-    ('1f9e3', '圍巾或薄毛衣', '洋蔥式穿法最方便'),
-    ('1f455', '換洗衣服（5 天）', ''),
-    ('1f45f', '好走的鞋子', '每天都會走路逛街'),
-    ('2602', '摺疊傘', '12 月雨不多，帶著安心'),
-    ('1faa5', '牙刷、牙膏、保養品', '自己帶最習慣'),
-    ('1f9fb', '面紙、濕紙巾', '外面廁所不一定有衛生紙'),
-    ('1f6cd', '環保袋', '裝伴手禮'),
-]) + '<ul class="chk"><li><i class="box"></i><span></span><div class="fill" style="height:8mm"></div></li></ul></div>', 'info', PREP, 0)
+LAYER = [('1f455', '裡面', '長袖上衣<br>或發熱衣'), ('1f9f6', '中間', '薄毛衣<br>或刷毛衣'), ('1f9e5', '外面', '防風<br>保暖外套')]
+page(head('衣服怎麼帶？', '2・衣服') +
+     '<div class="card tape pink"><div class="ct" style="font-size:15pt">12 月的廈門</div>' + ul([
+         '白天 15～20 度，早晚 10 多度',
+         '跟台北冬天差不多，海邊風大會更冷',
+     ]) + '<div class="layers">%s</div><p class="kind-n">一層一層穿，熱了脫一件、冷了加一件。</p></div>' % ''.join(
+         '<div class="layer">%s<b>%s</b><span>%s</span></div>' % (icon(c), k, t) for c, k, t in LAYER) +
+     '<div class="card tape blue r"><div class="ct" style="font-size:15pt">外套帶一厚一薄</div>' + ul([
+         '<b>厚的</b>：防風、保暖，穿在身上',
+         '<b>薄的</b>：刷毛或薄外套，放行李，白天熱可以換',
+     ]) + '</div>'
+     '<div class="warn">%s厚外套和鞋子穿在身上，行李就輕很多</div>' % icon('1f4a1'),
+     'info', PREP, 0)
+
+page(head('行李清單', '2・衣服（5 天）') + '<div class="card tape pink">' + chk2([
+    ('1f9e5', '厚外套 ×1', '穿在身上'),
+    ('1f9e5', '薄外套 ×1', '刷毛或薄外套'),
+    ('1f9f6', '薄毛衣 ×1', ''),
+    ('1f455', '長袖上衣 ×3', '可以輪流穿'),
+    ('1f525', '發熱衣 ×2', '怕冷的人'),
+    ('1f456', '長褲 ×2', ''),
+    ('1fa72', '內衣褲 ×5', ''),
+    ('1f9e6', '襪子 ×5', ''),
+    ('1f6cf', '睡衣 ×1', ''),
+    ('1f9e3', '圍巾、毛帽', '海邊風大'),
+    ('1f9e4', '手套', '怕冷的人'),
+    ('1f45f', '好走的鞋子', '穿在身上'),
+    ('1fa74', '室內拖鞋', '飯店不一定有'),
+], blanks=1) + '</div>', 'info', PREP, 0)
+
+page(head('行李清單', '3・洗臉、保養、日用品') + '<div class="card tape">' + chk2([
+    ('1faa5', '牙刷、牙膏', '飯店不一定提供'),
+    ('1f9fc', '洗面乳', ''),
+    ('1f9f4', '保養品、乳液', '小瓶的放手提'),
+    ('1f484', '護唇膏', '冬天嘴唇乾'),
+    ('1f9f4', '護手霜', ''),
+    ('2600', '防曬乳', ''),
+    ('1fa92', '刮鬍刀', '刀片的放託運'),
+    ('1fa86', '梳子', ''),
+    ('1f380', '髮夾、髮圈', ''),
+    ('1f484', '化妝品', ''),
+    ('2702', '指甲剪', '放託運'),
+    ('1f9fb', '面紙、濕紙巾', '廁所常沒有紙'),
+], blanks=2) + '</div><p class="note" style="text-align:center;margin-top:2mm">大陸的飯店通常不主動提供牙刷、梳子這些拋棄式用品，自己帶最方便。</p>',
+     'info', PREP, 0)
+
+page(head('行李清單', '4・藥和其他') + '<div class="card tape pink">' + chk2([
+    ('1f48a', '平常吃的藥', '多帶兩天，放手提'),
+    ('1f922', '暈船藥', '坐船約 30 分鐘'),
+    ('1f321', '感冒藥', ''),
+    ('1f48a', '腸胃藥', ''),
+    ('1fa79', 'OK 繃', ''),
+    ('1fa79', '痠痛貼布', ''),
+    ('1f637', '口罩', ''),
+    ('2602', '摺疊傘', '12 月雨不多'),
+    ('1f6cd', '環保袋', ''),
+    ('1f964', '保溫杯', '過安檢前倒空'),
+    ('1f58a', '原子筆', '寫手札、填資料'),
+], blanks=1) + '</div>'
+     '<div class="card tape blue r bigbag">%s<div><div class="ct" style="font-size:15pt">摺疊大行李袋</div>'
+     '<p>去程摺好放在行李箱裡。回程拿出來裝伴手禮，自己提上船、上飛機。怎麼帶看第 {weight} 頁。</p></div></div>' % icon('1f45c'),
+     'info', PREP, 0)
 
 # 7 託運？手提？（給不常出國的人）
 def flow(items):
@@ -383,7 +443,8 @@ page(head('託運？手提？', '行李有兩種') +
      '<div class="warn">%s藥、證件、錢、手機，一定放手提</div>' % icon('26a0'),
      'info', PREP, 0, mark='託運？手提？')
 
-# 8 能帶多重
+# 能帶多重
+WEIGHT_PAGE = len(pages) + 1
 page(head('能帶多重？', '飛機和船的規定不一樣') +
      '<div class="card tape"><div class="rule-h">%s<div class="ct">飛機<small>台北松山 ⇄ 金門（國內線）</small></div></div>'
      '<div class="nums"><div class="num"><div class="k">手提</div><div class="v">7<small>公斤</small></div><div class="s">1 件・約 20 吋登機箱大小</div></div>'
@@ -391,11 +452,28 @@ page(head('能帶多重？', '飛機和船的規定不一樣') +
      '<div class="card tape blue r"><div class="rule-h">%s<div class="ct">小三通船<small>金門水頭 ⇄ 廈門五通</small></div></div>'
      '<div class="nums"><div class="num"><div class="k">手提</div><div class="v">17<small>公斤</small></div><div class="s">最多 2 件，加起來</div></div>'
      '<div class="num hot"><div class="k">免費託運</div><div class="v">5<small>公斤</small></div><div class="s">超過就要付錢</div></div></div></div>' % icon('26f4') +
-     '<div class="card"><div class="ct" style="font-size:14pt">建議這樣帶</div>' + ul([
-         '一人一個 20 吋登機箱（7 公斤內）',
-         '再加一個隨身小包',
-     ]) + '<p class="note" style="margin-top:1.6mm">2026 年 10 月的規定，以航空公司、船公司現場為準。</p></div>',
+     '<p class="note" style="text-align:center;margin-top:2.4mm">2026 年 10 月的規定，以航空公司、船公司現場為準。</p>',
      'info', PREP, 0)
+
+# 建議這樣帶（冬天衣服重，託運額度又低）
+def plan(title, cls, rows):
+    out = ''.join('<div class="pl-r">%s<div><b>%s</b><span>%s</span></div></div>' % (icon(c), t, d) for c, t, d in rows)
+    return '<div class="card tape %s plan"><div class="ct" style="font-size:16pt">%s</div>%s</div>' % (cls, title, out)
+
+
+page(head('行李怎麼帶最省？', '冬天衣服重，這樣帶不用多付錢') +
+     plan('去程', '', [
+         ('1f9f3', '一個行李箱', '裡面摺一個大行李袋，先不用'),
+         ('2708', '飛機：行李箱託運', '10 公斤以內'),
+         ('26f4', '船：行李箱自己拖上船', '手提 17 公斤以內，不用託運'),
+     ]) +
+     plan('回程', 'pink r', [
+         ('1f45c', '大袋子拿出來', '伴手禮、多的衣服裝進去'),
+         ('26f4', '船：行李箱＋大袋子都帶上船', '兩件加起來 17 公斤以內'),
+         ('2708', '飛機：行李箱託運，大袋子手提', '託運 10 公斤＋手提 7 公斤'),
+     ]) +
+     '<div class="warn">%s菜刀、高粱酒放進要託運的行李箱</div>' % icon('26a0'),
+     'info', PREP, 0, mark='行李怎麼帶最省？')
 
 # 9 放哪裡
 def tiles(items):
@@ -422,7 +500,7 @@ page(head('打包和安檢', '小撇步') +
          '綁一條彩色帶子，領行李時好認',
          '瓶子蓋緊，裝進夾鏈袋',
          '藥多帶兩天份，放手提',
-         '在家先秤，手提箱 7 公斤以內',
+         '在家先秤，行李箱 10 公斤以內',
      ]) + '</div>'
      '<div class="card tape pink r"><div class="rule-h">%s<div class="ct">過安全檢查</div></div>' % icon('1f50d') + ul([
          '包包、外套放進籃子過 X 光',
@@ -462,7 +540,8 @@ page(head('交通資訊・回程', '12/20（日）') +
      '<div class="card tape pink" style="margin-top:4mm"><div class="ct" style="font-size:14pt">回程記得</div>' + ul([
          '廈門出境：<b>台胞證</b>；金門入境：<b>護照</b>',
          '肉做的東西不能帶回台灣',
-         '菜刀、高粱酒放託運行李',
+         '飛機：行李箱託運，大袋子手提',
+         '菜刀、高粱酒放進要託運的行李箱',
      ]) + '</div>', 'info', PREP, 0)
 
 # 11–12 碼頭怎麼走
@@ -477,7 +556,7 @@ def steps(items):
 
 page(head('碼頭怎麼走・去程', '金門 → 廈門') + steps([
     ('金門機場坐計程車', '到水頭碼頭，約 20 分鐘', 'u-kmair1'),
-    ('碼頭報到、託運行李', '領船票，大行李交給櫃台', 'u-kinmen'),
+    ('碼頭報到、領船票', '行李箱自己拖上船', 'u-kinmen'),
     ('出境：給海關看護照', '', None),
     ('上船，坐約 30 分鐘', '天氣好可以看到廈門', 'u-ship'),
     ('五通碼頭入境：台胞證', '', 'wutong2'),
@@ -486,7 +565,7 @@ page(head('碼頭怎麼走・去程', '金門 → 廈門') + steps([
 
 page(head('碼頭怎麼走・回程', '廈門 → 金門 → 台北') + steps([
     ('退房，坐車到五通碼頭', '約 40 分鐘', 'wutong'),
-    ('報到、託運行李', '', None),
+    ('報到、領船票', '行李箱和大袋子自己帶上船', None),
     ('出境：給海關看台胞證', '', None),
     ('上船，坐約 30 分鐘', '回到金門水頭碼頭', 'u-cabin'),
     ('入境：給海關看護照', '從「抵港」入口進去', 'u-shuitou'),
@@ -507,7 +586,7 @@ DAY_NOTE = {
     'd1': ['證件拿在手上，大家一起走', '入境後<b>護照收好</b>，不要拿出來', '晚餐看到想吃的就進去吃'],
     'd2': ['<b>台胞證</b>帶在身上，護照收好', '南普陀寺要事先預約', '下午採耳前可以回飯店午休'],
     'd3': ['<b>台胞證一定要帶</b>，坐船去鼓浪嶼要用', '鼓浪嶼走路多，穿好走的鞋'],
-    'd4': ['<b>台胞證</b>帶在身上，護照收好', '嶼見閩南的表演提早 10 分鐘到', '晚上先把行李收好'],
+    'd4': ['<b>台胞證</b>帶在身上，護照收好', '嶼見閩南的表演提早 10 分鐘到', '晚上收行李，<b>大袋子</b>拿出來裝伴手禮'],
     'd5': ['早點起床，退房別忘了東西', '廈門出境用<b>台胞證</b>，到金門才拿護照', '肉做的東西不能帶回台灣'],
 }
 ORDER = {
@@ -682,7 +761,6 @@ while (len(pages) + 1) % 4 or first_memo is None or len(pages) - first_memo < 1:
          'info', PREP)
     if first_memo is None:
         first_memo = len(pages)
-        toc.append(('筆記', first_memo, ''))
 
 hp = P['hotel']
 page('<div class="cv-sea"></div>' + stk('luggage', 6, 8, 20, -8) + stk('airplane', 98, 10, 22, 10) + stk('hibiscus', 104, 118, 14, 0)
@@ -697,7 +775,7 @@ pages[CRED_INDEX] = (credits_page(), 'info', PREP, None)
 toc_html = '<ul>%s</ul>' % ''.join('<li><b>%02d</b><span>%s%s</span></li>' % (n, e(name), ('<small>%s</small>' % e(sub)) if sub else '')
                                    for name, n, sub in toc)
 pages[2] = (head('目錄') + '<div class="toc">%s</div>' % toc_html, 'info', PREP, None)
-pages[:] = [(b.replace('{ban}', str(BAN_PAGE)), c, col, t) for b, c, col, t in pages]
+pages[:] = [(b.replace('{ban}', str(BAN_PAGE)).replace('{weight}', str(WEIGHT_PAGE + 1)), c, col, t) for b, c, col, t in pages]
 
 # ---------------------------------------------------------------- 輸出
 TAB_K = {0: 0, '吃': 6, '買': 7, '車': 8}
