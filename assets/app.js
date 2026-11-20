@@ -146,7 +146,7 @@
     h += '<div class="cb' + (it.img ? ' has-float' : '') + '"><div class="ch"><div class="ct">';
     if (opt) h += '<span class="tag-opt">沒累再去</span>';
     else h += '<b class="time">' + it.t + '</b>' + (it.tbd ? '<span class="tag-tbd">時間待確認</span>' : '');
-    if (it.book) h += '<span class="tag-book">' + icon('ticket') + esc(it.book === true ? '由代表預訂' : it.book) + '</span>';
+    if (it.book) h += '<span class="tag-book">' + icon('ticket') + esc(it.book === true ? '怡君代訂' : it.book) + '</span>';
     h += '<h3>' + icon(it.icon, 'ic h-ic') + '<span>' + esc(it.title) + '</span></h3>';
     if (it.sub) h += '<div class="sub">' + esc(it.sub) + '</div>';
     h += '</div>' + (it.img ? '' : spkBtn(it.say, it.id)) + '</div>';

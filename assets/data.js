@@ -7,7 +7,7 @@
  *   kind  'stop' 大卡片（有照片）｜'mini' 小列｜'move' 交通｜'opt' 沒累再去
  *   mode  交通方式：car 車、ship 船、walk 走路、plane 飛機
  *   nb    上方「現在」列顯示的短名稱
- *   book  由代表預訂的行程（true 顯示「由代表預訂」，也可以寫自己的字）
+ *   book  要事先訂的行程（true 顯示「怡君代訂」，也可以寫自己的字）
  *   say   喇叭按鈕唸的內容（時間寫成國字，語音才唸得順）
  *         改了 say 之後，要跑 python3 tools/make_audio.py 重新產生 audio/ 裡的語音檔
  */
@@ -91,21 +91,21 @@ window.TRIP = {
           pts: ['看活海鮮、看在地人買菜', '買芒果乾當伴手禮', '想吃再買點小吃'],
           say: '八點半，從飯店走路十分鐘到八市，也就是第八市場。早上海鮮剛送到，很熱鬧，可以看活海鮮、看在地人買菜，也可以買芒果乾當伴手禮，想吃再買點小吃。' },
         { id: 'd2-car', t: '10:00', kind: 'move', mode: 'car', text: '叫車到南普陀寺 約 15 分鐘', nb: '前往南普陀寺' },
-        { id: 'd2-npt', t: '10:15', kind: 'stop', book: true, icon: 'show', title: '南普陀寺', sub: '千年閩南古寺', nb: '南普陀寺', img: 'npt-u', at: 'npt',
-          pts: ['可以進去拜拜', '依山而建，邊走邊看廟宇和山景'],
+        { id: 'd2-npt', t: '10:15', kind: 'stop', book: '怡君代預約', icon: 'show', title: '南普陀寺', sub: '千年閩南古寺', nb: '南普陀寺', img: 'npt-u', at: 'npt',
+          pts: ['可以進去拜拜', '依山而建，邊走邊看廟宇和山景', '60 歲以上帶證件就能進去'],
           say: '十點叫車，大約十五分鐘到南普陀寺。這是一千多年的閩南古寺，可以進去拜拜。寺廟依山而建，可以一路往上走，看看廟宇建築和山景，放慢腳步輕鬆逛。' },
-        { id: 'd2-lunch', t: '11:30', kind: 'stop', book: true, icon: 'food', title: '南普陀素菜館', sub: '寺裡有名的素菜館', nb: '素菜館午餐', at: 'nptveg',
+        { id: 'd2-lunch', t: '11:30', kind: 'stop', icon: 'food', title: '南普陀素菜館', sub: '寺裡有名的素菜館', nb: '素菜館午餐', at: 'nptveg',
           pts: ['一樓自助餐，樓上可以點菜'],
           say: '十一點半，在南普陀寺裡的南普陀素菜館吃午餐。這是很有名的素菜館，一樓是自助餐，樓上可以點菜。' },
         { id: 'd2-back', t: '12:30', kind: 'move', mode: 'car', text: '叫車回飯店 約 15 分鐘', nb: '坐車回飯店' },
         { id: 'd2-nap', t: '13:00', kind: 'mini', icon: 'bed', title: '回飯店午休', nb: '回飯店午休',
           say: '下午一點回到飯店，睡個午覺。' },
         { kind: 'move', mode: 'walk', text: '走路約 5 分鐘（大中路）' },
-        { id: 'd2-ear', t: '15:45', kind: 'stop', book: true, icon: 'spa', title: '悅享採耳', sub: '採耳放鬆，約 1 小時', nb: '悅享採耳', img: 'caier', at: 'ear',
+        { id: 'd2-ear', t: '15:45', kind: 'stop', icon: 'spa', title: '悅享採耳', sub: '採耳放鬆，約 1 小時', nb: '悅享採耳', img: 'caier', at: 'ear',
           pts: ['躺著請師傅清耳朵', '不想做的人可以在附近逛逛'],
           say: '下午三點四十五分，從飯店走路到大中路上的悅享採耳，請師傅清耳朵，躺著放鬆大約一個小時。不想做的人可以在附近逛逛。' },
         { kind: 'move', mode: 'car', text: '叫車 約 10 分鐘' },
-        { id: 'd2-dinner', t: '17:00', kind: 'stop', book: true, icon: 'food', title: '小埕戲・海景晚餐', sub: '閩南菜，和平碼頭 4 樓', nb: '小埕戲晚餐', img: 'xcx-u', at: 'xcx',
+        { id: 'd2-dinner', t: '17:00', kind: 'stop', icon: 'food', title: '小埕戲・海景晚餐', sub: '閩南菜，和平碼頭 4 樓', nb: '小埕戲晚餐', img: 'xcx-u', at: 'xcx',
           pts: ['窗外就是鼓浪嶼，看夕陽和夜景', '招牌：紅蟳米糕、薑母鴨'],
           say: '傍晚五點，叫車到和平碼頭旁邊的小埕戲吃閩南菜。窗外就是鼓浪嶼，可以一邊吃飯一邊看夕陽和夜景。招牌菜有紅蟳米糕和薑母鴨。' },
         { id: 'd2-home', t: '19:00', kind: 'mini', icon: 'home', title: '叫車回飯店', nb: '回飯店休息',
@@ -119,7 +119,7 @@ window.TRIP = {
         { id: 'd3-bf', t: '07:30', kind: 'mini', icon: 'food', title: '早餐', nb: '早餐',
           say: '早上七點半吃早餐。' },
         { kind: 'move', mode: 'car', text: '叫車到碼頭' },
-        { id: 'd3-pier', t: '08:15', kind: 'stop', book: '船票由代表預訂', icon: 'ticket', title: '廈鼓碼頭', sub: '在郵輪中心裡面', nb: '廈鼓碼頭', img: 'xiagu-u', at: 'xiagu',
+        { id: 'd3-pier', t: '08:15', kind: 'stop', book: '船票怡君代訂', icon: 'ticket', title: '廈鼓碼頭', sub: '在郵輪中心裡面', nb: '廈鼓碼頭', img: 'xiagu-u', at: 'xiagu',
           pts: ['每個人都要帶自己的台胞證', '在閘門刷台胞證就能進站', '刷不過：到自助機或窗口印上船憑證'],
           say: '早上八點十五分，叫車到郵輪中心的廈鼓碼頭。船票已經用每個人的台胞證訂好了，在閘門刷自己的台胞證就能進站。如果刷不過，就到旁邊的自助機或窗口，印一張上船憑證。台胞證記得帶在身上。' },
         { id: 'd3-ship', t: '09:30', kind: 'move', mode: 'ship', text: '坐船上鼓浪嶼 約 15 分鐘', nb: '坐船上鼓浪嶼' },
@@ -132,7 +132,7 @@ window.TRIP = {
         { id: 'd3-nap', t: '13:15', kind: 'mini', icon: 'bed', title: '回飯店午休', nb: '回飯店午休',
           say: '下午一點十五分，回飯店睡午覺。' },
         { kind: 'move', mode: 'walk', text: '走路就到（同一條路）' },
-        { id: 'd3-foot', t: '15:00', kind: 'stop', book: true, icon: 'spa', title: '泰印象 SPA', sub: '足療＋全身按摩 80 分鐘', nb: '泰印象 SPA', img: 'massage', at: 'foot',
+        { id: 'd3-foot', t: '15:00', kind: 'stop', icon: 'spa', title: '泰印象 SPA', sub: '足療＋全身按摩 80 分鐘', nb: '泰印象 SPA', img: 'massage', at: 'foot',
           pts: ['跟飯店同一條路，在 2 樓', '躺在包廂裡，可以看電影', '太大力就說「輕一點」'],
           say: '下午三點，走路到同一條路上的泰印象SPA，在二樓。做足療加全身按摩，大約八十分鐘，可以躺在包廂裡看電影。如果按得太大力，就跟師傅說「輕一點」。有人推銷辦卡，就說我們是遊客，不辦卡，謝謝。' },
         { id: 'd3-car2', t: '16:30', kind: 'move', mode: 'car', text: '叫車到曾厝垵 約 20 分鐘，沿著環島路看海', nb: '前往曾厝垵' },
@@ -157,7 +157,7 @@ window.TRIP = {
           pts: ['不用訂位，看到想吃的就進去', '推薦：沙坡尾吃堡，像美食街，各自挑想吃的', '吃不下就少點一點，大家分著吃'],
           say: '十一點半，就在沙坡尾找午餐，不用訂位。這一帶有沙茶麵、海蠣煎、麵線糊、魚丸這些閩南小吃。推薦沙坡尾吃堡，像美食街一樣，每個人可以挑自己想吃的。吃不下就少點一點，大家分著吃。' },
         { id: 'd4-car', t: '13:00', kind: 'move', mode: 'car', text: '叫車 約 30 分鐘', nb: '前往嶼見閩南' },
-        { id: 'd4-show', t: '13:30', kind: 'stop', book: '門票由代表預訂', icon: 'show', title: '嶼見閩南 看表演', sub: '海上世界 4–5 樓', nb: '嶼見閩南', img: 'yujian', at: 'yujian',
+        { id: 'd4-show', t: '13:30', kind: 'stop', book: '門票怡君代訂', icon: 'show', title: '嶼見閩南 看表演', sub: '海上世界 4–5 樓', nb: '嶼見閩南', img: 'yujian', at: 'yujian',
           pts: ['都在室內，有冷氣，表演一場接一場', '門票已包含大部分表演', '換衣服、做手工、買吃的要另外付錢'],
           say: '下午一點半進嶼見閩南，全部在室內，有冷氣。裡面有大型表演、提線木偶、飛天表演，還有一場鼓浪風雲大戲。門票已經包含大部分的表演，換衣服、做手工、買吃的要另外付錢。' },
         { id: 'd4-dinner', t: '17:00', kind: 'mini', icon: 'food', title: '嶼見閩南館內小吃街吃晚餐', nb: '晚餐',
