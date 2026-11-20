@@ -20,7 +20,7 @@
 - **船班時間確定後**：在 `assets/data.js` 改那一項的 `t`，順便把 `tbd: true` 拿掉、改 `say` 裡唸的時間，再跑 `python3 tools/make_audio.py` 重錄有改到的語音。
 - **測試「現在」列**：網址後面加 `?now=2026-12-18T15:20`，就會假裝現在是那個時間。
 
-## 旅行手札（B6 印刷版）
+## 旅遊手冊（B6 印刷版）
 
 - `book/xiamen-travel-book-b6-print.pdf`：給印刷店，B6（12.8 × 18.2 公分）72 頁，四邊各多 3mm 出血，可騎馬釘裝訂
 - `book/xiamen-travel-book-b6.pdf`：同一本的裁切尺寸版，看電子檔或自己印

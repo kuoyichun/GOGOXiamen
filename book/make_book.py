@@ -1,4 +1,4 @@
-"""產生廈門旅行手札（B6，12.8 × 18.2 公分，可彩色印刷、騎馬釘裝訂）。
+"""產生廈門旅遊手冊（B6，12.8 × 18.2 公分，可彩色印刷、騎馬釘裝訂）。
 
 用法（在 repo 根目錄）：
     python3 book/make_book.py
@@ -113,9 +113,9 @@ def page(body, cls='', color=None, tab=None, mark=None, sub=''):
 # ---------------------------------------------------------------- 景點內容
 # photos：第一張是大照片；pts：重點；story／tip：小故事、小知識；place：地址
 SPOT = {
-    'plane': dict(day='d1', t='12:30', title='坐飛機到金門', layout='one',
+    'plane': dict(day='d1', t='11:10', title='坐飛機到金門', layout='one',
                   photos=[('plane', '國內線飛機'), ('tsa', '台北松山機場'), ('kmair', '金門機場')],
-                  pts=['從台北松山機場出發', '12:30 抵達金門機場', '出機場坐計程車到水頭碼頭，約 20 分鐘']),
+                  pts=['11:10 從台北松山機場起飛', '起飛前 1 小時先到機場報到', '12:30 抵達金門機場', '坐計程車到水頭碼頭，約 20 分鐘']),
     'ship': dict(day='d1', t='14:00', title='小三通：坐船到廈門', layout='two',
                  photos=[('u-ship', '金廈小三通的船'), ('u-cabin', '船艙裡，坐約 30 分鐘'), ('u-kinmen', '金門水頭港一帶'), ('wutong', '廈門五通碼頭'), ('wutong2', '五通碼頭入境出口')],
                  pts=['金門水頭碼頭 → 廈門五通碼頭', '坐船大約 30 分鐘', '天氣好時，船上就看得到廈門的高樓', '入境後坐車約 40 分鐘到飯店'],
@@ -194,7 +194,7 @@ SPOT = {
                   place='mofan'),
     'home': dict(day='d5', t='17:40', title='飛回台北松山', layout='one',
                  photos=[('u-kmair1', '金門航空站'), ('u-kmair2', '機場的候機室'), ('tsa', '回到台北松山機場')],
-                 pts=['15:45 到金門機場報到', '17:40 起飛，回到台北松山機場', '旅途愉快，辛苦了！']),
+                 pts=['15:45 到金門機場報到', '17:40 起飛', '18:50 回到台北松山機場', '旅途愉快，辛苦了！']),
 }
 
 
@@ -292,7 +292,7 @@ def cover():
         cpol('gly', 5, 95, 44, 34, -8, '鼓浪嶼'),
         cpol('u-jc1', 80, 97, 43, 34, 7, '金門'),
         cpol('u-spw1', 41, 90, 46, 36, 2, '沙坡尾'),
-        '<div class="cv-label"><div class="cv-k">2026 冬天・五天四夜</div><h1>廈門</h1><div class="cv-sub"><span>旅行手札</span></div>'
+        '<div class="cv-label"><div class="cv-k">2026 冬天・五天四夜</div><h1>廈門</h1><div class="cv-sub"><span>旅遊手冊</span></div>'
         '<div class="cv-date">12/16（三）— 12/20（日）</div><div class="cv-where">金門・廈門・鼓浪嶼</div></div>',
         stk('airplane', 3, 4, 21, -12), stk('sun-behind-small-cloud', 102, 3, 22, 0),
         stk('red-paper-lantern', 109, 30, 12, 6), stk('red-paper-lantern', 4, 33, 11, -6),
@@ -318,9 +318,8 @@ page(head('旅伴資料') +
          '電壓：220V，手機充電器可以直接用',
          '付錢：同行夥伴會先代付，身上帶一點人民幣',
          '在廈門：<b>護照收好</b>，<b>台胞證</b>帶在身上',
-     ]) + '</div>'
-     '<div class="card"><div class="ct">四晚都住</div><div style="font-size:13pt;font-weight:700;margin-top:1mm">壺香悅（中山路步行街店）</div>'
-     '<div lang="zh-Hans" style="font-size:11pt">厦门市思明区定安路61-2号</div></div>', 'info', PREP)
+         '網路：連當地 Wi-Fi，LINE、YouTube、臉書<b>不能用</b>',
+     ]) + '</div>', 'info', PREP)
 
 # 3 目錄（最後再填）
 page('{{TOC}}', 'info', PREP)
@@ -335,7 +334,21 @@ for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
 page(head('五天總覽') + '<div class="card mapcard"><img class="mapimg" src="img/map-all.png" alt="" style="height:76mm;object-fit:cover"></div>'
      '<div class="card" style="padding:1.6mm 4mm">%s</div>' % rows, 'info', PREP, mark='五天總覽')
 
-# 5–8 行李清單
+# 5 這樣玩最開心（出遊的心情，用「我們的約定」的口吻）
+PROMISE = [
+    ('1f60b', '沒吃過的，點來試試看', '好吃，多一個喜歡的味道；不合口味，也多一個回家可以說的故事。'),
+    ('1f4f8', '多拍照', '風景、美食、大家的笑臉，都拍下來，回家再慢慢看。'),
+    ('1f695', '走累了就叫車', '不用硬撐著走，腳顧好，後面幾天才玩得盡興。'),
+    ('1f39f', '想進去看，就進去', '門票、車錢都排進預算了，難得來一趟，不用替大家省。'),
+    ('1f30f', '「台灣也有」？不太一樣喔', '同樣是蚵仔煎、老街，在廈門吃、在廈門走，味道和心情都不同。'),
+]
+page(head('這樣玩最開心', '出發前，我們先說好') +
+     '<div class="card tape promise">%s</div>' % ''.join(
+         '<div class="pm">%s<div><b>%s</b><p>%s</p></div></div>' % (icon(c), e(t), e(d)) for c, t, d in PROMISE) +
+     '<div class="pm-end"><span>不用去想值不值這個價錢——</span><b>是我們，值得好好玩這一趟。</b></div>',
+     'info', PREP)
+
+# 6–9 行李清單
 def chk(items):
     return '<ul class="chk">%s</ul>' % ''.join(
         '<li><i class="box"></i>%s<div><b>%s</b>%s</div></li>' % (icon(c), e(t), ('<span>%s</span>' % e(n)) if n else '') for c, t, n in items)
@@ -357,7 +370,7 @@ page(head('行李清單', '1・證件和電子用品') + '<div class="card tape"
     ('1f4f1', '手機、充電線、充電頭', '兩腳扁插頭在廈門可以直接插'),
     ('1f50b', '行動電源', '放手提，不能託運'),
     ('1f453', '眼鏡、老花眼鏡', ''),
-    ('1f4d4', '這本旅行手札', ''),
+    ('1f4d4', '這本旅遊手冊', ''),
 ]) + '</div><div class="warn">%s證件效期要夠，出發前看一下</div>' % icon('26a0'), 'info', PREP, 0, mark='行李清單')
 
 LAYER = [('1f455', '裡面', '長袖上衣<br>或發熱衣'), ('1f9f6', '中間', '薄毛衣<br>或刷毛衣'), ('1f9e5', '外面', '防風<br>保暖外套')]
@@ -417,7 +430,7 @@ page(head('行李清單', '4・藥和其他') + '<div class="card tape pink">' +
     ('2602', '摺疊傘', '12 月雨不多'),
     ('1f6cd', '環保袋', ''),
     ('1f964', '保溫杯', '過安檢前倒空'),
-    ('1f58a', '原子筆', '寫手札、填資料'),
+    ('1f58a', '原子筆', '寫筆記、填資料'),
 ], blanks=1) + '</div>'
      '<div class="card tape blue r bigbag">%s<div><div class="ct" style="font-size:15pt">摺疊大行李袋</div>'
      '<p>去程摺好放在行李箱裡。回程拿出來裝伴手禮，自己提上船、上飛機。怎麼帶看第 {weight} 頁。</p></div></div>' % icon('1f45c'),
@@ -522,7 +535,7 @@ def ticket(ic, kind, date, a, b, ta, tb, foot):
 FILL = '<u></u>'
 page(head('交通資訊・去程', '12/16（三）') +
      '<div class="warn">%s證件拿在手上，大家一起走</div>' % icon('26a0') +
-     ticket('2708', '飛機', '12/16（三）・國內線', '台北松山', '金門', '', '12:30 到', '航班%s起飛%s' % (FILL, FILL)) +
+     ticket('2708', '飛機', '12/16（三）・國內線', '台北松山', '金門', '11:10 起飛', '12:30 到', '航班%s（待確認）' % FILL) +
      ticket('26f4', '船', '12/16（三）・小三通', '金門水頭', '廈門五通', '', '', '開船時間%s坐船約 30 分鐘' % FILL) +
      '<div class="card tape" style="margin-top:4mm"><div class="ct" style="font-size:14pt">每一段要拿出來的證件</div>' + ul([
          '坐飛機：<b>身分證</b>',
@@ -536,7 +549,7 @@ page(head('交通資訊・回程', '12/20（日）') +
      '<div class="warn">%s早上要早起，前一晚先收好行李</div>' % icon('26a0') +
      '<div style="height:4mm"></div>' +
      ticket('26f4', '船', '12/20（日）・小三通', '廈門五通', '金門水頭', '', '', '開船時間%s坐船約 30 分鐘' % FILL) +
-     ticket('2708', '飛機', '12/20（日）・國內線', '金門', '台北松山', '17:40 起飛', '', '15:45 到機場報到') +
+     ticket('2708', '飛機', '12/20（日）・國內線', '金門', '台北松山', '17:40 起飛', '18:50 到', '15:45 報到・航班%s' % FILL) +
      '<div class="card tape pink" style="margin-top:4mm"><div class="ct" style="font-size:14pt">回程記得</div>' + ul([
          '廈門出境：<b>台胞證</b>；金門入境：<b>護照</b>',
          '肉做的東西不能帶回台灣',
@@ -580,12 +593,12 @@ page(head('住宿資訊', '12/16 – 12/20・四晚') + pol('hotel', '壺香悅�
      ]) + '</div>' + addr('hotel', '飯店地址（迷路時給人看）'), 'spot', PREP, 0, mark='住宿資訊')
 
 # ---------------------------------------------------------------- 每一天
-MOVE_ICON = {'car': '1f695', 'walk': '1f6b6', 'ship': '26f4'}
+MOVE_ICON = {'car': '1f695', 'walk': '1f6b6', 'ship': '26f4', 'plane': '2708'}
 MEAL = ('早餐', '午餐', '晚餐')
 DAY_NOTE = {
-    'd1': ['證件拿在手上，大家一起走', '入境後<b>護照收好</b>，不要拿出來', '晚餐看到想吃的就進去吃'],
+    'd1': ['起飛前 1 小時到松山機場', '入境後<b>護照收好</b>，不要拿出來', '連飯店 Wi-Fi，LINE、YouTube、臉書不能用'],
     'd2': ['<b>台胞證</b>帶在身上，護照收好', '南普陀寺要事先預約', '下午採耳前可以回飯店午休'],
-    'd3': ['<b>台胞證一定要帶</b>，坐船去鼓浪嶼要用', '鼓浪嶼走路多，穿好走的鞋'],
+    'd3': ['<b>台胞證一定要帶</b>，坐船去鼓浪嶼要用', '鼓浪嶼走路多，走累了就坐電瓶車'],
     'd4': ['<b>台胞證</b>帶在身上，護照收好', '嶼見閩南的表演提早 10 分鐘到', '晚上收行李，<b>大袋子</b>拿出來裝伴手禮'],
     'd5': ['早點起床，退房別忘了東西', '廈門出境用<b>台胞證</b>，到金門才拿護照', '肉做的東西不能帶回台灣'],
 }
@@ -668,7 +681,7 @@ for i in range(0, len(foods), 2):
         where = '<div class="where">想吃可以去：<b>%s</b></div>' % e(at['n']) if at else ''
         cards += '<div class="card fd tape%s">%s<div><div class="ct">%s</div><div class="what">%s</div>%s%s</div></div>' % (
             ' r' if i % 4 else '', ph, e(f['name']), e(f['what']), ul([e(p) for p in f['pts']]), where)
-    page(head('必吃美食', '廈門的道地味道') + cards, 'food', EAT, '吃', mark='必吃美食' if i == 0 else None)
+    page(head('必吃美食', '沒吃過的，點一份大家分著吃') + cards, 'food', EAT, '吃', mark='必吃美食' if i == 0 else None)
 
 # ---------------------------------------------------------------- 伴手禮
 def gifts(items):
@@ -801,7 +814,7 @@ for i, (body, cls, color, tab) in enumerate(pages, 1):
     else:
         inner = '<div class="in">%s</div>' % body
     out.append('<section class="pg %s %s"%s>%s%s%s</section>' % (cls, side, style, inner, tabh, num))
-doc = ('<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><title>廈門旅行手札</title>'
+doc = ('<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><title>廈門旅遊手冊</title>'
        '<link rel="stylesheet" href="book.css"><style id="sz"></style></head><body>%s</body></html>') % '\n'.join(out)
 open(OUT_HTML, 'w').write(doc)
 print('pages:', len(pages), ' photos used:', len(used))
