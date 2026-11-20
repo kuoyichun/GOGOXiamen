@@ -37,24 +37,6 @@ window.IMG_CREDITS = [
   "page": "https://commons.wikimedia.org/wiki/File:Huang_Zehe_peanut_soup.jpg"
  },
  {
-  "what": "南普陀寺",
-  "author": "xiquinhosilva",
-  "lic": "CC BY 2.0",
-  "page": "https://commons.wikimedia.org/wiki/File:South_Putuo_Temple_07253-Xiamen_(48814191832).jpg"
- },
- {
-  "what": "鼓浪嶼黃昏",
-  "author": "周流劲火",
-  "lic": "CC BY 2.5",
-  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_at_dusk.jpg"
- },
- {
-  "what": "鼓浪嶼渡輪",
-  "author": "User:Vmenkov",
-  "lic": "CC BY-SA 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_-_Yuanhe_ferry_-_DSCF9335.JPG"
- },
- {
   "what": "鼓浪嶼老洋房",
   "author": "H2v5o68z",
   "lic": "CC0",
@@ -65,18 +47,6 @@ window.IMG_CREDITS = [
   "author": "Slyronit",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_Island_from_Zhongshan_Road,_Xiamen.jpg"
- },
- {
-  "what": "中華城",
-  "author": "Augustohai",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%8D%8E%E5%9F%8E084744.jpg"
- },
- {
-  "what": "沙坡尾",
-  "author": "向史公哲曰",
-  "lic": "CC BY-SA 4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E7%BD%91%E7%BA%A2%E5%8C%96%E6%B2%99%E5%9D%A1%E5%B0%BE1.jpg"
  },
  {
   "what": "世茂雙子塔",

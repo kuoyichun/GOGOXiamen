@@ -52,9 +52,15 @@ def src(key):
     raise SystemExit('找不到照片：' + key)
 
 
+# 直的照片放進橫的框時，要看哪一部分（object-position）
+FOCUS = {'u-xiagu1': '50% 18%', 'u-zhcity': '50% 30%', 'u-npt1': '50% 40%', 'u-bashi1': '50% 72%',
+         'u-zs2': '50% 35%', 'u-gly2': '50% 40%', 'u-xcx2': '50% 45%', 'u-spw2': '50% 60%', 'u-xiagu2': '50% 55%'}
+
+
 def pol(key, cap='', size='sm', extra=''):
     c = '<figcaption>%s</figcaption>' % e(cap) if cap else ''
-    return '<figure class="pol %s %s"><img src="%s" alt="">%s</figure>' % (size, extra, src(key), c)
+    st = ' style="object-position:%s"' % FOCUS[key] if key in FOCUS else ''
+    return '<figure class="pol %s %s"><img src="%s" alt=""%s>%s</figure>' % (size, extra, src(key), st, c)
 
 
 def row(*items):
@@ -115,42 +121,45 @@ SPOT = {
                  story='2001 年 1 月 2 日，金門的客輪「太武號」和「浯江號」載著大約 180 位金門鄉親開到廈門，這是兩岸隔了五十多年後，第一次有客船直接往來。以前要去大陸，得先繞到香港。到現在，坐小三通往來金廈的旅客已經超過兩千四百萬人次。',
                  place='wutong'),
     'zs': dict(day='d1', t='17:00', title='中山路步行街', layout='two',
-               photos=[('zs', '中山路夜景'), ('zs2', '中山路的牌樓'), ('zs3', '騎樓老房子'), ('zs4', '路邊小吃攤')],
+               photos=[('zs', '中山路夜景'), ('u-zs2', '晚上的招牌很熱鬧'), ('zs2', '中山路的牌樓'), ('zs3', '騎樓老房子'), ('u-zs1', '白天的中山路')],
                pts=['飯店就在旁邊，走路就到', '整條街都是行人徒步區', '兩邊是騎樓老房子，小吃、伴手禮店很多', '看到想吃的就進去吃晚餐'],
                story='中山路大約在 1925 年開始興建，全長約 1.2 公里，從海邊的輪渡碼頭一路往東。兩旁的騎樓，多半是 1920 年代從南洋回鄉的華僑蓋的，樓上住人、樓下開店，下雨天也淋不到雨，跟台灣的老街很像。現在被評為「中國歷史文化名街」。',
                place='zsroad'),
-    'peanut': dict(day='d2', t='07:30', title='早餐：黃則和花生湯', photo='peanut', place='peanut',
-                   pts=['中山路上的老店，從 1945 年開到現在', '花生湯是甜湯，花生煮到入口即化']),
-    'bashi': dict(day='d2', t='08:30', title='八市逛早市', emo='1f41f', place='bashi',
-                  pts=['從飯店走路約 10 分鐘', '早上海鮮剛送到，最熱鬧', '可以看活海鮮，買芒果乾當伴手禮']),
+    'peanut': dict(day='d2', t='07:30', title='早餐：黃則和花生湯', layout='one', place='peanut',
+                   photos=[('peanut', '黃則和花生湯老店')],
+                   pts=['中山路上的老店，從 1945 年開到現在', '花生湯是甜湯，花生煮到入口即化', '也可以吃廈門人早餐常吃的麵線糊']),
+    'bashi': dict(day='d2', t='08:30', title='八市逛早市', layout='two', place='bashi',
+                  photos=[('u-bashi2', '八市的海鮮攤'), ('u-bashi1', '八市的街口')],
+                  pts=['從飯店走路約 10 分鐘', '早上海鮮剛送到，最熱鬧', '可以看活海鮮、看在地人買菜', '買芒果乾當伴手禮，想吃什麼就買一點'],
+                  story='聽老一輩的廈門人說，八市大約在 1920、30 年代就形成了。因為離輪渡碼頭近，漁船一靠岸，海鮮就直接送來賣，一直是廈門最新鮮的海鮮集散地。八市其實是兩個市場合起來的：裡面的營平市場和外面的開禾市場。'),
     'npt': dict(day='d2', t='10:15', title='南普陀寺', layout='two', book=True,
-                photos=[('npt', '南普陀寺'), ('npt2', '放生池和寶塔'), ('npt3', '南普陀寺山門'), ('npt4', '山上的「佛」字石刻'), ('npt5', '寺廟和後面的五老峰')],
+                photos=[('u-npt1', '南普陀寺和五老峰'), ('u-npt2', '南普陀寺山門'), ('npt2', '放生池和寶塔'), ('npt4', '山上的「佛」字石刻'), ('npt', '放生池邊看寺廟')],
                 pts=['從八市坐車約 15 分鐘', '千年閩南古寺，可以進去拜拜', '依山而建，往上走可以看到五老峰', '參觀要事先預約'],
                 story='南普陀寺始建於唐末五代，最早叫「泗洲院」，宋朝改稱「無盡岩」，明朝又叫「普照寺」。清朝康熙年間重修，加蓋了供奉觀音菩薩的大悲殿。浙江的普陀山是有名的觀音道場，這座寺在它的南邊，所以叫「南普陀」。',
                 place='npt'),
     'veg': dict(day='d2', t='11:30', title='南普陀素菜館', emo='1f962', place='nptveg', book=True,
                 pts=['就在寺裡，是很有名的素菜館', '菜名很雅緻，像「半月沉江」「南海金蓮」']),
-    'ear': dict(day='d2', t='15:45', title='悅享採耳', photo='caier', place='ear', book=True,
+    'ear': dict(day='d2', t='15:45', title='悅享採耳', photo='u-ear', place='ear', book=True,
                 pts=['從飯店走路約 5 分鐘', '請師傅清耳朵，躺著約 1 小時', '不想做的人可以在附近逛逛']),
     'xcx': dict(day='d2', t='17:00', title='小埕戲・海景晚餐', layout='two', book=True,
-                photos=[('dusk', '從廈門看鼓浪嶼的黃昏'), ('heping', '和平碼頭'), ('dusk2', '鼓浪嶼的夜景'), ('lujiang', '晚上的鷺江道')],
+                photos=[('u-xcx1', '小埕戲的海景座位'), ('u-xcx2', '小埕戲入口'), ('heping', '和平碼頭'), ('dusk', '從碼頭看鼓浪嶼的黃昏'), ('dusk2', '鼓浪嶼的夜景')],
                 pts=['和平碼頭 4 樓，閩南古厝裝潢', '靠窗正對鼓浪嶼，看夕陽和夜景', '招牌菜：紅蟳米糕、薑母鴨'],
                 story='這個碼頭很有故事：2001 年第一班小三通的船，就是從金門開到這個和平碼頭靠岸。我們第一天坐的小三通，就是從那一天開始的。',
                 place='xcx'),
     'pier': dict(day='d3', t='08:15', title='廈鼓碼頭：坐船去鼓浪嶼', layout='one', book='船票要事先訂',
-                 photos=[('cruise', '國際郵輪中心'), ('glyship', '去鼓浪嶼的船')],
-                 pts=['碼頭在國際郵輪中心裡面', '每個人用自己的台胞證換上船憑證', '坐船約 15 分鐘，在三丘田碼頭上岸'],
+                 photos=[('u-xiagu1', '郵輪中心裡的「廈鼓輪渡」入口'), ('u-xiagu2', '候船大廳'), ('glyship', '去鼓浪嶼的船')],
+                 pts=['碼頭在國際郵輪中心裡面，找「廈鼓輪渡」', '每個人用自己的台胞證換上船憑證', '坐船約 15 分鐘，在三丘田碼頭上岸'],
                  place='xiagu'),
     'spa': dict(day='d3', t='15:00', title='泰印象主題 SPA', photo='massage', place='foot', book=True,
                 pts=['跟飯店同一條路，在 2 樓', '足療＋全身按摩，約 80 分鐘', '包廂裡可以看電影']),
     'tea': dict(day='d3', t='16:40', title='不只有茶', photo='glyview', place='tea', book=True,
                 pts=['海景茶館，大窗正對鼓浪嶼', '喝功夫茶、看夕陽', '12 月大約五點半天黑']),
     'zhcity': dict(day='d3', t='17:45', title='中華城逛逛・吃晚餐', layout='one',
-                   photos=[('zhcity', '中華城')],
+                   photos=[('u-zhcity', '中華城'), ('zhcity', '中華城一角')],
                    pts=['從茶館走過來約 10 分鐘，回飯店也近', '閩南風格的街區，有小吃和文創小店', '看到想吃的就進去吃晚餐'],
                    place='zhcity'),
     'spw': dict(day='d4', t='09:45', title='沙坡尾', layout='two',
-                photos=[('spw', '沙坡尾'), ('spw2', '港邊的漁船'), ('spw3', '避風塢'), ('spw4', '彩色老房子'), ('spw5', '遠遠看得到雙子塔')],
+                photos=[('u-spw1', '彩繪小店，後面就是雙子塔'), ('u-spw2', '沙坡尾的街角'), ('spw', '掛著燈籠的老街'), ('spw2', '港邊的漁船'), ('spw3', '避風塢')],
                 pts=['以前的老漁港，漁船還停在港邊', '彩色老房子、咖啡店、文創小店', '散步看風景，看到喜歡的咖啡店就坐坐'],
                 story='這一帶以前叫「玉沙坡」，是廈門最早的漁港。1920 年代廈門沿著海邊築堤蓋馬路，原本的小漁港被填掉，漁船就搬到沙坡尾，蓋了新的避風塢，颱風天可以躲進來。後來漁業慢慢沒落，老工廠、老倉庫改成藝術區和咖啡店。',
                 place='spw'),
@@ -487,7 +496,7 @@ DAY_NOTE = {
 }
 ORDER = {
     'd1': [('one', 'plane'), ('two', 'ship'), ('two', 'zs')],
-    'd2': [('pair', 'peanut', 'bashi'), ('two', 'npt'), ('pair', 'veg', 'ear'), ('two', 'xcx')],
+    'd2': [('one', 'peanut'), ('two', 'bashi'), ('two', 'npt'), ('pair', 'veg', 'ear'), ('two', 'xcx')],
     'd3': [('one', 'pier'), ('gly',), ('pair', 'spa', 'tea'), ('one', 'zhcity')],
     'd4': [('two', 'spw'), ('two', 'yixi'), ('two', 'yj'), ('one', 'pack')],
     'd5': [('one', 'back'), ('two', 'km'), ('two', 'mofan'), ('one', 'home')],
@@ -507,14 +516,14 @@ def gly_pages():
     body = '<div class="kick">%s</div><h1 class="hd" style="font-size:17pt"><span>鼓浪嶼散步看什麼</span></h1>' % daykick(did)
     body += fitrow(pol('church', '天主堂', 'sm', 'rot2'), pol('piano', '鋼琴博物館', 'sm', 'rot1'))
     body += fitrow(pol('glybeach', '海邊沙灘', 'sm', 'rot3'), pol('gly2', '老洋樓', 'sm', 'rot2'))
-    body += fitrow(pol('gly3', '洋房花園', 'sm', 'rot1'), pol('sunrock', '日光岩', 'sm', 'rot3'))
+    body += fitrow(pol('u-gly2', '1935 年的老洋房', 'sm', 'rot1'), pol('sunrock', '日光岩', 'sm', 'rot3'))
     page(body, 'spot', c, 3)
     body = '<div class="kick">%s</div><h1 class="hd" style="font-size:17pt"><span>鼓浪嶼</span></h1>' % daykick(did)
     body += ('<div class="card tape pink story"><span class="label">小故事</span><p>島的西南邊海灘上，有一塊兩公尺多高、中間有洞的礁石，'
              '漲潮時海浪打進洞裡，聲音像打鼓一樣，叫做「鼓浪石」，島也在明朝時因此改名「鼓浪嶼」，在那之前叫「五龍嶼」。</p></div>')
     body += ('<div class="card tape blue r story"><span class="label navy">小知識</span><p>清朝末年，很多國家的領事館、商人和傳教士住進鼓浪嶼，'
              '蓋了各式各樣的洋樓、教堂和學校，有「萬國建築博覽」的稱號。島上鋼琴特別多，又叫「鋼琴之島」。2017 年被列為世界文化遺產。</p></div>')
-    body += fitrow(pol('shuzhuang', '菽莊花園', 'xs', 'rot2'), pol('sanqiu', '三丘田碼頭', 'xs', 'rot1'), lo=True)
+    body += fitrow(pol('u-gly1', '鼓浪嶼碼頭', 'xs', 'rot2'), pol('sanqiu', '三丘田碼頭', 'xs', 'rot1'), lo=True)
     body += addr('gly')
     page(body, 'spot', c, 3)
 
@@ -635,11 +644,13 @@ def clean_author(a):
 def credits_page():
     groups = {}
     for k in used:
+        if k.startswith('u-'):
+            continue
         c = CREDITS[k]
         groups.setdefault((clean_author(c['author']), c['lic']), []).append(c['what'])
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
-            '<p>飯店、採耳、泰印象 SPA、嶼見閩南的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
+            '<p>飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、中華城、沙坡尾、嶼見閩南的部分照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
             '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。圖示：Twemoji（CC BY 4.0）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 
