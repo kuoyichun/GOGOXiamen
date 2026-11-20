@@ -163,6 +163,10 @@ SPOT = {
                 pts=['按摩完叫車約 20 分鐘，沿著環島路看海', '巷子裡都是小吃、甜品、茶飲和小店', '晚餐不用訂位，看到想吃的就進去', '推薦吃：<b>現炒海鮮、海蠣煎、沙茶麵</b>，飯後來碗花生湯或燒仙草', '19:00 左右叫車回飯店'],
                 story='「厝」是房子、「垵」是海邊的小村，以前這裡住的大多姓曾，是有八百多年歷史的漁村，明朝時商船出海前會在這裡停靠檢查。2000 年環島路開通後，老房子慢慢變成民宿、小吃和小店，現在被叫做「最文藝的漁村」。',
                 place='zcc'),
+    'dmg': dict(day='d3', t='12:00', title='鼓浪嶼午餐：蛋滿灌', layout='one',
+                photos=[('u-dmg', '蛋滿灌：蛋裡面包著肉餡')],
+                pts=['在龍頭路上，島上最熱鬧的街', '招牌<b>蛋滿灌</b>：把豬肉香菇餡灌進整顆蛋裡，再煮成一碗湯', '也有閩南燒肉粽和小吃，不用訂位', '13:00 走路約 10 分鐘到三丘田碼頭坐船'],
+                place='dmg'),
     'spw': dict(day='d4', t='09:45', title='沙坡尾', layout='two',
                 photos=[('u-spw3', '老漁港和彩色房子'), ('u-spw1', '彩繪小店，後面就是雙子塔'), ('u-spw2', '沙坡尾的街角'), ('spw2', '港邊的漁船'), ('spw3', '避風塢')],
                 pts=['以前的老漁港，漁船還停在港邊', '彩色老房子、咖啡店、文創小店', '散步看風景，看到喜歡的咖啡店就坐坐'],
@@ -602,7 +606,7 @@ DAY_NOTE = {
 ORDER = {
     'd1': [('one', 'plane'), ('one', 'gt'), ('two', 'ship'), ('two', 'zs')],
     'd2': [('one', 'peanut'), ('two', 'bashi'), ('two', 'npt'), ('pair', 'veg', 'ear'), ('two', 'xcx')],
-    'd3': [('one', 'pier'), ('gly',), ('one', 'spa'), ('two', 'zcc')],
+    'd3': [('one', 'pier'), ('gly',), ('one', 'dmg'), ('one', 'spa'), ('two', 'zcc')],
     'd4': [('two', 'spw'), ('one', 'lunch4'), ('two', 'yj'), ('one', 'pack')],
     'd5': [('one', 'back'), ('two', 'mofan'), ('one', 'home')],
 }
@@ -615,7 +619,7 @@ def gly_pages():
     body += '<div class="card tape"><div class="meta"><span class="label">09:45</span></div>' + ul([
         '島上沒有汽車，到處是百年老洋房',
         '散步看建築、看海景，放慢腳步輕鬆逛',
-        '12:00 在島上吃午餐，龍頭路一帶小吃很多',
+        '12:00 午餐：龍頭路上的蛋滿灌',
         '13:00 坐船回廈門，回飯店休息',
     ]) + '</div>'
     page(body, 'spot', c, 3)
@@ -756,7 +760,7 @@ def credits_page():
         groups.setdefault((clean_author(c['author']), c['lic']), []).append(c['what'])
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
-            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、沙坡尾、嶼見閩南、金城模範街、金門鍋貼、海蠣煎、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
+            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、沙坡尾、嶼見閩南、金城模範街、金門鍋貼、海蠣煎、蛋滿灌、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
             '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。貼紙和圖示：Microsoft Fluent Emoji（MIT）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 
