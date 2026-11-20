@@ -71,11 +71,5 @@ window.IMG_CREDITS = [
   "author": "董辰兴",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E5%8E%9D%E5%9E%B5%E7%89%8C%E5%9D%8A%E5%86%85%E4%BE%A7.jpg"
- },
- {
-  "what": "水頭聚落得月樓",
-  "author": "rheins",
-  "lic": "CC BY 3.0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E5%A4%B4%E5%BE%97%E6%9C%88%E6%A5%BC_-_Deyue_Tower_in_Shuitou_Settlement_-_2014.05_-_panoramio.jpg"
  }
 ];

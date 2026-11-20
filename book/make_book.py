@@ -115,13 +115,11 @@ def page(body, cls='', color=None, tab=None, mark=None, sub=''):
 SPOT = {
     'plane': dict(day='d1', t='11:10', title='坐飛機到金門', layout='one',
                   photos=[('plane', '國內線飛機'), ('tsa', '台北松山機場'), ('kmair', '金門機場')],
-                  pts=['11:10 從台北松山機場起飛', '起飛前 1 小時先到機場報到', '12:30 抵達金門機場', '坐計程車到水頭聚落吃午餐，約 20 分鐘']),
-    'stv': dict(day='d1', t='13:00', title='水頭聚落・午餐', layout='two',
-                photos=[('deyue', '水頭聚落的得月樓'), ('settle', '紅磚古厝'), ('lion', '風獅爺')],
-                pts=['就在水頭碼頭旁邊，坐車約 5 分鐘', '紅磚古厝和南洋洋樓的老村子', '午餐推薦：<b>金水食堂</b>的黃魚麵線，在得月樓旁', '14:30 叫車到水頭碼頭報到'],
-                story='清末民初，很多水頭人到印尼、新加坡這些南洋地方做生意，賺了錢就回鄉蓋洋樓和學校。得月樓是 1931 年蓋的高樓，當年用來防強盜，現在是展示館，介紹村民在南洋打拼的故事。',
-                tip='在金門的村子口，常看到石頭雕的獅子，叫「風獅爺」。以前金門風沙很大，村民立風獅爺來擋風、保平安。',
-                place='stv'),
+                  pts=['11:10 從台北松山機場起飛', '起飛前 1 小時先到機場報到', '12:30 抵達金門機場', '在機場附近吃鍋貼午餐']),
+    'gt': dict(day='d1', t='12:45', title='午餐：佑昇生億鍋貼', layout='one',
+               photos=[('u-guotie', '招牌蛋液鍋貼')],
+               pts=['從機場坐計程車一下就到', '一定要點招牌<b>蛋液鍋貼</b>：外皮酥脆、內餡多汁', '炒滷味也很多人點', '<b>入口不明顯</b>，像一般民宅、沒有大招牌：看到鐵門直接推門進去', '吃完叫車到水頭碼頭，約 20 分鐘'],
+               place='guotie'),
     'ship': dict(day='d1', t='15:30', title='小三通：坐船到廈門', layout='two',
                  photos=[('u-ship', '金廈小三通的船'), ('u-cabin', '船艙裡，坐約 30 分鐘'), ('u-kinmen', '金門水頭港一帶'), ('wutong', '廈門五通碼頭'), ('wutong2', '五通碼頭入境出口')],
                  pts=['金門水頭碼頭 → 廈門五通碼頭', '15:30 開船，船名「和平新星」', '坐船大約 30 分鐘，天氣好看得到廈門的高樓', '入境後坐車約 40 分鐘到飯店'],
@@ -568,7 +566,7 @@ def steps(items):
 
 
 page(head('碼頭怎麼走・去程', '金門 → 廈門') + steps([
-    ('坐計程車到水頭聚落', '約 20 分鐘，在這裡吃午餐', 'deyue'),
+    ('坐計程車去吃午餐', '機場附近的鍋貼店', 'u-guotie'),
     ('14:30 水頭碼頭報到', '領船票，行李箱自己拖上船', 'u-kinmen'),
     ('出境：給海關看護照', '', None),
     ('15:30 上船，坐約 30 分鐘', '船名「和平新星」', 'u-ship'),
@@ -603,7 +601,7 @@ DAY_NOTE = {
     'd5': ['11:30 前退房，別忘了東西', '廈門出境用<b>台胞證</b>，到金門才拿護照', '肉做的東西不能帶回台灣'],
 }
 ORDER = {
-    'd1': [('one', 'plane'), ('two', 'stv'), ('two', 'ship'), ('two', 'zs')],
+    'd1': [('one', 'plane'), ('one', 'gt'), ('two', 'ship'), ('two', 'zs')],
     'd2': [('one', 'peanut'), ('two', 'bashi'), ('two', 'npt'), ('pair', 'veg', 'ear'), ('two', 'xcx')],
     'd3': [('one', 'pier'), ('gly',), ('one', 'spa'), ('two', 'zcc')],
     'd4': [('two', 'spw'), ('one', 'lunch4'), ('two', 'yj'), ('one', 'pack')],
@@ -758,7 +756,7 @@ def credits_page():
         groups.setdefault((clean_author(c['author']), c['lic']), []).append(c['what'])
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
-            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、沙坡尾、嶼見閩南、金城模範街、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
+            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、沙坡尾、嶼見閩南、金城模範街、金門鍋貼、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
             '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。貼紙和圖示：Microsoft Fluent Emoji（MIT）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 
