@@ -19,3 +19,8 @@
 
 - **船班時間確定後**：在 `assets/data.js` 改那一項的 `t`，順便把 `tbd: true` 拿掉、改 `say` 裡唸的時間，再跑 `python3 tools/make_audio.py` 重錄有改到的語音。
 - **測試「現在」列**：網址後面加 `?now=2026-12-18T15:20`，就會假裝現在是那個時間。
+
+## 旅遊書（A6 印刷版）
+
+- `book/xiamen-guidebook-a6.pdf`：A6（10.5 × 14.8 公分）72 頁，可彩色印刷、騎馬釘裝訂
+- 重新產生：`python3 book/make_book.py`（行程、地址、美食從 `assets/data.js` 讀，景點小故事寫在 `book/make_book.py` 的 `STORY`）

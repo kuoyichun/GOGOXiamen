@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><title>廈門旅遊書</title><style>/* A6 旅遊書：10.5 × 14.8 公分，字大、對比高 */
+@page { size: 105mm 148mm; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #fff; }
+body {
+  font-family: "Noto Sans CJK TC", sans-serif;
+  color: #2B1A12; font-size: 12.5pt; line-height: 1.55;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+[lang="zh-Hans"] { font-family: "Noto Sans CJK SC", sans-serif; }
+.pg {
+  --c: #B23A26;
+  width: 105mm; height: 148mm; position: relative; overflow: hidden;
+  padding: 8mm 8mm 11mm; page-break-after: always; break-after: page;
+}
+.pg:last-child { page-break-after: auto; break-after: auto; }
+.no { position: absolute; bottom: 4.2mm; left: 0; right: 0; text-align: center; font-size: 9pt; color: #8A7666; font-weight: 500; }
+
+/* 外側的天數標籤（翻書時好找） */
+.tab {
+  position: absolute; width: 6mm; height: 13mm; background: var(--c); color: #fff;
+  font-size: 11pt; font-weight: 900; display: flex; align-items: center; justify-content: center;
+}
+.odd .tab { right: 0; border-radius: 1.5mm 0 0 1.5mm; }
+.even .tab { left: 0; border-radius: 0 1.5mm 1.5mm 0; }
+
+.ph { display: block; width: 100%; height: 50.6mm; object-fit: cover; border-radius: 2.5mm; background: #EADCC8; }
+.ph-none { display: flex; align-items: center; justify-content: center; background: var(--c); }
+.ph-none span { color: #fff; font-size: 24pt; font-weight: 900; letter-spacing: .08em; }
+
+h1 { font-family: "Noto Serif CJK TC", serif; font-weight: 900; }
+h2 { font-size: 18pt; font-weight: 900; line-height: 1.3; margin-top: 1.5mm; }
+h3 { font-size: 13pt; font-weight: 900; margin-top: 5mm; }
+.pg > .time:first-child { margin-top: 0; }
+.time { margin-top: 3mm; font-size: 13pt; font-weight: 900; color: var(--c); display: flex; align-items: center; gap: 2mm; flex-wrap: wrap; }
+.tag { display: inline-block; font-size: 9.5pt; font-weight: 700; color: #173F73; background: #E1ECFA; border-radius: 1.2mm; padding: .3mm 1.8mm; }
+.lead { margin-top: 2mm; }
+.cont { font-size: 10pt; font-weight: 700; color: #8A7666; margin-bottom: 2mm; }
+.cont::after { content: "（續）"; }
+
+.story { margin-top: 3mm; background: #F7EFE3; border-left: 1.6mm solid var(--c); border-radius: 0 2mm 2mm 0; padding: 2.4mm 3mm 2.6mm; }
+.story p { font-size: 12pt; line-height: 1.6; margin-top: 1mm; }
+.story-k { display: inline-block; font-size: 9.5pt; font-weight: 900; color: #fff; background: var(--c); border-radius: 1mm; padding: .2mm 2mm; }
+.tip { background: #F2F2EC; }
+
+.addr { margin-top: 3mm; border: .4mm solid #2B1A12; border-radius: 2mm; padding: 2mm 3mm 2.4mm; }
+.addr-k { font-size: 9pt; font-weight: 700; color: #8A7666; }
+.addr-n { font-size: 12.5pt; font-weight: 900; line-height: 1.35; margin-top: .5mm; }
+.addr-a { font-size: 11pt; font-weight: 500; line-height: 1.45; margin-top: .6mm; }
+
+.list { list-style: none; margin-top: 2.5mm; }
+.list li { position: relative; padding-left: 4.2mm; margin-top: 1.4mm; }
+.list li::before { content: ""; position: absolute; left: .6mm; top: .62em; width: 2mm; height: 2mm; border-radius: 50%; background: var(--c); }
+.info .list li::before { background: #B23A26; }
+
+/* 封面 */
+.cover { padding: 7mm; display: flex; flex-direction: column; }
+.cv-img { display: block; width: 100%; height: 72mm; object-fit: cover; border-radius: 3mm; }
+.cv-t { flex: 1; margin-top: 4mm; background: #B23A26; color: #fff; border-radius: 3mm; padding: 4mm 5mm; }
+.cv-k { font-size: 10.5pt; font-weight: 700; color: #F8D58A; letter-spacing: .05em; }
+.cover h1 { font-size: 44pt; line-height: 1.05; margin-top: 1mm; letter-spacing: .06em; }
+.cv-d { font-size: 13pt; font-weight: 900; margin-top: 2mm; }
+.cv-s { font-size: 11pt; font-weight: 700; margin-top: 1.5mm; color: #F8D58A; }
+
+/* 填寫欄 */
+.fill { margin-top: 3.5mm; height: 8.5mm; border-bottom: .3mm solid #9A8878; display: flex; align-items: flex-end; padding-bottom: 1mm; }
+.fill span { font-size: 11pt; font-weight: 700; color: #6B5848; }
+.line { height: 9.2mm; border-bottom: .3mm dotted #A89888; }
+
+/* 總覽 */
+.ov { margin-top: 2.6mm; border-left: 1.8mm solid var(--c); padding: .6mm 0 .8mm 3mm; }
+.ov-h { font-size: 10.5pt; color: #6B5848; }
+.ov-h b { color: var(--c); font-weight: 900; }
+.ov-t { font-size: 13.5pt; font-weight: 900; line-height: 1.35; }
+
+/* 每天的第一頁 */
+.day-hd { display: flex; align-items: center; gap: 3mm; background: var(--c); color: #fff; border-radius: 3mm; padding: 3mm; }
+.seal { flex: 0 0 auto; width: 15mm; height: 15mm; border-radius: 2mm; background: #fff; color: var(--c); display: flex; align-items: baseline; justify-content: center; padding-top: 1.6mm; font-size: 22pt; font-weight: 900; line-height: 1; }
+.seal small { font-size: 8pt; margin: 0 .3mm; }
+.dd { font-size: 11pt; font-weight: 700; }
+.dt { font-size: 15pt; font-weight: 900; line-height: 1.3; }
+.tl { list-style: none; margin-top: 3mm; }
+.tl li { display: grid; grid-template-columns: 13mm 1fr; gap: 1.5mm; padding: 1.3mm 0; border-bottom: .25mm dashed #D8C8B4; font-size: 12pt; line-height: 1.35; }
+.tl li b { color: var(--c); font-weight: 900; }
+
+/* 分隔頁 */
+.sectp { display: flex; align-items: center; }
+.sect { width: 100%; background: var(--c); color: #fff; border-radius: 3mm; padding: 10mm 6mm; text-align: center; }
+.sect-k { font-size: 11pt; font-weight: 700; opacity: .85; }
+.sect h1 { font-size: 30pt; margin-top: 1mm; }
+.sect p { font-size: 12pt; margin-top: 3mm; }
+
+/* 美食 */
+.food h2 { font-size: 21pt; margin-top: 3mm; }
+.what { font-size: 13pt; font-weight: 900; color: var(--c); }
+.where { margin-top: 3mm; border: .4mm solid #2B1A12; border-radius: 2mm; padding: 1.6mm 3mm 2mm; font-size: 12pt; font-weight: 900; line-height: 1.4; }
+.where span { display: block; font-size: 9pt; font-weight: 700; color: #8A7666; }
+
+/* 台灣說法・廈門說法 */
+.words { width: 100%; border-collapse: collapse; margin-top: 3mm; font-size: 13pt; }
+.words td { padding: 1.4mm 0; border-bottom: .25mm dashed #D8C8B4; }
+.words td:first-child { font-weight: 700; }
+.words td:nth-child(2) { color: #B23A26; text-align: center; width: 8mm; }
+.words td:last-child { font-weight: 900; }
+.note { margin-top: 3mm; font-size: 11.5pt; font-weight: 700; color: #B23A26; }
+
+/* 給司機看 */
+.driver, .back { display: flex; flex-direction: column; }
+.drv-k, .bk-k { font-size: 10.5pt; font-weight: 700; color: #6B5848; }
+.drv { flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.drv-p { font-size: 13pt; font-weight: 900; color: #B23A26; }
+.drv-n { font-size: 23pt; font-weight: 900; line-height: 1.25; margin-top: 4mm; }
+.drv-n small { display: block; font-size: 12.5pt; margin-top: 1.5mm; }
+.drv-a { font-size: 15pt; font-weight: 900; line-height: 1.45; margin-top: 5mm; padding: 3mm 0; border-top: .5mm solid #2B1A12; border-bottom: .5mm solid #2B1A12; }
+.back { padding: 7mm; }
+.bk-in { flex: 1; display: flex; flex-direction: column; border: 1mm solid #B23A26; border-radius: 3mm; padding: 5mm 4mm; }
+.bk-k { text-align: center; color: #B23A26; font-size: 11pt; }
+</style></head><body><section class="pg cover odd"><div class="cv-ph"><img class="cv-img" src="../img/gulangyu-dusk.webp" alt=""></div><div class="cv-t"><div class="cv-k">2026 冬天・五天四夜</div><h1>廈門</h1><div class="cv-d">12/16（三）— 12/20（日）</div><div class="cv-s">金門・廈門・鼓浪嶼</div></div></section>
+<section class="pg info even"><h2>這本書怎麼用</h2><ul class="list"><li>每天一個顏色，跟手機網頁一樣。</li><li>每個景點都有照片、介紹和「小故事」。</li><li>要坐車時，翻到最後面的<b>「給司機看」</b>地址卡。</li><li>封底是飯店地址，迷路時給人看。</li></ul><h3>聯絡電話</h3><div class="fill"><span>領隊</span></div><div class="fill"><span>同行</span></div><div class="fill"><span>同行</span></div><div class="fill"><span>飯店</span></div><div class="no">2</div></section>
+<section class="pg spot odd"><img class="ph" src="../img/hotel.webp" alt=""><div class="time">四晚都住這裡</div><h2>壺香悅</h2><p class="lead">中山路步行街店。紅白色的洋樓，門口是圓拱玻璃門，就在中山路步行街旁邊。</p><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">壶香悦（厦门中山路步行街店）</div><div class="addr-a" lang="zh-Hans">厦门市思明区定安路61-2号</div></div><div class="no">3</div></section>
+<section class="pg info even"><h2>五天行程總覽</h2><div class="ov" style="--c:#C0392B"><div class="ov-h"><b>第 1 天</b> 12/16（三）</div><div class="ov-t">出發・到廈門</div></div><div class="ov" style="--c:#2E7D4F"><div class="ov-h"><b>第 2 天</b> 12/17（四）</div><div class="ov-t">八市・南普陀・海景晚餐</div></div><div class="ov" style="--c:#1F6FB2"><div class="ov-h"><b>第 3 天</b> 12/18（五）</div><div class="ov-t">鼓浪嶼・泡腳按摩</div></div><div class="ov" style="--c:#C26A12"><div class="ov-h"><b>第 4 天</b> 12/19（六）</div><div class="ov-t">沙坡尾・嶼見閩南</div></div><div class="ov" style="--c:#7B4FA8"><div class="ov-h"><b>第 5 天</b> 12/20（日）</div><div class="ov-t">回台灣</div></div><div class="no">4</div></section>
+<section class="pg info odd"><h2>天氣和穿著</h2><p class="lead">12 月的廈門，白天大約 15 到 20 度，早晚 10 到 13 度左右，跟台北的冬天差不多。</p><ul class="list"><li>海邊風大，感覺會比較冷，帶一件防風外套。</li><li>12 月很少下雨，早上偶爾有霧。</li><li>穿一雙好走的鞋子，散步逛街都舒服。</li></ul><div class="no">5</div></section>
+<section class="pg info even"><h2>出發前小叮嚀</h2><ul class="list"><li><b>台胞證</b>每天帶在身上，坐船去鼓浪嶼要用。</li><li>付錢由領隊處理，每個人也帶一點人民幣現金。</li><li>手機開漫遊，LINE 才能用。</li><li>肉乾、香腸這些肉做的東西不能帶回台灣。</li><li>小三通的行李重量有限制，伴手禮不要買太重。</li></ul><div class="no">6</div></section>
+<section class="pg dayp odd" style="--c:#C0392B"><div class="day-hd"><div class="seal"><small>第</small>1<small>天</small></div><div><div class="dd">12/16（三）</div><div class="dt">出發・到廈門</div></div></div><ul class="tl"><li><b>12:30</b><span>抵達金門機場</span></li><li><b>13:15</b><span>水頭碼頭 報到</span></li><li><b>14:00</b><span>坐船到廈門</span></li><li><b>14:30</b><span>五通碼頭 入境</span></li><li><b>15:15</b><span>前往飯店</span></li><li><b>16:00</b><span>入住飯店</span></li><li><b>17:00</b><span>逛中山路步行街・吃晚餐</span></li><li><b>19:30</b><span>回飯店休息</span></li></ul><div class="tab" style="top:12.0mm">1</div><div class="no">7</div></section>
+<section class="pg spot even" style="--c:#C0392B"><img class="ph" src="../img/ferry.webp" alt=""><div class="time">14:00 </div><h2>坐船到廈門：小三通</h2><p class="lead">從金門水頭碼頭坐船到廈門五通碼頭，大約 30 分鐘。天氣好的時候，在船上就看得到廈門的高樓。</p><div class="tab" style="top:12.0mm">1</div><div class="no">8</div></section>
+<section class="pg spot odd" style="--c:#C0392B"><div class="cont">坐船到廈門：小三通</div><div class="story"><span class="story-k">小故事</span><p>2001 年 1 月 2 日，兩艘金門的客輪「太武號」和「浯江號」，載著大約 180 位金門鄉親開到廈門，這是兩岸隔了五十多年後，第一次有客船直接往來。以前要去大陸，得先繞到香港或日本。到現在，坐小三通往來金廈的旅客已經超過兩千四百萬人次。</p></div><div class="tab" style="top:12.0mm">1</div><div class="no">9</div></section>
+<section class="pg spot even" style="--c:#C0392B"><img class="ph" src="../img/zhongshan.webp" alt=""><div class="time">17:00 </div><h2>中山路步行街</h2><p class="lead">飯店就在旁邊。整條街是行人徒步區，兩邊是騎樓老房子，有很多小吃和伴手禮店，晚上燈亮起來特別漂亮。</p><div class="tab" style="top:12.0mm">1</div><div class="no">10</div></section>
+<section class="pg spot odd" style="--c:#C0392B"><div class="cont">中山路步行街</div><div class="story"><span class="story-k">小故事</span><p>中山路大約在 1925 年開始興建，全長約 1.2 公里，從海邊的輪渡碼頭一路往東。兩旁的騎樓，多半是 1920 年代從南洋回鄉的華僑蓋的，樓上住人、樓下開店，下雨天也淋不到雨，跟台灣的老街很像。現在被評為「中國歷史文化名街」。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">中山路步行街</div><div class="addr-a" lang="zh-Hans">厦门市思明区中山路步行街</div></div><div class="tab" style="top:12.0mm">1</div><div class="no">11</div></section>
+<section class="pg dayp even" style="--c:#2E7D4F"><div class="day-hd"><div class="seal"><small>第</small>2<small>天</small></div><div><div class="dd">12/17（四）</div><div class="dt">八市・南普陀・海景晚餐</div></div></div><ul class="tl"><li><b>07:30</b><span>早餐：黃則和花生湯</span></li><li><b>08:30</b><span>八市逛早市</span></li><li><b>10:00</b><span>前往南普陀寺</span></li><li><b>10:15</b><span>南普陀寺</span></li><li><b>11:30</b><span>南普陀素菜館</span></li><li><b>12:30</b><span>坐車回飯店</span></li><li><b>13:00</b><span>回飯店午休</span></li><li><b>15:45</b><span>悅享採耳</span></li><li><b>17:00</b><span>小埕戲・海景晚餐</span></li><li><b>19:00</b><span>叫車回飯店</span></li></ul><div class="tab" style="top:27.0mm">2</div><div class="no">12</div></section>
+<section class="pg spot odd" style="--c:#2E7D4F"><img class="ph" src="../img/breakfast.webp" alt=""><div class="time">07:30 </div><h2>早餐：黃則和花生湯</h2><p class="lead">中山路上的老店，從 1945 年開到現在。花生湯是甜湯，花生煮到入口即化，也可以在附近吃廈門人早餐常吃的麵線糊。</p><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">黄则和花生汤（中山路总店）</div><div class="addr-a" lang="zh-Hans">厦门市思明区中山路22-24号</div></div><div class="tab" style="top:27.0mm">2</div><div class="no">13</div></section>
+<section class="pg spot even" style="--c:#2E7D4F"><div class="time">08:30 </div><h2>八市逛早市</h2><p class="lead">八市就是「第八市場」，從飯店走路約 10 分鐘。早上海鮮剛送到，是一天最熱鬧的時候。可以看活海鮮、看在地人買菜，也可以買芒果乾當伴手禮，想吃什麼就買一點小吃。</p><div class="tab" style="top:27.0mm">2</div><div class="no">14</div></section>
+<section class="pg spot odd" style="--c:#2E7D4F"><div class="cont">八市逛早市</div><div class="story"><span class="story-k">小故事</span><p>聽老一輩的廈門人說，八市大約在 1920、30 年代就形成了。因為離輪渡碼頭近，漁船一靠岸，海鮮就直接送來賣，一直是廈門最新鮮的海鮮集散地。八市其實是兩個市場合起來的：裡面的營平市場和外面的開禾市場，兩旁也都是騎樓。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">第八市场（八市）</div><div class="addr-a" lang="zh-Hans">厦门市思明区开禾路 第八市场</div></div><div class="tab" style="top:27.0mm">2</div><div class="no">15</div></section>
+<section class="pg spot even" style="--c:#2E7D4F"><img class="ph" src="../img/nanputuo.webp" alt=""><div class="time">10:15 <span class="tag">要事先訂</span></div><h2>南普陀寺</h2><p class="lead">坐車約 15 分鐘。千年閩南古寺，香火很旺，可以進去拜拜。寺廟依山而建，一路往上走，可以看到廟宇建築和後面的五老峰山景。</p><div class="tab" style="top:27.0mm">2</div><div class="no">16</div></section>
+<section class="pg spot odd" style="--c:#2E7D4F"><div class="cont">南普陀寺</div><div class="story"><span class="story-k">小故事</span><p>南普陀寺始建於唐末五代，最早叫「泗洲院」，宋朝改稱「無盡岩」，明朝又叫「普照寺」。清朝康熙年間重修，加蓋了供奉觀音菩薩的大悲殿。浙江的普陀山是有名的觀音道場，這座寺在它的南邊，所以叫「南普陀」。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">南普陀寺</div><div class="addr-a" lang="zh-Hans">厦门市思明区思明南路515号</div></div><div class="tab" style="top:27.0mm">2</div><div class="no">17</div></section>
+<section class="pg spot even" style="--c:#2E7D4F"><div class="time">11:30 <span class="tag">要事先訂</span></div><h2>南普陀素菜館</h2><p class="lead">就在寺裡，是廈門很有名的素菜館。一樓是自助餐，樓上可以點菜。</p><div class="story tip"><span class="story-k">小知識</span><p>這裡的素菜做得很講究，菜名也很雅緻，像「半月沉江」「南海金蓮」，光看名字就很有意思。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">南普陀素菜馆</div><div class="addr-a" lang="zh-Hans">厦门市思明区思明南路515号 南普陀寺内（东侧）</div></div><div class="tab" style="top:27.0mm">2</div><div class="no">18</div></section>
+<section class="pg spot odd" style="--c:#2E7D4F"><img class="ph" src="../img/caier.webp" alt=""><div class="time">15:45 <span class="tag">要事先訂</span></div><h2>悅享採耳</h2><p class="lead">從飯店走路約 5 分鐘。請師傅用小工具清耳朵，躺著大約一個小時，很舒服，常常有人做到一半就睡著。不想做的人可以在附近逛逛。</p><div class="tab" style="top:27.0mm">2</div><div class="no">19</div></section>
+<section class="pg spot even" style="--c:#2E7D4F"><div class="cont">悅享採耳</div><div class="story tip"><span class="story-k">小知識</span><p>採耳是很傳統的手藝，在四川最有名，現在很多城市都有。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">悦享采耳·洗头头疗·推拿SPA（中山路旗舰店）</div><div class="addr-a" lang="zh-Hans">厦门市思明区大中路34号</div></div><div class="tab" style="top:27.0mm">2</div><div class="no">20</div></section>
+<section class="pg spot odd" style="--c:#2E7D4F"><img class="ph" src="../img/gulangyu-dusk.webp" alt=""><div class="time">17:00 <span class="tag">要事先訂</span></div><h2>小埕戲・海景晚餐</h2><p class="lead">在和平碼頭 4 樓，閩南古厝的裝潢，靠窗就正對鼓浪嶼。傍晚去剛好看夕陽，天黑後鼓浪嶼的燈一盞盞亮起來。招牌菜有紅蟳米糕、薑母鴨。</p><div class="tab" style="top:27.0mm">2</div><div class="no">21</div></section>
+<section class="pg spot even" style="--c:#2E7D4F"><div class="cont">小埕戲・海景晚餐</div><div class="story"><span class="story-k">小故事</span><p>這個碼頭很有故事：2001 年第一班小三通的船，就是從金門開到這個和平碼頭靠岸。我們第一天坐的小三通，就是從那一天開始的。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">小埕戏·流水席福建菜</div><div class="addr-a" lang="zh-Hans">厦门市思明区鹭江道3号 和平码头（1号电梯到4楼）</div></div><div class="tab" style="top:27.0mm">2</div><div class="no">22</div></section>
+<section class="pg dayp odd" style="--c:#1F6FB2"><div class="day-hd"><div class="seal"><small>第</small>3<small>天</small></div><div><div class="dd">12/18（五）</div><div class="dt">鼓浪嶼・泡腳按摩</div></div></div><ul class="tl"><li><b>07:30</b><span>早餐</span></li><li><b>08:15</b><span>廈鼓碼頭</span></li><li><b>09:30</b><span>坐船上鼓浪嶼</span></li><li><b>09:45</b><span>鼓浪嶼</span></li><li><b>12:00</b><span>坐船回廈門</span></li><li><b>12:30</b><span>中山路附近吃午餐</span></li><li><b>13:15</b><span>回飯店午休</span></li><li><b>15:00</b><span>泰印象 SPA</span></li><li><b>16:40</b><span>不只有茶</span></li><li><b>17:45</b><span>中華城逛逛・吃晚餐</span></li><li><b>19:00</b><span>回飯店</span></li></ul><div class="tab" style="top:42.0mm">3</div><div class="no">23</div></section>
+<section class="pg spot even" style="--c:#1F6FB2"><img class="ph" src="../img/pier.webp" alt=""><div class="time">08:15 <span class="tag">船票要事先訂</span></div><h2>廈鼓碼頭</h2><p class="lead">在國際郵輪中心裡面。每個人都要用自己的台胞證換上船的憑證，台胞證記得帶在身上。坐船到鼓浪嶼大約 15 分鐘。</p><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">国际邮轮中心 厦鼓码头</div><div class="addr-a" lang="zh-Hans">厦门市湖里区东港路2号 国际邮轮中心（厦鼓码头）</div></div><div class="tab" style="top:42.0mm">3</div><div class="no">24</div></section>
+<section class="pg spot odd" style="--c:#1F6FB2"><img class="ph" src="../img/gulangyu.webp" alt=""><div class="time">09:45 </div><h2>鼓浪嶼</h2><p class="lead">島上沒有汽車，到處是一百年前的老洋房、小巷和海邊步道。最適合散步，看建築、看海景，放慢腳步輕鬆逛。島上也有電瓶車可以坐。</p><div class="tab" style="top:42.0mm">3</div><div class="no">25</div></section>
+<section class="pg spot even" style="--c:#1F6FB2"><div class="cont">鼓浪嶼</div><div class="story"><span class="story-k">小故事</span><p>島的西南邊海灘上，有一塊兩公尺多高、中間有洞的礁石，漲潮時海浪打進洞裡，聲音像打鼓一樣，叫做「鼓浪石」，島也在明朝時因此改名「鼓浪嶼」，在那之前叫「五龍嶼」。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">鼓浪屿 三丘田码头</div><div class="addr-a" lang="zh-Hans">厦门市思明区鼓浪屿 三丘田码头</div></div><div class="tab" style="top:42.0mm">3</div><div class="no">26</div></section>
+<section class="pg spot odd" style="--c:#1F6FB2"><img class="ph" src="../img/gulangyu-view.webp" alt=""><h2>鼓浪嶼的萬國建築</h2><div class="story"><span class="story-k">小故事</span><p>清朝末年，很多國家的領事館、商人和傳教士住進鼓浪嶼，蓋了各式各樣的洋樓、教堂和學校，所以有「萬國建築博覽」的稱號。島上的鋼琴也特別多，還有一座鋼琴博物館，被叫做「鋼琴之島」。2017 年，鼓浪嶼以「歷史國際社區」被列為世界文化遺產。</p></div><div class="tab" style="top:42.0mm">3</div><div class="no">27</div></section>
+<section class="pg spot even" style="--c:#1F6FB2"><img class="ph" src="../img/massage.webp" alt=""><div class="time">15:00 <span class="tag">要事先訂</span></div><h2>泰印象主題 SPA</h2><p class="lead">跟飯店在同一條路上，在 2 樓。做足療加全身按摩，大約 80 分鐘，躺在包廂裡還可以看電影。</p><div class="tab" style="top:42.0mm">3</div><div class="no">28</div></section>
+<section class="pg spot odd" style="--c:#1F6FB2"><div class="cont">泰印象主題 SPA</div><div class="story tip"><span class="story-k">小知識</span><p>按得太大力，就跟師傅說「輕一點」。有人推銷辦卡，就說「我們是遊客，不辦卡，謝謝」。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">泰印象主题SPA（中山路步行街店）</div><div class="addr-a" lang="zh-Hans">厦门市思明区定安路36号2楼</div></div><div class="tab" style="top:42.0mm">3</div><div class="no">29</div></section>
+<section class="pg spot even" style="--c:#1F6FB2"><div class="time">16:40 <span class="tag">要事先訂</span></div><h2>不只有茶</h2><p class="lead">海景茶館，大窗戶正對鼓浪嶼，還有鋼琴演奏。一邊喝功夫茶，一邊看夕陽，廈門 12 月大約五點半天黑。</p><div class="story tip"><span class="story-k">小知識</span><p>功夫茶是閩南人的日常：用小茶壺、小茶杯，一泡一泡慢慢喝。常喝的是烏龍茶，有名的鐵觀音就產在福建安溪。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">不只有茶·海景休闲空间</div><div class="addr-a" lang="zh-Hans">厦门市思明区民族路44号 海滨商厦2楼</div></div><div class="tab" style="top:42.0mm">3</div><div class="no">30</div></section>
+<section class="pg spot odd" style="--c:#1F6FB2"><img class="ph" src="../img/zhcity.webp" alt=""><div class="time">17:45 </div><h2>中華城逛逛・吃晚餐</h2><p class="lead">從茶館走過來約 10 分鐘，回飯店也很近。閩南風格的老街，有小吃和文創小店，看到想吃的就進去吃晚餐。</p><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">中华城</div><div class="addr-a" lang="zh-Hans">厦门市思明区思明南路 中华城</div></div><div class="tab" style="top:42.0mm">3</div><div class="no">31</div></section>
+<section class="pg dayp even" style="--c:#C26A12"><div class="day-hd"><div class="seal"><small>第</small>4<small>天</small></div><div><div class="dd">12/19（六）</div><div class="dt">沙坡尾・嶼見閩南</div></div></div><ul class="tl"><li><b>07:30</b><span>早餐</span></li><li><b>09:30</b><span>前往沙坡尾</span></li><li><b>09:45</b><span>沙坡尾</span></li><li><b>11:30</b><span>一席・海景午餐</span></li><li><b>13:00</b><span>前往嶼見閩南</span></li><li><b>13:30</b><span>嶼見閩南 看表演</span></li><li><b>17:00</b><span>嶼見閩南館內小吃街吃晚餐</span></li><li><b>18:00</b><span>回飯店・收行李</span></li></ul><div class="tab" style="top:57.0mm">4</div><div class="no">32</div></section>
+<section class="pg spot odd" style="--c:#C26A12"><img class="ph" src="../img/shapowei.webp" alt=""><div class="time">09:45 </div><h2>沙坡尾</h2><p class="lead">以前的老漁港，漁船還停在港邊，兩邊是彩色的老房子、咖啡店和文創小店。這裡是散步看風景的地方，看到喜歡的咖啡店就進去坐坐。</p><div class="tab" style="top:57.0mm">4</div><div class="no">33</div></section>
+<section class="pg spot even" style="--c:#C26A12"><div class="cont">沙坡尾</div><div class="story"><span class="story-k">小故事</span><p>這一帶以前叫「玉沙坡」，是廈門最早的漁港。1920 年代廈門沿著海邊築堤蓋馬路，原本的小漁港被填掉，漁船就搬到沙坡尾，蓋了新的避風塢，颱風天可以躲進來。後來漁業慢慢沒落，老工廠、老倉庫改成藝術區和咖啡店，就是現在的「沙坡尾藝術西區」。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">沙坡尾</div><div class="addr-a" lang="zh-Hans">厦门市思明区大学路 沙坡尾</div></div><div class="tab" style="top:57.0mm">4</div><div class="no">34</div></section>
+<section class="pg spot odd" style="--c:#C26A12"><img class="ph" src="../img/shimao.webp" alt=""><div class="time">11:30 <span class="tag">要事先訂</span></div><h2>雙子塔・一席海景午餐</h2><p class="lead">從沙坡尾走路約 5 分鐘。中午在 5 樓的一席吃海景午餐，窗外就是海和演武大橋。</p><div class="tab" style="top:57.0mm">4</div><div class="no">35</div></section>
+<section class="pg spot even" style="--c:#C26A12"><div class="cont">雙子塔・一席海景午餐</div><div class="story tip"><span class="story-k">小知識</span><p>世茂海峽大廈是兩棟像船帆的高樓，大約 300 公尺高，2015 年完工，大家都叫它「雙子塔」，是廈門很醒目的地標。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">一席海景大排档·观落日海景（双子塔店）</div><div class="addr-a" lang="zh-Hans">厦门市思明区演武西路180号 世茂海峡大厦（双子塔）5楼</div></div><div class="tab" style="top:57.0mm">4</div><div class="no">36</div></section>
+<section class="pg spot odd" style="--c:#C26A12"><img class="ph" src="../img/yujian.webp" alt=""><div class="time">13:30 <span class="tag">門票要事先訂</span></div><h2>嶼見閩南</h2><p class="lead">坐車約 30 分鐘。全部在室內，有冷氣，像走進一座閩南古城，表演一場接一場。</p><div class="tab" style="top:57.0mm">4</div><div class="no">37</div></section>
+<section class="pg spot even" style="--c:#C26A12"><div class="cont">嶼見閩南</div><div class="story"><span class="story-k">小故事</span><p>2025 年 5 月才開幕。裡面分成宋朝、海上絲路、市井煙火、南洋四個時空，每天有將近 30 場表演：大型實景演出《千年回響》、提線木偶、飛天表演，還有《鼓浪風雲》大戲。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">屿见闽南·时光幻境</div><div class="addr-a" lang="zh-Hans">厦门市湖里区东港北路15-19号 海上世界4-5楼</div></div><div class="tab" style="top:57.0mm">4</div><div class="no">38</div></section>
+<section class="pg spot odd" style="--c:#C26A12"><h2>看表演小提醒</h2><p class="lead">表演全部都已經付過了。只有換古裝、做手工、買吃的，才要另外付錢。晚餐就在館內的小吃街吃。</p><div class="story tip"><span class="story-k">小知識</span><p>提線木偶是泉州的傳統戲，一尊木偶身上有十幾條到三十幾條線，全靠師傅的手指操控，動作細膩得像真人一樣。</p></div><div class="tab" style="top:57.0mm">4</div><div class="no">39</div></section>
+<section class="pg spot even" style="--c:#C26A12"><img class="ph" src="../img/souvenir.webp" alt=""><div class="time">18:00 </div><h2>回飯店・收行李</h2><p class="lead">回飯店前，在中山路買最後的伴手禮。隔天要早起坐船，晚上先把行李收好。</p><div class="tab" style="top:57.0mm">4</div><div class="no">40</div></section>
+<section class="pg spot odd" style="--c:#C26A12"><div class="cont">回飯店・收行李</div><div class="story tip"><span class="story-k">小知識</span><p>肉乾、香腸這些肉做的東西不能帶回台灣。小三通的行李重量有限制，伴手禮不要買太重。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">壶香悦（厦门中山路步行街店）</div><div class="addr-a" lang="zh-Hans">厦门市思明区定安路61-2号</div></div><div class="tab" style="top:57.0mm">4</div><div class="no">41</div></section>
+<section class="pg dayp even" style="--c:#7B4FA8"><div class="day-hd"><div class="seal"><small>第</small>5<small>天</small></div><div><div class="dd">12/20（日）</div><div class="dt">回台灣</div></div></div><ul class="tl"><li><b>07:30</b><span>早餐，吃快一點</span></li><li><b>08:00</b><span>前往五通碼頭</span></li><li><b>08:45</b><span>五通碼頭 報到</span></li><li><b>09:30</b><span>坐船回金門</span></li><li><b>10:00</b><span>水頭碼頭 入境</span></li><li><b>10:30</b><span>包計程車逛金門</span></li><li><b>12:00</b><span>金城模範街</span></li><li><b>15:45</b><span>金門機場報到</span></li><li><b>17:40</b><span>飛回台北松山</span></li></ul><div class="tab" style="top:72.0mm">5</div><div class="no">42</div></section>
+<section class="pg spot odd" style="--c:#7B4FA8"><img class="ph" src="../img/wutong.webp" alt=""><div class="time">08:45 </div><h2>坐船回金門</h2><p class="lead">退房後坐車約 40 分鐘到五通碼頭，辦報到、出境，坐船約 30 分鐘回到金門水頭碼頭（船班時間以領隊通知為準）。</p><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">五通客运码头</div><div class="addr-a" lang="zh-Hans">厦门市湖里区环岛东路 五通客运码头</div></div><div class="tab" style="top:72.0mm">5</div><div class="no">43</div></section>
+<section class="pg spot even" style="--c:#7B4FA8"><img class="ph" src="../img/kinmen.webp" alt=""><div class="time">10:30 </div><h2>包計程車逛金門</h2><p class="lead">在水頭碼頭坐上包車，行李放車上，由司機帶路逛金門。照片是金門的地標莒光樓，1952 年建成。</p><div class="tab" style="top:72.0mm">5</div><div class="no">44</div></section>
+<section class="pg spot odd" style="--c:#7B4FA8"><img class="ph" src="../img/jincheng.webp" alt=""><div class="time">12:00 </div><h2>金城模範街</h2><p class="lead">中午在金城的模範街吃午餐、買貢糖。</p><div class="tab" style="top:72.0mm">5</div><div class="no">45</div></section>
+<section class="pg spot even" style="--c:#7B4FA8"><div class="cont">金城模範街</div><div class="story"><span class="story-k">小故事</span><p>整條街是紅磚拱廊的老店屋，1924 年開始興建、1925 年完成，由當時的商會會長傅錫琪發起。他希望這條街成為以後建設的「模範」，所以叫模範街。</p></div><div class="addr"><div class="addr-k">地址（給司機看）</div><div class="addr-n" lang="zh-Hans">金城模範街</div><div class="addr-a" lang="zh-Hant">金門縣金城鎮模範街</div></div><div class="tab" style="top:72.0mm">5</div><div class="no">46</div></section>
+<section class="pg spot odd" style="--c:#7B4FA8"><h2>金門貢糖的故事</h2><div class="story"><span class="story-k">小故事</span><p>金門貢糖是用花生和麥芽糖做的，口感酥鬆。其實貢糖最早來自廈門，後來在金門發揚光大；1959 年在全國商品展得到最優等，從此成為金門最有名的伴手禮。這趟從廈門玩到金門，剛好把貢糖的故事走了一圈。</p></div><div class="tab" style="top:72.0mm">5</div><div class="no">47</div></section>
+<section class="pg spot even" style="--c:#7B4FA8"><img class="ph" src="../img/kinmen-airport-2.webp" alt=""><div class="time">17:40 </div><h2>飛回台北松山</h2><p class="lead">15:45 到金門機場報到，17:40 起飛，回到台北松山機場。旅途愉快，辛苦了！</p><div class="tab" style="top:72.0mm">5</div><div class="no">48</div></section>
+<section class="pg sectp odd" style="--c:#B23A26"><div class="sect"><div class="sect-k">吃的</div><h1>廈門必吃</h1><p>十道廈門的道地味道，看到就點來吃吃看。</p></div><div class="no">49</div></section>
+<section class="pg spot food even" style="--c:#B23A26"><img class="ph" src="../img/food-shacha.webp" alt=""><h2>沙茶麵</h2><div class="what">廈門最有名的麵</div><ul class="list"><li>沙茶熬的湯頭，香香的、有一點辣</li><li>配料自己挑：蝦、魷魚、豬肝</li></ul><div class="tab" style="top:87.0mm">吃</div><div class="no">50</div></section>
+<section class="pg spot food odd" style="--c:#B23A26"><div class="ph ph-none"><span>海蠣煎</span></div><h2>海蠣煎</h2><div class="what">就是台灣的蚵仔煎</div><ul class="list"><li>廈門的蚵仔比較小顆、比較鮮</li><li>八市、中山路的小吃攤都有</li></ul><div class="tab" style="top:87.0mm">吃</div><div class="no">51</div></section>
+<section class="pg spot food even" style="--c:#B23A26"><img class="ph" src="../img/food-duck.webp" alt=""><h2>薑母鴨</h2><div class="what">冬天吃最暖</div><ul class="list"><li>跟台灣的不一樣：沒有湯，用砂鍋乾煎</li><li>老薑、麻油，香又暖</li></ul><div class="where"><span>想吃可以去</span>桃喜老廈門私廚（中山路店）</div><div class="tab" style="top:87.0mm">吃</div><div class="no">52</div></section>
+<section class="pg spot food odd" style="--c:#B23A26"><img class="ph" src="../img/breakfast.webp" alt=""><h2>花生湯</h2><div class="what">甜湯，花生煮到入口即化</div><ul class="list"><li>早餐或下午點心都適合</li><li>中山路上的黃則和是老店</li></ul><div class="where"><span>想吃可以去</span>黃則和花生湯（中山路老店）</div><div class="tab" style="top:87.0mm">吃</div><div class="no">53</div></section>
+<section class="pg spot food even" style="--c:#B23A26"><img class="ph" src="../img/food-mianxian.webp" alt=""><h2>麵線糊</h2><div class="what">廈門人的早餐</div><ul class="list"><li>細麵線煮成稠稠的糊</li><li>可以加大腸、蚵仔、油條</li></ul><div class="tab" style="top:87.0mm">吃</div><div class="no">54</div></section>
+<section class="pg spot food odd" style="--c:#B23A26"><img class="ph" src="../img/food-zongzi.webp" alt=""><h2>燒肉粽</h2><div class="what">跟台灣南部粽很像</div><ul class="list"><li>裡面有滷肉、香菇、栗子</li><li>沾甜辣醬或沙茶醬吃</li></ul><div class="tab" style="top:87.0mm">吃</div><div class="no">55</div></section>
+<section class="pg spot food even" style="--c:#B23A26"><div class="ph ph-none"><span>紅蟳米糕</span></div><h2>紅蟳米糕</h2><div class="what">請客的大菜</div><ul class="list"><li>整隻紅蟳蒸在米糕上</li><li>12/17 晚餐的小埕戲就有</li></ul><div class="where"><span>想吃可以去</span>小埕戲・流水席福建菜</div><div class="tab" style="top:87.0mm">吃</div><div class="no">56</div></section>
+<section class="pg spot food odd" style="--c:#B23A26"><div class="ph ph-none"><span>海鮮砂鍋粥</span></div><h2>海鮮砂鍋粥</h2><div class="what">熱熱的，吃了很舒服</div><ul class="list"><li>用砂鍋現煮，蝦、蟹、蚵仔都有</li><li>天氣冷的晚上很適合</li></ul><div class="where"><span>想吃可以去</span>吳紅英海鮮砂鍋粥（廈門首店）</div><div class="tab" style="top:87.0mm">吃</div><div class="no">57</div></section>
+<section class="pg spot food even" style="--c:#B23A26"><img class="ph" src="../img/food-seafood.webp" alt=""><h2>現炒小海鮮</h2><div class="what">海邊城市一定要吃</div><ul class="list"><li>夫妻小店，現點現炒</li><li>想自己挑海鮮：醉壹號海鮮大排檔（思明北路）</li></ul><div class="where"><span>想吃可以去</span>楊鑫麗・廈門菜小海鮮</div><div class="tab" style="top:87.0mm">吃</div><div class="no">58</div></section>
+<section class="pg spot food odd" style="--c:#B23A26"><img class="ph" src="../img/food-tusun.webp" alt=""><h2>土筍凍</h2><div class="what">廈門特產，敢吃再試</div><ul class="list"><li>海邊的小沙蟲做成的凍，冰冰的</li><li>沾醋、蒜和辣醬吃</li></ul><div class="tab" style="top:87.0mm">吃</div><div class="no">59</div></section>
+<section class="pg info even"><h2>台灣說法・廈門說法</h2><table class="words"><tr><td>計程車</td><td>→</td><td>出租車・打車</td></tr><tr><td>捷運</td><td>→</td><td>地鐵</td></tr><tr><td>廁所</td><td>→</td><td>衛生間</td></tr><tr><td>塑膠袋</td><td>→</td><td>塑料袋</td></tr><tr><td>冷氣</td><td>→</td><td>空調</td></tr><tr><td>鳳梨</td><td>→</td><td>菠蘿</td></tr><tr><td>番茄</td><td>→</td><td>西紅柿</td></tr><tr><td>馬鈴薯</td><td>→</td><td>土豆</td></tr><tr><td>影片</td><td>→</td><td>視頻</td></tr></table><p class="note">廈門人也講閩南話，跟台語很像，可以說說看！</p><div class="no">60</div></section>
+<section class="pg sectp odd" style="--c:#2B1A12"><div class="sect"><div class="sect-k">坐車用</div><h1>給司機看</h1><p>要坐車時，翻到要去的地方，把這頁給司機看。</p></div><div class="no">61</div></section>
+<section class="pg driver even"><div class="drv-k">南普陀寺</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">南普陀寺</p><p class="drv-a">厦门市思明区思明南路515号</p></div><div class="no">62</div></section>
+<section class="pg driver odd"><div class="drv-k">小埕戲・流水席福建菜</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">小埕戏·流水席福建菜</p><p class="drv-a">厦门市思明区鹭江道3号 和平码头（1号电梯到4楼）</p></div><div class="no">63</div></section>
+<section class="pg driver even"><div class="drv-k">郵輪中心 廈鼓碼頭</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">国际邮轮中心 厦鼓码头</p><p class="drv-a">厦门市湖里区东港路2号 国际邮轮中心（厦鼓码头）</p></div><div class="no">64</div></section>
+<section class="pg driver odd"><div class="drv-k">沙坡尾（老漁港）</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">沙坡尾</p><p class="drv-a">厦门市思明区大学路 沙坡尾</p></div><div class="no">65</div></section>
+<section class="pg driver even"><div class="drv-k">一席海景大排檔（雙子塔店）</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">一席海景大排档·观落日海景<small>（双子塔店）</small></p><p class="drv-a">厦门市思明区演武西路180号 世茂海峡大厦（双子塔）5楼</p></div><div class="no">66</div></section>
+<section class="pg driver odd"><div class="drv-k">嶼見閩南・時光幻境</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">屿见闽南·时光幻境</p><p class="drv-a">厦门市湖里区东港北路15-19号 海上世界4-5楼</p></div><div class="no">67</div></section>
+<section class="pg driver even"><div class="drv-k">廈門五通碼頭</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">五通客运码头</p><p class="drv-a">厦门市湖里区环岛东路 五通客运码头</p></div><div class="no">68</div></section>
+<section class="pg info odd"><h2>筆記</h2><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="no">69</div></section>
+<section class="pg info even"><h2>筆記</h2><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="no">70</div></section>
+<section class="pg info odd"><h2>筆記</h2><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="no">71</div></section>
+<section class="pg back even"><div class="bk-in"><div class="bk-k">迷路的時候，請把這頁給人看</div><div class="drv" lang="zh-Hans"><p class="drv-p">请送我到这里，谢谢</p><p class="drv-n">壶香悦<small>（厦门中山路步行街店）</small></p><p class="drv-a">厦门市思明区定安路61-2号</p></div></div></section></body></html>
