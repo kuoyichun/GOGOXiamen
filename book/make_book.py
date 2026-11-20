@@ -173,14 +173,14 @@ SPOT = {
                photos=[('yujian', '嶼見閩南'), ('u-yj1', '館內像一座閩南古城'), ('u-yj2', '表演舞台')],
                pts=['坐車約 30 分鐘，在海上世界 4–5 樓', '全部在室內，有冷氣', '像走進一座閩南古城，表演一場接一場', '晚餐在館內的小吃街吃'],
                story='2025 年 5 月才開幕。裡面分成宋朝、海上絲路、市井煙火、南洋四個時空，每天有將近 30 場表演：大型實景演出《千年回響》、提線木偶、飛天表演，還有《鼓浪風雲》大戲。',
-               tip='表演全部都已經付過了，只有換古裝、做手工、買吃的才要另外付錢。提線木偶是泉州的傳統戲，一尊木偶有十幾條到三十幾條線，全靠師傅的手指操控。',
+               tip='表演全部都已經付過了，只有換古裝、做手工、買吃的才要另外付錢。',
                place='yujian'),
     'pack': dict(day='d4', t='18:00', title='回飯店・收行李', layout='one',
                  photos=[('zs4', '中山路的小吃和伴手禮')],
                  pts=['在中山路買最後的伴手禮', '隔天要早起坐船，晚上先把行李收好', '肉做的東西不能帶回台灣（看第 {ban} 頁）']),
     'back': dict(day='d5', t='08:45', title='坐船回金門', layout='one',
                  photos=[('u-ship', '回金門的船'), ('u-shuitou', '水頭碼頭的「抵港」入口')],
-                 pts=['退房後坐車約 40 分鐘到五通碼頭', '坐船約 30 分鐘回到水頭碼頭', '船班時間以領隊通知為準'],
+                 pts=['退房後坐車約 40 分鐘到五通碼頭', '坐船約 30 分鐘回到水頭碼頭', '船班時間確定後會再通知大家'],
                  place='wutong'),
     'km': dict(day='d5', t='10:30', title='包計程車逛金門', layout='two',
                photos=[('juguang', '莒光樓'), ('u-kinmen', '路邊的「金門」大字'), ('settle', '水頭聚落'), ('deyue', '水頭的得月樓'), ('lion', '風獅爺')],
@@ -272,81 +272,52 @@ def spot(key):
     {'one': spot_one, 'two': spot_two}[SPOT[key]['layout']](key)
 
 
-# ---------------------------------------------------------------- 封面
-def waves(y, amp, n, color, h=188):
-    w = 134.0 / n
-    d = 'M0,%.1f ' % y
-    for i in range(n):
-        x0 = i * w
-        d += 'Q%.1f,%.1f %.1f,%.1f Q%.1f,%.1f %.1f,%.1f ' % (x0 + w / 4, y - amp, x0 + w / 2, y, x0 + 3 * w / 4, y + amp, x0 + w, y)
-    d += 'L134,%d L0,%d Z' % (h, h)
-    return '<path d="%s" fill="%s"/>' % (d, color)
+# ---------------------------------------------------------------- 封面（Fluent Emoji 貼紙＋照片拼貼）
+def stk(name, x, y, w, rot=0):
+    """貼紙；x、y 是離裁切線左上角幾公釐"""
+    return ('<img class="stk" src="stickers/%s.svg" alt="" style="left:calc(var(--b) + %.1fmm);top:calc(var(--b) + %.1fmm);'
+            'width:%.1fmm;transform:rotate(%ddeg)">') % (name, x, y, w, rot)
 
 
-def egret(x, y, s=1.0):
-    return ('<g transform="translate(%.1f %.1f) scale(%.2f)" stroke="#1D3557" stroke-width=".45" stroke-linejoin="round">'
-            '<path d="M14,8 C18,-4 28,-6 34,1 C27,2 23,5 21,9 Z" fill="#fff"/>'
-            '<path d="M2,8 C8,6 20,7 27,9 C22,12.5 11,12.5 5,11 Z" fill="#fff"/>'
-            '<path d="M18,9 C24,4 32,4 37,7 C31,8 26,10 22,12 Z" fill="#F4FAFB"/>'
-            '<path d="M5,9.5 C2,8.5 1,6.5 2,5 C3,4 4.6,4.4 4.6,5.6" fill="none"/>'
-            '<path d="M2.2,5 L-1.8,6 L2.2,5.9 Z" fill="#FFD45C" stroke-width=".3"/>'
-            '<path d="M27,10 L34,12.6 M26.4,10.6 L33,13.6" stroke-width=".5" fill="none"/></g>') % (x, y, s)
+def cpol(key, x, y, w, h, rot, cap=''):
+    st = ';object-position:%s' % FOCUS[key] if key in FOCUS else ''
+    c = '<figcaption>%s</figcaption>' % e(cap) if cap else ''
+    return ('<figure class="cpol" style="left:calc(var(--b) + %.1fmm);top:calc(var(--b) + %.1fmm);width:%.1fmm;transform:rotate(%ddeg)">'
+            '<img src="%s" alt="" style="height:%.1fmm%s">%s</figure>') % (x, y, w, rot, src(key), h, st, c)
 
 
-COVER_ART = ''.join([
-    '<svg class="cv-art" viewBox="0 0 134 188" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">',
-    '<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9DCDD"/><stop offset="1" stop-color="#E6F5EF"/></linearGradient></defs>',
-    '<rect width="134" height="188" fill="url(#sky)"/>',
-    '<circle cx="104" cy="36" r="19" fill="#FFD45C" opacity=".28"/><circle cx="104" cy="36" r="13" fill="#FFD45C"/>',
-    '<g fill="#fff" opacity=".85"><rect x="60" y="20" width="32" height="4" rx="2"/><rect x="74" y="27" width="46" height="4" rx="2"/>',
-    '<rect x="96" y="60" width="30" height="3.4" rx="1.7"/><rect x="58" y="88" width="24" height="3.4" rx="1.7"/></g>',
-    # 鼓浪嶼和日光岩
-    '<path d="M18,124 C28,110 40,106 50,108 C58,98 70,94 80,97 C86,90 98,86 108,92 C118,94 127,101 134,105 L134,134 L18,134 Z" fill="#7DC29A"/>',
-    '<path d="M74,99 C73,89 79,82 86,83 C93,84 95,91 94,99 Z" fill="#E2CFA6" stroke="#B89B6A" stroke-width=".5"/>',
-    '<path d="M81,83.2 L86,79.6 L91,83.2 Z" fill="#C8553D"/><rect x="83" y="83" width="6" height="2.4" fill="#F6E7C8"/>',
-    '<path d="M0,128 C14,119 30,117 44,121 C49,122.5 53,126 56,131 L56,140 L0,140 Z" fill="#9ED3A8"/>',
-    # 閩南紅磚厝（燕尾脊）
-    '<rect x="96" y="100" width="25" height="14" fill="#D2563E"/>',
-    '<path d="M93,100.4 L124,100.4 L121,96.6 Q108.5,94.6 96,96.6 Z" fill="#9E3A2C"/>',
-    '<path d="M92.2,93.4 Q94.6,96.4 97.6,96 Q108.5,94.4 119.4,96 Q122.4,96.4 124.8,93.4" fill="none" stroke="#9E3A2C" stroke-width="1.3" stroke-linecap="round"/>',
-    '<rect x="98.6" y="103.4" width="4" height="4" fill="#F6D8A8"/><rect x="114.4" y="103.4" width="4" height="4" fill="#F6D8A8"/>',
-    '<path d="M106,114 L106,107.6 Q108.5,105 111,107.6 L111,114 Z" fill="#7A2E22"/>',
-    # 海
-    waves(126, 2.2, 7, '#8ACDDA'),
-    waves(140, 2.4, 6, '#62B5CD'),
-    waves(155, 2.6, 5, '#4299C0'),
-    waves(171, 2.8, 5, '#2F7FAA'),
-    '<g stroke="#fff" stroke-width=".7" fill="none" stroke-linecap="round" opacity=".75">',
-    '<path d="M70,134 q3,-2 6,0"/><path d="M100,147 q3,-2 6,0"/><path d="M14,150 q3,-2 6,0"/><path d="M58,163 q3,-2 6,0"/><path d="M110,166 q3,-2 6,0"/></g>',
-    # 小三通的船
-    '<g transform="translate(14 120)"><path d="M0,10 L30,10 L27,15 L3,15 Z" fill="#fff" stroke="#1D3557" stroke-width=".45"/>',
-    '<rect x="2" y="11.6" width="26" height="1.2" fill="#3E8FB8"/>',
-    '<path d="M6,10 L7,5 L22,5 L24,10 Z" fill="#fff" stroke="#1D3557" stroke-width=".45"/>',
-    '<g fill="#3E8FB8"><circle cx="10" cy="7.4" r=".9"/><circle cx="13.5" cy="7.4" r=".9"/><circle cx="17" cy="7.4" r=".9"/><circle cx="20.5" cy="7.4" r=".9"/></g></g>',
-    egret(58, 52, 1.0), egret(30, 92, .55),
-    '</svg>'])
-
-
-def back_art():
-    return ''.join(['<svg class="cv-art" viewBox="0 0 134 188" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">',
-                    waves(158, 2.2, 6, '#8ACDDA'), waves(168, 2.4, 5, '#62B5CD'), waves(178, 2.6, 5, '#4299C0'),
-                    egret(18, 22, .7), '</svg>'])
+def cover():
+    return ''.join([
+        '<div class="cv-sea"></div>',
+        cpol('gly', 5, 95, 44, 34, -8, '鼓浪嶼'),
+        cpol('u-jc1', 80, 97, 43, 34, 7, '金門'),
+        cpol('u-spw1', 41, 90, 46, 36, 2, '沙坡尾'),
+        '<div class="cv-label"><div class="cv-k">2026 冬天・五天四夜</div><h1>廈門</h1><div class="cv-sub"><span>旅行手札</span></div>'
+        '<div class="cv-date">12/16（三）— 12/20（日）</div><div class="cv-where">金門・廈門・鼓浪嶼</div></div>',
+        stk('airplane', 3, 4, 21, -12), stk('sun-behind-small-cloud', 102, 3, 22, 0),
+        stk('red-paper-lantern', 109, 30, 12, 6), stk('red-paper-lantern', 4, 33, 11, -6),
+        stk('musical-keyboard', 2, 62, 17, -14), stk('teacup-without-handle', 110, 62, 14, 8),
+        stk('lion', 104, 80, 17, -6), stk('sparkles', 14, 82, 10, 0),
+        stk('steaming-bowl', 28, 133, 15, -8), stk('peanuts', 68, 135, 12, 12),
+        stk('ferry', 6, 145, 27, 0), stk('crab', 52, 152, 15, -10), stk('tropical-fish', 76, 160, 12, 8),
+        stk('luggage', 99, 140, 22, 6),
+    ])
 
 
 # ---------------------------------------------------------------- 1 封面
-page(COVER_ART + '<div class="cv-t"><div class="cv-year">2026</div><h1>廈門</h1><div class="cv-side">旅行手札</div></div>'
-     '<div class="cv-d"><b>12/16（三）— 12/20（日）</b><span>金門・廈門・鼓浪嶼</span></div>', 'cover')
+page(cover(), 'cover')
 
 # 2 聯絡
 page(head('旅伴資料') +
      '<div class="card tape"><div class="ct">聯絡電話</div>'
-     '<div class="fill"><span>領隊</span></div><div class="fill"><span>同行</span></div>'
+     '<div class="fill"><span>同行</span></div><div class="fill"><span>同行</span></div>'
      '<div class="fill"><span>同行</span></div><div class="fill"><span>台灣家人</span></div></div>'
      '<div class="card tape pink r"><div class="ct">出發前知道一下</div>' + ul([
          '時間：跟台灣一樣，不用調手錶',
          '天氣：12 月白天約 15–20 度，早晚 10 多度',
          '電壓：220V，手機充電器可以直接用',
-         '付錢：由領隊處理，身上帶一點人民幣',
+         '付錢：同行夥伴會先代付，身上帶一點人民幣',
+         '在廈門：<b>護照收好</b>，<b>台胞證</b>帶在身上',
      ]) + '</div>'
      '<div class="card"><div class="ct">四晚都住</div><div style="font-size:13pt;font-weight:700;margin-top:1mm">壺香悅（中山路步行街店）</div>'
      '<div lang="zh-Hans" style="font-size:11pt">厦门市思明区定安路61-2号</div></div>', 'info', PREP)
@@ -358,8 +329,8 @@ page('{{TOC}}', 'info', PREP)
 rows = ''
 for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
     d = DAYS[did]
-    rows += ('<div style="display:grid;grid-template-columns:22mm 1fr;align-items:center;gap:2.4mm;padding:1.3mm 0;border-bottom:.3mm dashed #CFE0E6">'
-             '<span class="pill" style="background:%s;text-align:center">%d/%d（%s）</span><span class="hn" style="font-size:13.5pt;line-height:1.3">%s</span></div>') % (
+    rows += ('<div style="display:grid;grid-template-columns:auto 1fr;align-items:center;gap:2.4mm;padding:1.3mm 0;border-bottom:.3mm dashed #CFE0E6">'
+             '<span class="pill" style="background:%s;text-align:center">%d/%d（%s）</span><span class="hn" style="font-size:15pt;line-height:1.3">%s</span></div>') % (
         d['color'], T['month'], d['d'], d['wk'], e(d['title']))
 page(head('五天總覽') + '<div class="card mapcard"><img class="mapimg" src="img/map-all.png" alt="" style="height:76mm;object-fit:cover"></div>'
      '<div class="card" style="padding:1.6mm 4mm">%s</div>' % rows, 'info', PREP, mark='五天總覽')
@@ -372,9 +343,9 @@ def chk(items):
 
 page(head('行李清單', '證件・錢・手機') + '<div class="card tape">' + chk([
     ('1faaa', '身分證', '坐國內線飛機要用'),
-    ('1f4d7', '護照', '在金門出境、回來入境要用'),
-    ('1f4b3', '台胞證', '進廈門要用；坐船去鼓浪嶼也要用'),
-    ('1f45b', '一點人民幣和新台幣', '大部分由領隊付'),
+    ('1f4d7', '護照', '金門出入境用；到廈門後收好，不要拿出來'),
+    ('1f4b3', '台胞證', '到廈門後每天帶著，景點、坐船都會用到'),
+    ('1f45b', '一點人民幣和新台幣', '大部分由同行夥伴先代付'),
     ('1f4f1', '手機和充電線', ''),
     ('1f50b', '行動電源', '放隨身包，不能託運'),
     ('1f48a', '平常吃的藥', '放隨身包'),
@@ -390,8 +361,7 @@ page(head('行李清單', '衣服・日用品') + '<div class="card tape pink">'
     ('1faa5', '牙刷、牙膏、保養品', '自己帶最習慣'),
     ('1f9fb', '面紙、濕紙巾', '外面廁所不一定有衛生紙'),
     ('1f6cd', '環保袋', '裝伴手禮'),
-]) + '<ul class="chk"><li><i class="box"></i><span></span><div class="fill" style="height:8mm"></div></li>'
-     '<li><i class="box"></i><span></span><div class="fill" style="height:8mm"></div></li></ul></div>', 'info', PREP, 0)
+]) + '<ul class="chk"><li><i class="box"></i><span></span><div class="fill" style="height:8mm"></div></li></ul></div>', 'info', PREP, 0)
 
 # 7 行李規定
 page(head('託運和隨身行李', '飛機和船的規定不一樣') +
@@ -402,9 +372,8 @@ page(head('託運和隨身行李', '飛機和船的規定不一樣') +
      '<div class="nums"><div class="num"><div class="k">隨身行李</div><div class="v">17<small>公斤</small></div><div class="s">最多 2 件，合計</div></div>'
      '<div class="num hot"><div class="k">免費託運</div><div class="v">5<small>公斤</small></div><div class="s">超過就要付錢</div></div></div></div>' % icon('26f4') +
      '<div class="card"><div class="ct" style="font-size:14pt">建議這樣帶</div>' + ul([
-         '一人一個 20 吋以內的登機箱（7 公斤以內）',
-         '再加一個隨身小包，放證件、藥和行動電源',
-         '回程伴手禮變多，飛機那段可以改託運',
+         '一人一個 20 吋登機箱（7 公斤內）',
+         '證件、藥、行動電源放隨身小包',
      ]) + '<p class="note" style="margin-top:1.6mm">2026 年 10 月的規定，以航空公司、船公司現場為準。</p></div>',
      'info', PREP, 0, mark='行李規定')
 
@@ -429,15 +398,15 @@ def ticket(ic, kind, date, a, b, ta, tb, foot):
 
 FILL = '<u></u>'
 page(head('交通資訊・去程', '12/16（三）') +
-     '<div class="warn">%s證件拿在手上，跟著領隊走</div>' % icon('26a0') +
-     '<div style="height:4mm"></div>' +
+     '<div class="warn">%s證件拿在手上，大家一起走</div>' % icon('26a0') +
      ticket('2708', '飛機', '12/16（三）・國內線', '台北松山', '金門', '', '12:30 到', '航班%s起飛%s' % (FILL, FILL)) +
      ticket('26f4', '船', '12/16（三）・小三通', '金門水頭', '廈門五通', '', '', '開船時間%s坐船約 30 分鐘' % FILL) +
      '<div class="card tape" style="margin-top:4mm"><div class="ct" style="font-size:14pt">每一段要拿出來的證件</div>' + ul([
          '坐飛機：<b>身分證</b>',
          '金門出境：<b>護照</b>',
          '廈門入境：<b>台胞證</b>',
-     ]) + '<p class="note" style="margin-top:1.4mm">開船時間確定後，領隊會再通知，可以寫在上面。</p></div>',
+         '到了廈門：只拿台胞證，<b>護照收好</b>',
+     ]) + '</div>',
      'info', PREP, 0, mark='交通資訊')
 
 page(head('交通資訊・回程', '12/20（日）') +
@@ -490,11 +459,11 @@ page(head('住宿資訊', '12/16 – 12/20・四晚') + pol('hotel', '壺香悅�
 MOVE_ICON = {'car': '1f695', 'walk': '1f6b6', 'ship': '26f4'}
 MEAL = ('早餐', '午餐', '晚餐')
 DAY_NOTE = {
-    'd1': ['證件拿在手上，跟著領隊走', '晚餐看到想吃的就進去吃'],
-    'd2': ['南普陀寺要事先預約', '下午採耳前可以回飯店午休'],
+    'd1': ['證件拿在手上，大家一起走', '入境後<b>護照收好</b>，不要拿出來', '晚餐看到想吃的就進去吃'],
+    'd2': ['<b>台胞證</b>帶在身上，護照收好', '南普陀寺要事先預約', '下午採耳前可以回飯店午休'],
     'd3': ['<b>台胞證一定要帶</b>，坐船去鼓浪嶼要用', '鼓浪嶼走路多，穿好走的鞋'],
-    'd4': ['嶼見閩南的表演提早 10 分鐘到', '晚上先把行李收好'],
-    'd5': ['早點起床，退房別忘了東西', '肉做的東西不能帶回台灣'],
+    'd4': ['<b>台胞證</b>帶在身上，護照收好', '嶼見閩南的表演提早 10 分鐘到', '晚上先把行李收好'],
+    'd5': ['早點起床，退房別忘了東西', '廈門出境用<b>台胞證</b>，到金門才拿護照', '肉做的東西不能帶回台灣'],
 }
 ORDER = {
     'd1': [('one', 'plane'), ('two', 'ship'), ('two', 'zs')],
@@ -524,7 +493,7 @@ def gly_pages():
     body += ('<div class="card tape pink story"><span class="label">小故事</span><p>島的西南邊海灘上，有一塊兩公尺多高、中間有洞的礁石，'
              '漲潮時海浪打進洞裡，聲音像打鼓一樣，叫做「鼓浪石」，島也在明朝時因此改名「鼓浪嶼」，在那之前叫「五龍嶼」。</p></div>')
     body += ('<div class="card tape blue r story"><span class="label navy">小知識</span><p>清朝末年，很多國家的領事館、商人和傳教士住進鼓浪嶼，'
-             '蓋了各式各樣的洋樓、教堂和學校，有「萬國建築博覽」的稱號。島上鋼琴特別多，又叫「鋼琴之島」。2017 年被列為世界文化遺產。</p></div>')
+             '蓋了洋樓、教堂和學校，有「萬國建築博覽」的稱號。島上鋼琴特別多，又叫「鋼琴之島」。2017 年被列為世界文化遺產。</p></div>')
     body += fitrow(pol('u-gly1', '鼓浪嶼碼頭', 'xs', 'rot2'), pol('sanqiu', '三丘田碼頭', 'xs', 'rot1'), lo=True)
     body += addr('gly')
     page(body, 'spot', c, 3)
@@ -543,7 +512,7 @@ for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
         bk = '<i class="bk">要事先訂</i>' if it.get('book') else ''
         ml = '<i class="meal">%s</i>' % meal if meal and not t.startswith(meal) else ''
         lis += '<li class="st"><b>%s</b><span>%s%s%s</span></li>' % (e(it['t']), e(t), ml, bk)
-    dense = ' dense' if lis.count('<li') > 13 else ''
+    dense = ' dense' if lis.count('<li') > 12 else ''
     page(head('每日行程', '第 %d 天' % n) +
          '<div class="card%s"><div class="tl-top"><span class="pill">%d/%d（%s）</span><span class="tl-title">%s</span></div>'
          '<span class="dayrib">DAY %d</span><ul class="tl">%s</ul></div>' % (dense, T['month'], d['d'], d['wk'], e(d['title']), n, lis),
@@ -606,8 +575,7 @@ page(head('必買伴手禮', '金門') + '<div class="card tape pink">' + gifts(
 ]) + '</div><div class="warn">%s菜刀不能手提，記得託運</div>' % icon('26a0'), 'food', BUY, '買')
 
 # ---------------------------------------------------------------- 說法對照
-WORDS = [('計程車', '出租車・打車'), ('捷運', '地鐵'), ('廁所', '衛生間'), ('塑膠袋', '塑料袋'),
-         ('冷氣', '空調'), ('鳳梨', '菠蘿'), ('馬鈴薯', '土豆')]
+WORDS = [('計程車', '出租車・打車'), ('捷運', '地鐵'), ('廁所', '衛生間'), ('塑膠袋', '塑料袋'), ('鳳梨', '菠蘿')]
 page(head('台灣說法・廈門說法') + '<div class="card tape"><table class="words">%s</table></div>' % ''.join(
     '<tr><td>%s</td><td>→</td><td>%s</td></tr>' % (e(a), e(b)) for a, b in WORDS) +
      '<div class="card tape pink r"><div class="ct" style="font-size:14pt">幾句好用的話</div><ul class="say">%s</ul></div>' % ''.join(
@@ -654,7 +622,7 @@ def credits_page():
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
             '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、中華城、沙坡尾、嶼見閩南、金城模範街、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
-            '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。圖示：Twemoji（CC BY 4.0）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
+            '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。貼紙和圖示：Microsoft Fluent Emoji（MIT）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 
 
@@ -672,7 +640,8 @@ while (len(pages) + 1) % 4 or first_memo is None or len(pages) - first_memo < 1:
         toc.append(('筆記', first_memo, ''))
 
 hp = P['hotel']
-page(back_art() + '<!--IN--><div class="bk-card"><div class="bk-k">迷路的時候，請把這頁給人看</div><div class="drv" lang="zh-Hans" style="flex:none">'
+page('<div class="cv-sea"></div>' + stk('luggage', 6, 8, 20, -8) + stk('airplane', 98, 10, 22, 10) + stk('hibiscus', 104, 118, 14, 0)
+     + stk('sparkles', 10, 118, 11, 0) + stk('ferry', 50, 150, 26, 0) + '<!--IN--><div class="bk-card"><div class="bk-k">迷路的時候，請把這頁給人看</div><div class="drv" lang="zh-Hans" style="flex:none">'
      '<p class="p" style="margin-top:3mm">请送我到这里，谢谢</p><p class="n">壶香悦<small>（厦门中山路步行街店）</small></p>'
      '<p class="a">%s</p></div></div>' % e(hp['addr']), 'back')
 

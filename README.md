@@ -26,4 +26,4 @@
 - `book/xiamen-travel-book-b6.pdf`：同一本的裁切尺寸版，看電子檔或自己印
 - 內容：行李清單、託運和隨身行李規定、不能帶的東西、交通票卡、碼頭流程、住宿、每日行程和地圖、景點介紹、必吃、伴手禮、給司機看、花費紀錄、筆記
 - 重新產生：`python3 book/make_book.py`（行程、地址、美食從 `assets/data.js` 讀，景點介紹寫在 `book/make_book.py` 的 `SPOT`）
-- 照片在 `book/img/`，來源和授權在 `book/credits.json`；圓體字是 jf open 粉圓（`book/fonts/`，SIL OFL），圖示是 Twemoji（CC BY 4.0）
+- 照片在 `book/img/`，來源和授權在 `book/credits.json`；圓體字是 jf open 粉圓（`book/fonts/`，SIL OFL），封面貼紙和圖示是 Microsoft Fluent Emoji（MIT，`book/stickers/`、`book/icons/`）
