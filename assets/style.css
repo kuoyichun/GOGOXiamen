@@ -199,13 +199,15 @@ nav a.today{background:#fff;color:var(--ink);border-color:#fff}
 .pl-n b{font-weight:900}
 .pl-n .ic{color:var(--c);margin-top:1px}
 .pl-a{font-size:16px;color:var(--ink2);margin:3px 0 0 30px;line-height:1.45}
-.pl-b{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pl-b{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.pl-b > *{justify-content:center;text-align:center;min-width:0;padding:6px 8px;font-size:16px}
 .pl-drv,.pl-l{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 13px;border-radius:12px;font-size:17px;font-weight:900;text-decoration:none;cursor:pointer;line-height:1.2}
 .pl-drv{background:var(--ink);color:#fff;border:0}
 .pl-l{background:#fff;color:var(--ink);border:2px solid var(--line)}
 .pl-l .ic,.pl-drv .ic{width:20px;height:20px}
 .pl-l.amap .ic{color:#1F6FE5}
 .pl-l.gmap .ic{color:#2E9E4F}
+.pl-l.dp .ic{color:#FF6633}
 .hotel-a{margin-top:3px;font-size:16px !important;font-weight:500 !important}
 .hotel-links{order:4;width:100%;margin-top:0}
 

@@ -103,14 +103,19 @@
   var PL = [];
   function enc(x) { return encodeURIComponent(x); }
   function amapURL(pl) {
-    // 高德地圖網頁版，不用裝 App 也能開
-    return 'https://uri.amap.com/search?keyword=' + enc(pl.kw || pl.sc) + '&city=' + enc(pl.city || '厦门') + '&view=map&src=trip&callnative=0';
+    // callnative=1：手機有裝高德地圖 App 就直接打開 App，沒裝才開網頁版
+    return 'https://uri.amap.com/search?keyword=' + enc(pl.kw || pl.sc) + '&city=' + enc(pl.city || '厦门') + '&view=map&src=trip&callnative=1';
+  }
+  function dpURL(pl) {
+    // 大眾點評 App 的搜尋（只有裝了 App 的手機才打得開）
+    return 'dianping://searchshoplist?keyword=' + enc(pl.dp || pl.kw || pl.sc);
   }
   function gURL(pl) {
     return 'https://www.google.com/maps/search/?api=1&query=' + enc(pl.g || (pl.tw ? pl.sc : (pl.kw || pl.sc) + ' 厦门'));
   }
   function mapLinks(pl) {
-    return (pl.tw ? '' : '<a class="pl-l amap" href="' + amapURL(pl) + '" target="_blank" rel="noopener">' + icon('map') + '高德地圖</a>') +
+    return (pl.tw ? '' : '<a class="pl-l amap" href="' + amapURL(pl) + '" target="_blank" rel="noopener">' + icon('map') + '高德地圖</a>' +
+      '<a class="pl-l dp" href="' + dpURL(pl) + '">' + icon('food') + '大眾點評</a>') +
       '<a class="pl-l gmap" href="' + gURL(pl) + '" target="_blank" rel="noopener">' + icon('map') + 'Google 地圖</a>';
   }
   function placeHTML(pl) {
