@@ -48,7 +48,7 @@ window.TRIP = {
       id: 'd1', d: 16, wk: '三', color: '#C0392B', title: '出發・到廈門',
       say: '第一天，十二月十六號，星期三。早上十一點十分從台北松山機場坐飛機到金門，中午坐計程車去吃金門的鍋貼，下午三點半坐船到廈門。五點多住進飯店，晚上在中山路步行街散步、吃晚餐。',
       items: [
-        { id: 'd1-tsa', t: '11:10', kind: 'mini', icon: 'plane', title: '台北松山機場起飛', nb: '松山起飛',
+        { id: 'd1-tsa', t: '11:10', kind: 'mini', icon: 'plane', title: '台北松山機場起飛（華信 AE2065）', nb: '松山起飛',
           say: '早上十一點十分，從台北松山機場起飛。起飛前一個小時先到機場報到。' },
         { kind: 'move', mode: 'plane', text: '飛機 約 1 小時 20 分鐘' },
         { id: 'd1-air', t: '12:30', kind: 'stop', icon: 'plane', title: '抵達金門機場', nb: '金門機場', img: 'kmair-u', at: 'kmAir',
@@ -196,7 +196,7 @@ window.TRIP = {
         { id: 'd5-air', t: '15:45', kind: 'mini', icon: 'ticket', title: '金門機場報到', nb: '機場報到', at: 'kmAir',
           say: '下午三點四十五分到金門機場報到。' },
         { id: 'd5-fly', t: '17:40', kind: 'stop', icon: 'plane', title: '飛回台北松山', sub: '金門機場出發', nb: '飛回松山', img: 'kmair-u2', at: 'kmAir',
-          pts: ['17:40 起飛，18:50 到台北松山'],
+          pts: ['華信航空 AE2074', '17:40 起飛，18:50 到台北松山'],
           say: '傍晚五點四十分起飛，六點五十分回到台北松山機場。' },
         { kind: 'move', mode: 'plane', text: '飛機 約 1 小時 10 分鐘' },
         { id: 'd5-tsa', t: '18:50', kind: 'mini', icon: 'plane', title: '回到台北松山機場', nb: '回到松山',
