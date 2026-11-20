@@ -1,117 +1,332 @@
-/* A6 旅遊書：10.5 × 14.8 公分，字大、對比高 */
-@page { size: 105mm 148mm; margin: 0; }
+/* 廈門旅行手札：B6（12.8 × 18.2 公分），字大、圖多 */
+@import url("fonts/huninn.css");
+
+:root {
+  --b: 3mm;                 /* 出血；預覽版是 0 */
+  --paper: #DDF0EC;
+  --paper2: #C7E7E1;
+  --ink: #1D3557;
+  --ink2: #4B6178;
+  --red: #E0503A;
+  --yellow: #FFD45C;
+  --yellow2: #FFF0B3;
+  --pink: #F7C6C0;
+  --sea: #3E8FB8;
+  --c: #E0503A;             /* 每天的顏色 */
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { background: #fff; }
 body {
-  font-family: "Noto Sans CJK TC", sans-serif;
-  color: #2B1A12; font-size: 12.5pt; line-height: 1.55;
+  font-family: "Noto Sans CJK TC", sans-serif; font-weight: 500;
+  color: var(--ink); font-size: 12pt; line-height: 1.6;
   -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
+.hn { font-family: "Huninn", "Noto Sans CJK TC", sans-serif; font-weight: 400; }
 [lang="zh-Hans"] { font-family: "Noto Sans CJK SC", sans-serif; }
+img { display: block; }
+.ic { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -.2em; }
+
+/* ---------- 頁面 ---------- */
 .pg {
-  --c: #B23A26;
-  width: 105mm; height: 148mm; position: relative; overflow: hidden;
-  padding: 8mm 8mm 11mm; page-break-after: always; break-after: page;
+  width: calc(128mm + 2 * var(--b)); height: calc(182mm + 2 * var(--b));
+  position: relative; overflow: hidden; background: var(--paper);
+  page-break-after: always; break-after: page;
 }
 .pg:last-child { page-break-after: auto; break-after: auto; }
-.no { position: absolute; bottom: 4.2mm; left: 0; right: 0; text-align: center; font-size: 9pt; color: #8A7666; font-weight: 500; }
-
-/* 外側的天數標籤（翻書時好找） */
-.tab {
-  position: absolute; width: 6mm; height: 13mm; background: var(--c); color: #fff;
-  font-size: 11pt; font-weight: 900; display: flex; align-items: center; justify-content: center;
+.pg::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(48mm 34mm at 104% -2%, rgba(255,255,255,.65), transparent 70%),
+    radial-gradient(60mm 40mm at -6% 104%, rgba(140,204,192,.55), transparent 70%),
+    radial-gradient(30mm 22mm at 8% 30%, rgba(255,255,255,.35), transparent 70%);
 }
-.odd .tab { right: 0; border-radius: 1.5mm 0 0 1.5mm; }
-.even .tab { left: 0; border-radius: 0 1.5mm 1.5mm 0; }
+.even::before { transform: scaleX(-1); }
+.in {
+  position: absolute; display: flex; flex-direction: column;
+  top: calc(var(--b) + 9mm); bottom: calc(var(--b) + 11mm);
+  left: calc(var(--b) + 12mm); right: calc(var(--b) + 10mm);
+}
+.even .in { left: calc(var(--b) + 10mm); right: calc(var(--b) + 12mm); }
+.in > * { flex-shrink: 0; }
+.grow { flex: 1 1 auto; flex-shrink: 1; min-height: 0; }
+.no {
+  position: absolute; bottom: calc(var(--b) + 3.6mm); left: 0; right: 0; margin: auto;
+  width: 8mm; height: 5.4mm; border-radius: 2.7mm; background: rgba(255,255,255,.75);
+  text-align: center; font-size: 8.5pt; line-height: 5.4mm; font-weight: 700; color: var(--ink2);
+}
 
-.ph { display: block; width: 100%; height: 50.6mm; object-fit: cover; border-radius: 2.5mm; background: #EADCC8; }
-.ph-none { display: flex; align-items: center; justify-content: center; background: var(--c); }
-.ph-none span { color: #fff; font-size: 24pt; font-weight: 900; letter-spacing: .08em; }
+/* 外側索引標籤（翻書時找天數） */
+.tab {
+  position: absolute; width: calc(var(--b) + 7.5mm); height: 15mm; background: var(--c); color: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: "Huninn", sans-serif; font-size: 8pt; line-height: 1.05; text-align: center;
+}
+.tab b { font-size: 14pt; font-weight: 400; }
+.odd .tab { right: 0; padding-left: 0; padding-right: var(--b); border-radius: 2.5mm 0 0 2.5mm; }
+.even .tab { left: 0; padding-left: var(--b); border-radius: 0 2.5mm 2.5mm 0; }
 
-h1 { font-family: "Noto Serif CJK TC", serif; font-weight: 900; }
-h2 { font-size: 18pt; font-weight: 900; line-height: 1.3; margin-top: 1.5mm; }
-h3 { font-size: 13pt; font-weight: 900; margin-top: 5mm; }
-.pg > .time:first-child { margin-top: 0; }
-.time { margin-top: 3mm; font-size: 13pt; font-weight: 900; color: var(--c); display: flex; align-items: center; gap: 2mm; flex-wrap: wrap; }
-.tag { display: inline-block; font-size: 9.5pt; font-weight: 700; color: #173F73; background: #E1ECFA; border-radius: 1.2mm; padding: .3mm 1.8mm; }
-.lead { margin-top: 2mm; }
-.cont { font-size: 10pt; font-weight: 700; color: #8A7666; margin-bottom: 2mm; }
-.cont::after { content: "（續）"; }
+/* ---------- 標題 ---------- */
+.kick { font-family: "Huninn", sans-serif; text-align: center; font-size: 11pt; color: var(--c); letter-spacing: .06em; }
+.hd { font-family: "Huninn", sans-serif; font-weight: 400; text-align: center; font-size: 21pt; line-height: 1.25; letter-spacing: .08em; }
+.hd span { background: linear-gradient(transparent 55%, var(--yellow) 55%, var(--yellow) 90%, transparent 90%); padding: 0 1.6mm; }
+.hd + * { margin-top: 3.5mm; }
+.kick + .hd { margin-top: .5mm; }
 
-.story { margin-top: 3mm; background: #F7EFE3; border-left: 1.6mm solid var(--c); border-radius: 0 2mm 2mm 0; padding: 2.4mm 3mm 2.6mm; }
-.story p { font-size: 12pt; line-height: 1.6; margin-top: 1mm; }
-.story-k { display: inline-block; font-size: 9.5pt; font-weight: 900; color: #fff; background: var(--c); border-radius: 1mm; padding: .2mm 2mm; }
-.tip { background: #F2F2EC; }
+/* ---------- 卡片 ---------- */
+.card {
+  position: relative; background: #fff; border-radius: 3.5mm; padding: 3.6mm 4mm;
+  box-shadow: 0 .7mm 0 rgba(29,53,87,.10);
+}
+.card + .card, .card + .row, .row + .card, .pol + .card, .row + .row, .warn + .card, .card + .warn { margin-top: 3.4mm; }
+.tape::before {
+  content: ""; position: absolute; top: -2.6mm; left: 9mm; width: 21mm; height: 5.6mm;
+  background: rgba(255,212,92,.82); transform: rotate(-5deg); border-radius: .6mm;
+}
+.tape.pink::before { background: rgba(247,170,160,.8); }
+.tape.blue::before { background: rgba(120,185,220,.75); }
+.tape.r::before { left: auto; right: 9mm; transform: rotate(5deg); }
+.clip { position: absolute; top: -3.6mm; right: 6mm; width: 6mm; height: 15mm; }
 
-.addr { margin-top: 3mm; border: .4mm solid #2B1A12; border-radius: 2mm; padding: 2mm 3mm 2.4mm; }
-.addr-k { font-size: 9pt; font-weight: 700; color: #8A7666; }
-.addr-n { font-size: 12.5pt; font-weight: 900; line-height: 1.35; margin-top: .5mm; }
-.addr-a { font-size: 11pt; font-weight: 500; line-height: 1.45; margin-top: .6mm; }
+.ct { font-family: "Huninn", sans-serif; font-size: 16pt; line-height: 1.3; }
+.ct small { font-size: 11pt; color: var(--ink2); margin-left: 1.5mm; }
+.label {
+  display: inline-block; font-family: "Huninn", sans-serif; font-size: 10.5pt; line-height: 1.5;
+  color: #fff; background: var(--c); border-radius: 3mm; padding: 0 2.6mm;
+}
+.label.navy { background: var(--ink); }
+.label.yel { background: var(--yellow); color: var(--ink); }
+.book { display: inline-block; font-size: 10pt; font-weight: 700; color: #fff; background: var(--red); border-radius: 1.2mm; padding: 0 1.8mm; line-height: 1.6; vertical-align: .15em; margin-left: 1.5mm; }
+.time { font-family: "Huninn", sans-serif; font-size: 13pt; color: var(--c); }
+.meta { display: flex; align-items: center; gap: 2mm; flex-wrap: wrap; }
 
-.list { list-style: none; margin-top: 2.5mm; }
-.list li { position: relative; padding-left: 4.2mm; margin-top: 1.4mm; }
-.list li::before { content: ""; position: absolute; left: .6mm; top: .62em; width: 2mm; height: 2mm; border-radius: 50%; background: var(--c); }
-.info .list li::before { background: #B23A26; }
+.ul { list-style: none; }
+.ul li { position: relative; padding-left: 4.6mm; margin-top: 1.2mm; }
+.ul li:first-child { margin-top: 0; }
+.ul li::before { content: ""; position: absolute; left: .7mm; top: .62em; width: 2.1mm; height: 2.1mm; border-radius: 50%; background: var(--c); }
+.ct + .ul, .meta + .ul, .ct + p, .meta + .ct { margin-top: 1.6mm; }
+.story p { font-size: 11.5pt; line-height: 1.65; margin-top: 1.6mm; }
+.note { font-size: 10pt; color: var(--ink2); }
 
-/* 封面 */
-.cover { padding: 7mm; display: flex; flex-direction: column; }
-.cv-img { display: block; width: 100%; height: 72mm; object-fit: cover; border-radius: 3mm; }
-.cv-t { flex: 1; margin-top: 4mm; background: #B23A26; color: #fff; border-radius: 3mm; padding: 4mm 5mm; }
-.cv-k { font-size: 10.5pt; font-weight: 700; color: #F8D58A; letter-spacing: .05em; }
-.cover h1 { font-size: 44pt; line-height: 1.05; margin-top: 1mm; letter-spacing: .06em; }
-.cv-d { font-size: 13pt; font-weight: 900; margin-top: 2mm; }
-.cv-s { font-size: 11pt; font-weight: 700; margin-top: 1.5mm; color: #F8D58A; }
+/* ---------- 照片 ---------- */
+.pol { background: #fff; padding: 1.8mm 1.8mm 1.4mm; border-radius: 1.2mm; box-shadow: 0 .8mm 1.6mm rgba(29,53,87,.18); position: relative; }
+.pol img { width: 100%; object-fit: cover; border-radius: .6mm; background: #CFE3DE; }
+.pol figcaption { font-family: "Huninn", sans-serif; font-size: 9.5pt; line-height: 1.3; text-align: center; margin-top: 1mm; color: var(--ink2); }
+.pol.big img { height: 60mm; }
+.pol.mid img { height: 44mm; }
+.pol.sm img { height: 30mm; }
+.pol.xs img { height: 24mm; }
+.rot1 { transform: rotate(-1.4deg); } .rot2 { transform: rotate(1.6deg); } .rot3 { transform: rotate(-2.2deg); }
+.row { display: flex; gap: 3.4mm; align-items: flex-start; }
+.row > * { flex: 1 1 0; min-width: 0; }
+.pol.tape::before { top: -2.4mm; left: 50%; margin-left: -10mm; width: 20mm; }
 
-/* 填寫欄 */
-.fill { margin-top: 3.5mm; height: 8.5mm; border-bottom: .3mm solid #9A8878; display: flex; align-items: flex-end; padding-bottom: 1mm; }
-.fill span { font-size: 11pt; font-weight: 700; color: #6B5848; }
-.line { height: 9.2mm; border-bottom: .3mm dotted #A89888; }
+/* 沒有照片時的圖示框 */
+.emo { display: flex; align-items: center; justify-content: center; border-radius: 2.5mm; background: var(--yellow2); }
+.emo img { width: 46%; height: auto; }
 
-/* 總覽 */
-.ov { margin-top: 2.6mm; border-left: 1.8mm solid var(--c); padding: .6mm 0 .8mm 3mm; }
-.ov-h { font-size: 10.5pt; color: #6B5848; }
-.ov-h b { color: var(--c); font-weight: 900; }
-.ov-t { font-size: 13.5pt; font-weight: 900; line-height: 1.35; }
+/* ---------- 地址 ---------- */
+.addr { border: .45mm dashed var(--ink); border-radius: 2.5mm; padding: 2mm 3mm 2.2mm; background: rgba(255,255,255,.7); }
+.addr-k { font-family: "Huninn", sans-serif; font-size: 9.5pt; color: var(--red); }
+.addr-n { font-size: 12.5pt; font-weight: 900; line-height: 1.35; }
+.addr-a { font-size: 11pt; line-height: 1.45; margin-top: .4mm; }
+.card + .addr, .row + .addr, .pol + .addr { margin-top: 3.4mm; }
 
-/* 每天的第一頁 */
-.day-hd { display: flex; align-items: center; gap: 3mm; background: var(--c); color: #fff; border-radius: 3mm; padding: 3mm; }
-.seal { flex: 0 0 auto; width: 15mm; height: 15mm; border-radius: 2mm; background: #fff; color: var(--c); display: flex; align-items: baseline; justify-content: center; padding-top: 1.6mm; font-size: 22pt; font-weight: 900; line-height: 1; }
-.seal small { font-size: 8pt; margin: 0 .3mm; }
-.dd { font-size: 11pt; font-weight: 700; }
-.dt { font-size: 15pt; font-weight: 900; line-height: 1.3; }
-.tl { list-style: none; margin-top: 3mm; }
-.tl li { display: grid; grid-template-columns: 13mm 1fr; gap: 1.5mm; padding: 1.3mm 0; border-bottom: .25mm dashed #D8C8B4; font-size: 12pt; line-height: 1.35; }
-.tl li b { color: var(--c); font-weight: 900; }
+/* ---------- 提醒 ---------- */
+.warn {
+  display: flex; align-items: center; gap: 1.8mm; align-self: center;
+  font-family: "Huninn", sans-serif; font-size: 11.5pt; line-height: 1.35;
+  background: var(--yellow); border-radius: 2mm; padding: 1.2mm 3mm;
+}
+.warn img { width: 5.2mm; height: 5.2mm; flex: 0 0 auto; }
 
-/* 分隔頁 */
-.sectp { display: flex; align-items: center; }
-.sect { width: 100%; background: var(--c); color: #fff; border-radius: 3mm; padding: 10mm 6mm; text-align: center; }
-.sect-k { font-size: 11pt; font-weight: 700; opacity: .85; }
-.sect h1 { font-size: 30pt; margin-top: 1mm; }
-.sect p { font-size: 12pt; margin-top: 3mm; }
+/* ---------- 封面 ---------- */
+.cover { background: #CDEBE7; }
+.cover::before { display: none; }
+.cv-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cv-t { position: absolute; top: calc(var(--b) + 15mm); left: calc(var(--b) + 13mm); color: #fff; font-family: "Huninn", sans-serif; }
+.cv-t h1 { font-weight: 400; font-size: 54pt; line-height: 1.02; writing-mode: vertical-rl; letter-spacing: .05em;
+  text-shadow: 0 .8mm 0 rgba(29,53,87,.55); }
+.cv-side { position: absolute; top: 2mm; left: 23mm; writing-mode: vertical-rl; font-size: 15pt; line-height: 1.25; letter-spacing: .12em;
+  text-shadow: 0 .5mm 0 rgba(29,53,87,.45); }
+.cv-side b { font-weight: 400; display: block; font-size: 13pt; letter-spacing: 0; margin-left: 1mm; }
+.cv-d { position: absolute; left: 0; right: 0; bottom: calc(var(--b) + 13mm); text-align: center; color: #fff; font-family: "Huninn", sans-serif; }
+.cv-d b { display: block; font-weight: 400; font-size: 16pt; letter-spacing: .06em; }
+.cv-d span { font-size: 11.5pt; letter-spacing: .14em; }
 
-/* 美食 */
-.food h2 { font-size: 21pt; margin-top: 3mm; }
-.what { font-size: 13pt; font-weight: 900; color: var(--c); }
-.where { margin-top: 3mm; border: .4mm solid #2B1A12; border-radius: 2mm; padding: 1.6mm 3mm 2mm; font-size: 12pt; font-weight: 900; line-height: 1.4; }
-.where span { display: block; font-size: 9pt; font-weight: 700; color: #8A7666; }
+/* ---------- 目錄 ---------- */
+.toc { background: linear-gradient(160deg, #4C8FC4, #6FB4D8 55%, #8FCBE0); color: #fff; border-radius: 3.5mm; padding: 4mm 6mm 4mm; flex: 1 1 auto; position: relative; overflow: hidden; }
+.toc::after { content: ""; position: absolute; inset: 0; background:
+  radial-gradient(18mm 14mm at 90% 12%, rgba(255,255,255,.25), transparent 70%),
+  radial-gradient(26mm 18mm at 10% 92%, rgba(255,255,255,.22), transparent 70%); }
+.toc li { list-style: none; display: grid; grid-template-columns: 10mm 1fr; align-items: baseline; font-family: "Huninn", sans-serif; font-size: 13pt; line-height: 1.3; padding: .85mm 0; border-bottom: .3mm dashed rgba(255,255,255,.55); position: relative; z-index: 1; }
+.toc li b { font-weight: 400; font-size: 12pt; color: #FFF2B8; }
+.toc li small { font-size: 9.5pt; opacity: .9; margin-left: 1.5mm; }
 
-/* 台灣說法・廈門說法 */
-.words { width: 100%; border-collapse: collapse; margin-top: 3mm; font-size: 13pt; }
-.words td { padding: 1.4mm 0; border-bottom: .25mm dashed #D8C8B4; }
-.words td:first-child { font-weight: 700; }
-.words td:nth-child(2) { color: #B23A26; text-align: center; width: 8mm; }
-.words td:last-child { font-weight: 900; }
-.note { margin-top: 3mm; font-size: 11.5pt; font-weight: 700; color: #B23A26; }
+/* ---------- 填寫欄 ---------- */
+.fill { display: flex; align-items: flex-end; gap: 2mm; height: 10mm; border-bottom: .35mm solid #9DB3C4; padding-bottom: 1.2mm; }
+.fill span { font-family: "Huninn", sans-serif; font-size: 11.5pt; color: var(--ink2); white-space: nowrap; }
+.fill i { font-style: normal; font-size: 10pt; color: #8EA3B5; margin-left: auto; }
 
-/* 給司機看 */
-.driver, .back { display: flex; flex-direction: column; }
-.drv-k, .bk-k { font-size: 10.5pt; font-weight: 700; color: #6B5848; }
-.drv { flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; }
-.drv-p { font-size: 13pt; font-weight: 900; color: #B23A26; }
-.drv-n { font-size: 23pt; font-weight: 900; line-height: 1.25; margin-top: 4mm; }
-.drv-n small { display: block; font-size: 12.5pt; margin-top: 1.5mm; }
-.drv-a { font-size: 15pt; font-weight: 900; line-height: 1.45; margin-top: 5mm; padding: 3mm 0; border-top: .5mm solid #2B1A12; border-bottom: .5mm solid #2B1A12; }
-.back { padding: 7mm; }
-.bk-in { flex: 1; display: flex; flex-direction: column; border: 1mm solid #B23A26; border-radius: 3mm; padding: 5mm 4mm; }
-.bk-k { text-align: center; color: #B23A26; font-size: 11pt; }
+/* ---------- 行李清單 ---------- */
+.chk { list-style: none; }
+.chk li { display: grid; grid-template-columns: 5.4mm 9mm 1fr; gap: 2.2mm; align-items: center; padding: 1.4mm 0; border-bottom: .3mm dashed #CFE0E6; }
+.chk li:last-child { border-bottom: 0; }
+.chk .box { width: 5.4mm; height: 5.4mm; border: .5mm solid var(--ink); border-radius: 1.2mm; background: #fff; }
+.chk img { width: 9mm; height: 9mm; }
+.chk b { font-family: "Huninn", sans-serif; font-weight: 400; font-size: 13.5pt; line-height: 1.3; display: block; }
+.chk span { font-size: 10.5pt; line-height: 1.4; color: var(--ink2); display: block; }
+
+/* ---------- 行李規定 ---------- */
+.rule-h { display: flex; align-items: center; gap: 2.4mm; }
+.rule-h img { width: 9mm; height: 9mm; }
+.rule-h .ct { font-size: 15pt; }
+.rule-h .ct small { display: block; margin: 0; font-size: 10pt; }
+.nums { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm; margin-top: 2mm; }
+.num { border-radius: 2.5mm; background: #EAF5F7; padding: 1.4mm 2.4mm 1.6mm; text-align: center; }
+.num .k { font-family: "Huninn", sans-serif; font-size: 11pt; color: var(--ink2); }
+.num .v { font-family: "Huninn", sans-serif; font-size: 20pt; line-height: 1.12; color: var(--sea); }
+.num .v small { font-size: 12pt; margin-left: .6mm; }
+.num .s { font-size: 9.5pt; line-height: 1.35; color: var(--ink2); }
+.num.hot { background: #FFE9E3; }
+.num.hot .v { color: var(--red); }
+
+.ban { display: grid; grid-template-columns: 11mm 1fr; gap: 2.6mm; align-items: start; }
+.ban + .ban { margin-top: 2.6mm; padding-top: 2.6mm; border-top: .3mm dashed #CFE0E6; }
+.ban img { width: 11mm; height: 11mm; }
+.ban b { font-family: "Huninn", sans-serif; font-weight: 400; font-size: 13.5pt; line-height: 1.3; }
+.ban p { font-size: 11pt; line-height: 1.5; margin-top: .4mm; }
+.no-x { display: inline-block; font-size: 9.5pt; font-weight: 900; color: #fff; background: var(--red); border-radius: 1mm; padding: 0 1.5mm; margin-left: 1.5mm; vertical-align: .2em; line-height: 1.6; }
+.ok-o { background: #2E8F6A; }
+
+/* ---------- 票卡 ---------- */
+.ticket { position: relative; display: grid; grid-template-columns: 19mm 1fr; background: #fff; border-radius: 3.5mm; box-shadow: 0 .7mm 0 rgba(29,53,87,.10); border: .45mm solid #BFD6E4; }
+.ticket + .ticket { margin-top: 4mm; }
+.ticket::before, .ticket::after { content: ""; position: absolute; left: 17.4mm; width: 3.6mm; height: 3.6mm; border-radius: 50%; background: var(--paper); border: .45mm solid #BFD6E4; }
+.ticket::before { top: -2.2mm; } .ticket::after { bottom: -2.2mm; }
+.tk-s { border-right: .5mm dashed #BFD6E4; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5mm; padding: 3mm 0; }
+.tk-s img { width: 10mm; height: 10mm; }
+.tk-s span { font-family: "Huninn", sans-serif; font-size: 11pt; }
+.tk-b { padding: 3mm 4mm 3.2mm; }
+.tk-d { font-family: "Huninn", sans-serif; font-size: 11pt; color: var(--ink2); }
+.tk-r { display: grid; grid-template-columns: 1fr 9mm 1fr; align-items: center; text-align: center; margin-top: 1mm; }
+.tk-r b { font-family: "Huninn", sans-serif; font-weight: 400; font-size: 16pt; line-height: 1.25; display: block; }
+.tk-r small { display: block; font-size: 9.5pt; color: var(--ink2); }
+.tk-r i { font-style: normal; color: #9DB3C4; font-size: 14pt; }
+.tk-t { display: grid; grid-template-columns: 1fr 9mm 1fr; text-align: center; font-family: "Huninn", sans-serif; font-size: 17pt; color: var(--red); line-height: 1.3; }
+.tk-f { margin-top: 1.6mm; font-size: 10.5pt; color: var(--ink2); display: flex; gap: 2mm; align-items: flex-end; }
+.tk-f u { flex: 1; text-decoration: none; border-bottom: .3mm solid #9DB3C4; height: 5mm; }
+
+/* ---------- 流程 ---------- */
+.steps { list-style: none; }
+.steps li { display: grid; grid-template-columns: 8mm 1fr auto; gap: 2.6mm; align-items: center; background: #fff; border-radius: 3mm; padding: 2mm 2.6mm; box-shadow: 0 .6mm 0 rgba(29,53,87,.08); }
+.steps li + li { margin-top: 2.4mm; }
+.steps .n { width: 8mm; height: 8mm; border-radius: 50%; background: var(--sea); color: #fff; font-family: "Huninn", sans-serif; font-size: 13pt; display: flex; align-items: center; justify-content: center; }
+.steps b { font-family: "Huninn", sans-serif; font-weight: 400; font-size: 13.5pt; line-height: 1.3; display: block; }
+.steps span { font-size: 10.5pt; line-height: 1.4; color: var(--ink2); display: block; }
+.steps img.th { width: 26mm; height: 17mm; object-fit: cover; border-radius: 1.6mm; }
+
+/* ---------- 每日行程 ---------- */
+.tl-top { display: flex; align-items: center; gap: 2.4mm; }
+.pill { font-family: "Huninn", sans-serif; font-size: 12pt; color: #fff; background: var(--ink); border-radius: 4mm; padding: .2mm 3.2mm; white-space: nowrap; }
+.tl-title { font-family: "Huninn", sans-serif; font-size: 12.5pt; color: var(--red); line-height: 1.3; }
+.dayrib { position: absolute; top: 3mm; right: -2mm; background: #F28C38; color: #fff; font-family: "Huninn", sans-serif; font-size: 13pt; letter-spacing: .08em; padding: .4mm 3.4mm; transform: rotate(4deg); box-shadow: 0 .6mm 0 rgba(0,0,0,.12); }
+.tl { list-style: none; margin-top: 3mm; position: relative; }
+.tl::before { content: ""; position: absolute; left: 16.6mm; top: 2mm; bottom: 2mm; width: .7mm; background: var(--ink); border-radius: .35mm; }
+.tl li { display: grid; grid-template-columns: 15mm 4.4mm 1fr; align-items: baseline; position: relative; }
+.tl li.st { padding: 1.4mm 0; }
+.tl li.st::after { content: ""; position: absolute; left: 15.6mm; top: calc(1.4mm + .62em); width: 2.7mm; height: 2.7mm; border-radius: 50%; background: #fff; border: .6mm solid var(--c); box-sizing: border-box; }
+.tl li.st b { grid-column: 1; font-family: "Huninn", sans-serif; font-weight: 400; font-size: 14.5pt; text-align: right; padding-right: 1mm; }
+.tl li.st span { grid-column: 3; font-family: "Huninn", sans-serif; font-size: 15pt; line-height: 1.35; }
+.tl li.mv { padding: .2mm 0 .5mm; }
+.tl li.mv span { grid-column: 3; font-size: 11pt; color: var(--ink2); }
+.tl li.mv img { width: 4.2mm; height: 4.2mm; display: inline-block; vertical-align: -.25em; margin-right: 1mm; }
+.tl .meal { display: inline-block; font-size: 9pt; background: var(--pink); color: var(--ink); border-radius: 2mm; padding: 0 1.6mm; margin-left: 1.4mm; vertical-align: .15em; font-family: "Huninn", sans-serif; line-height: 1.6; }
+.tl .bk { display: inline-block; font-size: 9pt; color: #fff; background: var(--red); border-radius: 1mm; padding: 0 1.4mm; margin-left: 1.4mm; vertical-align: .15em; font-family: "Noto Sans CJK TC", sans-serif; font-weight: 700; line-height: 1.6; }
+.mapimg { width: 100%; border-radius: 2.4mm; }
+.mapcard { padding: 2mm; }
+.lg { display: flex; gap: 3mm; justify-content: center; font-size: 9.5pt; color: var(--ink2); margin-top: 1.4mm; }
+.lg i { display: inline-block; width: 7mm; height: 0; border-top: .7mm solid var(--c); vertical-align: middle; margin-right: 1mm; }
+.lg i.ship { border-top-style: dashed; }
+.lg i.walk { border-top-style: dotted; border-top-width: .9mm; }
+
+/* ---------- 景點小卡（照片在左） ---------- */
+.sc { display: grid; grid-template-columns: 42mm 1fr; gap: 3.4mm; }
+.sc .ph { width: 42mm; height: 46mm; object-fit: cover; border-radius: 2.4mm; }
+.sc .emo { width: 42mm; height: 46mm; }
+.sc .ct { font-size: 15pt; }
+.sc .ul { font-size: 11.5pt; line-height: 1.5; }
+.sc-addr { margin-top: 2.4mm; font-size: 10.5pt; line-height: 1.4; border-top: .3mm dashed #CFE0E6; padding-top: 1.6mm; }
+.sc-addr b { font-family: "Huninn", sans-serif; font-weight: 400; color: var(--red); font-size: 9.5pt; margin-right: 1.4mm; }
+
+/* ---------- 美食 ---------- */
+.fd { display: grid; grid-template-columns: 44mm 1fr; gap: 3.4mm; }
+.fd .ph, .fd .emo { width: 44mm; height: 52mm; object-fit: cover; border-radius: 2.4mm; }
+.fd .ct { font-size: 18pt; }
+.fd .what { font-family: "Huninn", sans-serif; font-size: 12pt; color: var(--red); line-height: 1.35; margin-top: .4mm; }
+.fd .ul { font-size: 11.5pt; line-height: 1.5; margin-top: 1.6mm; }
+.fd .where { margin-top: 1.6mm; font-size: 10pt; line-height: 1.4; color: var(--ink2); }
+.fd .where b { color: var(--ink); }
+
+/* ---------- 伴手禮 ---------- */
+.gifts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm 2.6mm; }
+.gift { text-align: center; }
+.gift .cir { width: 28mm; height: 28mm; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 1.2mm solid #fff; box-shadow: 0 .7mm 1.4mm rgba(29,53,87,.18); background: var(--yellow2); display: flex; align-items: center; justify-content: center; }
+.gift .cir img.p { width: 100%; height: 100%; object-fit: cover; }
+.gift .cir img.e { width: 58%; height: 58%; }
+.gift b { display: block; font-family: "Huninn", sans-serif; font-weight: 400; font-size: 12.5pt; line-height: 1.3; margin-top: 1.4mm; }
+.gift span { display: block; font-size: 9.5pt; line-height: 1.35; color: var(--ink2); }
+
+/* ---------- 說法對照 ---------- */
+.words { width: 100%; border-collapse: collapse; font-size: 13pt; }
+.words td { padding: 1.1mm 0; border-bottom: .3mm dashed #CFE0E6; }
+.words tr:last-child td { border-bottom: 0; }
+.words td:first-child { font-family: "Huninn", sans-serif; }
+.words td:nth-child(2) { color: var(--red); text-align: center; width: 8mm; }
+.words td:last-child { font-weight: 700; }
+.say li { list-style: none; padding: 1.1mm 0; border-bottom: .3mm dashed #CFE0E6; }
+.say li:last-child { border-bottom: 0; }
+.say b { display: block; font-family: "Huninn", sans-serif; font-weight: 400; font-size: 11pt; color: var(--ink2); }
+.say span { font-size: 14pt; font-weight: 700; }
+
+/* ---------- 給司機看 ---------- */
+.drv { flex: 1 1 0; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.drv + .drv { margin-top: 5mm; }
+.drv .tw { font-family: "Huninn", sans-serif; font-size: 12pt; color: var(--ink2); }
+.drv .p { font-size: 13.5pt; font-weight: 900; color: var(--red); margin-top: 1mm; }
+.drv .n { font-size: 25pt; font-weight: 900; line-height: 1.25; margin-top: 2mm; }
+.drv .n small { display: block; font-size: 14pt; margin-top: .6mm; }
+.drv .a { font-size: 16.5pt; font-weight: 900; line-height: 1.45; margin-top: 3mm; padding-top: 2.4mm; border-top: .5mm dashed var(--ink); }
+
+/* ---------- 花費、筆記 ---------- */
+.cost { width: 100%; border-collapse: collapse; background: #fff; border-radius: 3mm; overflow: hidden; }
+.cost th { font-family: "Huninn", sans-serif; font-weight: 400; font-size: 11.5pt; background: #FFE08A; padding: 1.6mm 2mm; text-align: left; }
+.cost td { height: 9.6mm; border-top: .3mm solid #DCE7EC; border-left: .3mm solid #DCE7EC; }
+.cost td:first-child { border-left: 0; }
+.memo { flex: 1 1 auto; background-color: #fff; border-radius: 3.5mm; position: relative;
+  background-image: radial-gradient(circle, #A9C3D2 .32mm, transparent .4mm); background-size: 5mm 5mm; background-position: 2.5mm 2.5mm; }
+.leaf { position: absolute; width: 16mm; height: 16mm; opacity: .9; }
+
+/* ---------- 照片來源 ---------- */
+.cred { font-size: 7pt; line-height: 1.42; color: var(--ink2); column-count: 2; column-gap: 4mm; }
+.cred p { break-inside: avoid; margin-bottom: .6mm; }
+
+/* ---------- 封底 ---------- */
+.back .in { justify-content: center; }
+.bk-card { background: #fff; border-radius: 4mm; padding: 7mm 5mm; text-align: center; border: .8mm solid var(--red); }
+.bk-k { font-family: "Huninn", sans-serif; font-size: 13pt; color: var(--red); }
+
+/* ---------- 照片自動填滿剩下的空間 ---------- */
+.in > .fit { flex: 1 1 0; min-height: 34mm; max-height: 84mm; display: flex; flex-direction: column; }
+.in > .fit.lo { min-height: 26mm; }
+.pol.fit img { flex: 1 1 0; height: auto !important; min-height: 0; }
+.row.fit { align-items: stretch; }
+.row.fit > .pol { display: flex; flex-direction: column; }
+.row.fit > .pol img { flex: 1 1 0; height: auto !important; min-height: 0; }
+.cv-year { font-size: 13pt; letter-spacing: .2em; margin-bottom: 1.5mm; text-shadow: 0 .5mm 0 rgba(29,53,87,.45); }
+.dense .tl li.st { padding: .75mm 0; }
+.dense .tl li.st::after { top: calc(.75mm + .62em); }
+.dense .tl li.mv { padding: 0 0 .2mm; }
+.dense .tl li.mv span { font-size: 10.5pt; }
+.in > .row.fit { flex-direction: row; }
+.tl-top { padding-right: 0; }
+.dayrib { top: -4.2mm; right: 5mm; }

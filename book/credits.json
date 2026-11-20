@@ -1,0 +1,443 @@
+[
+ {
+  "key": "tsa",
+  "what": "松山機場",
+  "author": "玄史生",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Taipei_Songshan_Airport_1st_Terminal_Building_20090725_(cropped).JPG"
+ },
+ {
+  "key": "plane",
+  "what": "飛金門的螺旋槳飛機",
+  "author": "4300streetcar",
+  "lic": "CC BY 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:UNI_Air_ATR_72-600_B-17002_on_final_approach_to_Taoyuan_February_2026.jpg"
+ },
+ {
+  "key": "kmair",
+  "what": "金門機場",
+  "author": "riNux\n\n\nCamera location24° 26′ 09.78″ N, 118° 22′ 04.94″ E V",
+  "lic": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Kinmen_Airport_front_view_20090401c.jpg"
+ },
+ {
+  "key": "kmair2",
+  "what": "金門機場",
+  "author": "Livewireshock",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Kinmen_Airport_and_Surrounds_03.JPG"
+ },
+ {
+  "key": "ferry",
+  "what": "金廈小三通船",
+  "author": "lienyuan lee",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E9%A0%AD%E7%A2%BC%E9%A0%AD_Shuitou_Pier_-_panoramio.jpg"
+ },
+ {
+  "key": "ferry2",
+  "what": "水頭港",
+  "author": "User:Vmenkov",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Kinmen_-_Shuitou_Harbor_-_DSCF9376.JPG"
+ },
+ {
+  "key": "wutong",
+  "what": "五通碼頭",
+  "author": "Shwangtianyuan",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wutong_Ferry_Terminal_Phase_3.jpg"
+ },
+ {
+  "key": "wutong2",
+  "what": "五通碼頭入境出口",
+  "author": "Livewireshock",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Arrivals_exit_at_Wutong_Ferry_Terminal.JPG"
+ },
+ {
+  "key": "zs",
+  "what": "中山路夜景",
+  "author": "Slyronit",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Zhongshan_Road,_Xiamen_2.jpg"
+ },
+ {
+  "key": "zs2",
+  "what": "中山路牌樓",
+  "author": "Slyronit",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Zhongshan_Road,_Xiamen_8.jpg"
+ },
+ {
+  "key": "zs3",
+  "what": "中山路騎樓",
+  "author": "xiquinhosilva",
+  "lic": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Zhongshan_Road_07044-Xiamen_(48814365192).jpg"
+ },
+ {
+  "key": "zs4",
+  "what": "中山路小吃攤",
+  "author": "lienyuan lee",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%BB%88%E9%96%80%E6%AD%A5%E8%A1%8C%E8%A1%97%E5%B0%8F%E5%90%83%E6%94%A4_snack_stalls_at_Xiamen_pedestrian_street_-_panoramio.jpg"
+ },
+ {
+  "key": "peanut",
+  "what": "黃則和花生湯",
+  "author": "HualinXMN",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Huang_Zehe_peanut_soup.jpg"
+ },
+ {
+  "key": "npt",
+  "what": "南普陀寺",
+  "author": "xiquinhosilva",
+  "lic": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:South_Putuo_Temple_07253-Xiamen_(48814191832).jpg"
+ },
+ {
+  "key": "npt2",
+  "what": "南普陀寺放生池",
+  "author": "xiquinhosilva",
+  "lic": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:South_Putuo_Temple_07235-Xiamen_(48814044816).jpg"
+ },
+ {
+  "key": "npt3",
+  "what": "南普陀寺山門",
+  "author": "lienyuan lee",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E6%99%AE%E9%99%80%E5%AF%BA%E5%B1%B1%E9%96%80_Gate_of_South_Putuo_Temple_-_panoramio.jpg"
+ },
+ {
+  "key": "npt4",
+  "what": "南普陀寺「佛」字石",
+  "author": "lienyuan lee",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E6%99%AE%E9%99%80%E5%AF%BA_Nan_Putuo_Temple_-_panoramio.jpg"
+ },
+ {
+  "key": "npt5",
+  "what": "南普陀寺與五老峰",
+  "author": "Mx. Granger",
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E6%99%AE%E9%99%80%E5%AF%BA.jpg"
+ },
+ {
+  "key": "heping",
+  "what": "和平碼頭",
+  "author": "Liuxingy",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%8E%A6%E9%97%A8%E5%92%8C%E5%B9%B3%E7%A0%81%E5%A4%B4.jpg"
+ },
+ {
+  "key": "dusk",
+  "what": "鼓浪嶼黃昏",
+  "author": "周流劲火",
+  "lic": "CC BY 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_at_dusk.jpg"
+ },
+ {
+  "key": "dusk2",
+  "what": "鼓浪嶼夜景",
+  "author": "JULIANISME",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Night_view_of_Gulangyu_20230826.jpg"
+ },
+ {
+  "key": "lujiang",
+  "what": "鷺江道夜景",
+  "author": "https://pxhere.com/en/photo/793051",
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%AD%E6%B1%9F%E9%81%93%E4%B9%8B%E8%93%9D%E5%A4%9C.jpg"
+ },
+ {
+  "key": "cruise",
+  "what": "郵輪中心",
+  "author": "Shwangtianyuan",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_International_Cruise_Terminal_South_gate-20191215.jpg"
+ },
+ {
+  "key": "glyship",
+  "what": "鼓浪嶼渡輪",
+  "author": "User:Vmenkov",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_-_Yuanhe_ferry_-_DSCF9335.JPG"
+ },
+ {
+  "key": "sanqiu",
+  "what": "三丘田碼頭",
+  "author": "N509FZ",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Sanqiutian_Ferry_Terminal_(20170120173750).jpg"
+ },
+ {
+  "key": "gly",
+  "what": "黃榮遠堂",
+  "author": "H2v5o68z",
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E9%BC%93%E6%B5%AA%E5%B1%BF%E9%BB%84%E8%8D%A3%E8%BF%9C%E5%A0%82.jpg"
+ },
+ {
+  "key": "gly2",
+  "what": "鼓浪嶼洋樓",
+  "author": "Zhangzhugang",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_Gulangyu_20120226-25.jpg"
+ },
+ {
+  "key": "gly3",
+  "what": "鼓浪嶼老洋房",
+  "author": "Rolfmueller",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_mansion_2011_12.jpg"
+ },
+ {
+  "key": "church",
+  "what": "鼓浪嶼天主堂",
+  "author": "Siyuwj",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Catholic_Church,_Kulangsu,_2019-09-26_18.jpg"
+ },
+ {
+  "key": "piano",
+  "what": "鋼琴博物館",
+  "author": "xiquinhosilva",
+  "lic": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gu_Lang_Yu_Piano_Museum_20161231.jpg"
+ },
+ {
+  "key": "sunrock",
+  "what": "日光岩",
+  "author": "Rolfmueller",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_sunlight_rock_2011_12.jpg"
+ },
+ {
+  "key": "glybeach",
+  "what": "鼓浪嶼海邊",
+  "author": "Rolfmueller",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_beach_2011_12.jpg"
+ },
+ {
+  "key": "shuzhuang",
+  "what": "菽莊花園",
+  "author": "Popolon",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Xiamen-Gulangyu-Jardin_traditionnel.jpg"
+ },
+ {
+  "key": "glyview",
+  "what": "從廈門看鼓浪嶼",
+  "author": "Slyronit",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Gulangyu_Island_from_Zhongshan_Road,_Xiamen.jpg"
+ },
+ {
+  "key": "zhcity",
+  "what": "中華城",
+  "author": "Augustohai",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%8D%8E%E5%9F%8E084744.jpg"
+ },
+ {
+  "key": "spw",
+  "what": "沙坡尾",
+  "author": "向史公哲曰",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E7%BD%91%E7%BA%A2%E5%8C%96%E6%B2%99%E5%9D%A1%E5%B0%BE1.jpg"
+ },
+ {
+  "key": "spw2",
+  "what": "沙坡尾漁船",
+  "author": "mojojo.cn",
+  "lic": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Fishing_boats_in_Shapowei,_Xiamen.jpg"
+ },
+ {
+  "key": "spw3",
+  "what": "沙坡尾避風塢",
+  "author": "https://pxhere.com/zh/photo/875404",
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:2015%E5%B9%B4%E7%9A%84%E6%B2%99%E5%9D%A1%E5%B0%BE%E9%81%BF%E9%A3%8E%E5%9D%9E.jpg"
+ },
+ {
+  "key": "spw4",
+  "what": "沙坡尾",
+  "author": "向史公哲曰",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E7%BD%91%E7%BA%A2%E5%8C%96%E6%B2%99%E5%9D%A1%E5%B0%BE4.jpg"
+ },
+ {
+  "key": "spw5",
+  "what": "沙坡尾與雙子塔",
+  "author": "向史公哲曰",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E8%BF%98%E6%9C%89%E6%B8%94%E6%B0%91%E7%9A%84%E6%B2%99%E5%9D%A1%E5%B0%BE2.jpg"
+ },
+ {
+  "key": "shimao",
+  "what": "世茂雙子塔",
+  "author": "周流劲火",
+  "lic": "CC BY 2.5",
+  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_Shimao_Straits_Tower_at_dusk.jpg"
+ },
+ {
+  "key": "shimao2",
+  "what": "雙子塔與海邊",
+  "author": "JamesYoung8167",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_Shimao_Straits_Tower_2016-02-09.jpg"
+ },
+ {
+  "key": "shimao3",
+  "what": "從雙子塔往下看",
+  "author": "Mx. Granger",
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:View_from_Shimao_Cross-Strait_Plaza_2.jpg"
+ },
+ {
+  "key": "yanwu",
+  "what": "演武大橋夜景",
+  "author": "JULIANISME",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Night_view_of_Xiamen_Yanwu_Bridge_20230826_01.jpg"
+ },
+ {
+  "key": "yanwu2",
+  "what": "演武大橋日落",
+  "author": "rheins",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%BC%94%E6%AD%A6%E5%A4%A7%E6%A1%A5%E6%97%A5%E8%90%BD_-_Sunset_at_Yanwu_Bridge_-_2014.01_-_panoramio.jpg"
+ },
+ {
+  "key": "juguang",
+  "what": "莒光樓",
+  "author": "姜 明雄",
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Juguang_Tower_20180727_(cropped).jpg"
+ },
+ {
+  "key": "mofan",
+  "what": "模範街",
+  "author": "Cpc3711",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E9%96%80%E6%A8%A1%E7%AF%84%E8%A1%97%E4%B9%8B%E7%BE%8E-%E5%BC%B5%E5%88%A9%E8%81%B0.jpg"
+ },
+ {
+  "key": "mofan2",
+  "what": "模範街",
+  "author": "林高志",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E9%96%80%E6%A8%A1%E7%AF%84%E8%A1%972.jpg"
+ },
+ {
+  "key": "mofan3",
+  "what": "金城老街",
+  "author": "rheins",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E5%9F%8E%E8%80%81%E8%A1%97_-_Old_Street_in_Jincheng_Township_-_2014.05_-_panoramio.jpg"
+ },
+ {
+  "key": "settle",
+  "what": "水頭聚落",
+  "author": "rheins",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E5%A4%B4%E8%81%9A%E8%90%BD_-_Shuitou_Settlement_-_2014.05_-_panoramio.jpg"
+ },
+ {
+  "key": "deyue",
+  "what": "得月樓",
+  "author": "rheins",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4%E5%A4%B4%E5%BE%97%E6%9C%88%E6%A5%BC_-_Deyue_Tower_in_Shuitou_Settlement_-_2014.05_-_panoramio.jpg"
+ },
+ {
+  "key": "lion",
+  "what": "風獅爺",
+  "author": "P95521708",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Wind_Lion_God_in_Kimmen_DSC_3309.jpg"
+ },
+ {
+  "key": "lion2",
+  "what": "風獅爺",
+  "author": "LiCheng Shih",
+  "lic": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Stone_(lion)_worship_in_Kinmen_2016-06-25.jpg"
+ },
+ {
+  "key": "knife",
+  "what": "金門鋼刀",
+  "author": "lienyuan lee",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E5%90%88%E5%88%A9%E9%8B%BC%E5%88%80_Maestro_Wu_-_panoramio.jpg"
+ },
+ {
+  "key": "liquor",
+  "what": "金門高粱酒",
+  "author": "tomscoffin",
+  "lic": "CC BY 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:2012-06-05_Liquor_products_by_the_Kinmen_Distillery.jpg"
+ },
+ {
+  "key": "tea",
+  "what": "鐵觀音茶葉",
+  "author": "Quelcrime",
+  "lic": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Tieguanyin2.jpg"
+ },
+ {
+  "key": "shacha",
+  "what": "沙茶麵",
+  "author": "Xmhaoyu",
+  "lic": "CC BY 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Shachamian.JPG"
+ },
+ {
+  "key": "duck",
+  "what": "薑母鴨",
+  "author": "N509FZ",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Quanzhou-style_Kiu%E2%81%BF-b%C3%B3-ah_(Ginger_Duck)_at_Yipin_Xiangqing_Restaurant,_Beijing_(20240908174515).jpg"
+ },
+ {
+  "key": "mianxian",
+  "what": "麵線糊",
+  "author": "N509FZ",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:M%C4%AB-su%C3%A0nn-k%C3%B4o_in_Quanzhou_(20200929220207).jpg"
+ },
+ {
+  "key": "zongzi",
+  "what": "燒肉粽",
+  "author": "向史公哲曰",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:1980%E7%83%A7%E8%82%89%E7%B2%BD%E5%89%8D%E5%9F%94%E5%BA%97%E7%9A%84%E8%8F%9C%E5%93%81.jpg"
+ },
+ {
+  "key": "tusun",
+  "what": "土筍凍",
+  "author": "Slyronit",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Sand_worm_in_jelly,_Xiamen.jpg"
+ },
+ {
+  "key": "oyster",
+  "what": "海蠣煎",
+  "author": "Chensiyuan",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Oyster_omelette.jpg"
+ },
+ {
+  "key": "shellfish",
+  "what": "鼓浪嶼海鮮攤",
+  "author": "Don Ramey Logan",
+  "lic": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Xiamen_China_Gulangyu_Island_shellfish_for_sale_by_Don_Ramey_Logan.jpg"
+ }
+]
