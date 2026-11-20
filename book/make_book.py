@@ -814,11 +814,78 @@ for i, (body, cls, color, tab) in enumerate(pages, 1):
         a, b = body.split('<!--IN-->')
         inner = a + '<div class="in">%s</div>' % b
     else:
-        inner = '<div class="in">%s</div>' % body
+        inner = '<div class="in">%s<!--TRIVIA--></div>' % body
     out.append('<section class="pg %s %s"%s>%s%s%s</section>' % (cls, side, style, inner, tabh, num))
-doc = ('<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><title>廈門旅遊手冊</title>'
-       '<link rel="stylesheet" href="book.css"><style id="sz"></style></head><body>%s</body></html>') % '\n'.join(out)
-open(OUT_HTML, 'w').write(doc)
+
+
+def write_doc():
+    doc = ('<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><title>廈門旅遊手冊</title>'
+           '<link rel="stylesheet" href="book.css"><style id="sz"></style></head><body>%s</body></html>') % '\n'.join(out)
+    open(OUT_HTML, 'w').write(doc)
+
+
+# ---------------------------------------------------------------- 冷知識：塞進有空位的頁面底下，不增加頁數
+TRIVIA = [
+    ('「金門」這個名字，來自明朝 1387 年築城守海防，取「固若金湯，雄鎮海門」的意思。以前這裡叫「浯洲」。',
+     ['坐飛機到金門', '午餐：佑昇生億鍋貼', '金城模範街']),
+    ('金門的縣鳥是戴勝，頭上的羽毛像一把小扇子，常在古厝的牆縫裡做窩。',
+     ['金城模範街', '飛回台北松山', '午餐：佑昇生億鍋貼', '坐船回金門']),
+    ('2018 年起，金門有一部分自來水是從福建用海底水管送過來的。金門和廈門，連水都連在一起。',
+     ['小三通：坐船到廈門', '午餐：佑昇生億鍋貼', '坐船回金門', '碼頭怎麼走・去程']),
+    ('廈門以前有很多白鷺鷥，所以又叫「鷺島」，白鷺也是廈門的市鳥。在海邊看到白色的鳥，就是牠。',
+     ['中山路步行街', '住宿資訊', '五天總覽', '鼓浪嶼']),
+    ('「沙茶」其實就是南洋烤肉串「沙嗲」的閩南話念法，是早年下南洋的人帶回來的味道。',
+     ['img/u-shacha.jpg', 'img/shacha.jpg']),
+    ('海蠣煎用台語念，就是「蚵仔煎」。廈門跟台灣寫法不一樣，念起來一模一樣。',
+     ['>海蠣煎</div>', 'img/u-oyster.jpg']),
+    ('金門菜刀是用以前打到金門的砲彈鋼打成的。從砲彈變成菜刀，是金門最特別的伴手禮。',
+     ['砲彈鋼', '刀子<br>菜刀']),
+]
+SKIP = ('cover', 'back', 'driver')
+NEED = 66   # 一則冷知識大約要的高度（px）
+
+
+def measure():
+    js = r'''
+const { chromium } = require('playwright');
+(async () => {
+  const b = await chromium.launch(); const p = await b.newPage();
+  await p.goto('file://' + process.argv[1], { waitUntil: 'networkidle' });
+  await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(400);
+  const r = await p.evaluate(() => [...document.querySelectorAll('.pg')].map((s, i) => {
+    const el = s.querySelector('.in'); if (!el) return null;
+    const kids = [...el.children]; if (!kids.length) return null;
+    const bottom = Math.max(...kids.map(k => k.getBoundingClientRect().bottom));
+    const h = s.querySelector('.hd span');
+    // 會自動放大的照片（.fit）可以縮回最小高度，讓出空間
+    const give = [...el.querySelectorAll(':scope > .fit')].reduce((t, f) =>
+      t + Math.max(0, f.getBoundingClientRect().height - parseFloat(getComputedStyle(f).minHeight || 0)), 0);
+    return { i, free: Math.round(el.getBoundingClientRect().bottom - bottom + give),
+             title: h ? h.textContent : '', memo: !!s.querySelector('.memo, .cost, .cred, .toc') };
+  }).filter(Boolean));
+  console.log(JSON.stringify(r)); await b.close();
+})();
+'''
+    return json.loads(subprocess.check_output(['node', '-e', js, OUT_HTML]))
+
+
+write_doc()
+info = [x for x in measure() if not x['memo'] and pages[x['i']][1] not in SKIP]
+taken = set()
+for text, prefer in TRIVIA:
+    # prefer：頁面標題，或頁面內容裡會出現的字
+    ok = [x for x in info if x['free'] >= NEED and x['i'] not in taken]
+    cand = [x for t in prefer for x in ok if x['title'] == t] + [x for t in prefer for x in ok if t in out[x['i']]]
+    if not cand:
+        cand = sorted([x for x in info if x['free'] >= NEED and x['i'] not in taken], key=lambda x: -x['free'])
+    if not cand:
+        print('冷知識放不下：', text[:12])
+        continue
+    k = cand[0]['i']
+    taken.add(k)
+    out[k] = out[k].replace('<!--TRIVIA-->', '<div class="trivia"><span>冷知識</span>%s</div>' % e(text))
+    print('冷知識 → 第 %d 頁（%s）' % (k + 1, cand[0]['title']))
+write_doc()
 print('pages:', len(pages), ' photos used:', len(used))
 
 # 用 Chromium 印成 PDF（出血版、裁切版），並檢查有沒有內容擠出頁面
