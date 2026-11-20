@@ -169,7 +169,7 @@ SPOT = {
                 story='這一帶以前叫「玉沙坡」，是廈門最早的漁港。1920 年代廈門沿著海邊築堤蓋馬路，原本的小漁港被填掉，漁船就搬到沙坡尾，蓋了新的避風塢，颱風天可以躲進來。後來漁業慢慢沒落，老工廠、老倉庫改成藝術區和咖啡店。',
                 place='spw'),
     'lunch4': dict(day='d4', t='11:30', title='沙坡尾找午餐', layout='one',
-                   photos=[('u-spw4', '水邊步道，兩邊都是小吃和小店'), ('shacha', '沙茶麵'), ('oyster', '海蠣煎')],
+                   photos=[('u-spw4', '水邊步道，兩邊都是小吃和小店'), ('shacha', '沙茶麵'), ('u-oyster', '海蠣煎')],
                    pts=['不用訂位，看到想吃的就進去', '推薦吃：<b>沙茶麵、海蠣煎、魚丸湯、麵線糊</b>', '吃不下就少點一點，大家分著吃']),
     'yj': dict(day='d4', t='13:30', title='嶼見閩南・看表演', layout='two', book='門票怡君代訂',
                photos=[('yujian', '嶼見閩南'), ('u-yj1', '館內像一座閩南古城'), ('u-yj2', '表演舞台')],
@@ -664,7 +664,7 @@ for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
             spot(o[1])
 
 # ---------------------------------------------------------------- 必吃美食
-FOOD_IMG = {'f-shacha': 'shacha', 'f-oyster': 'oyster', 'f-duck': 'duck', 'f-peanut': 'peanut', 'f-mianxian': 'mianxian',
+FOOD_IMG = {'f-shacha': 'shacha', 'f-oyster': 'u-oyster', 'f-duck': 'duck', 'f-peanut': 'peanut', 'f-mianxian': 'mianxian',
             'f-zongzi': 'zongzi', 'f-crab': 'u-crab', 'f-congee': 'u-congee', 'f-seafood': 'shellfish', 'f-tusun': 'tusun'}
 FOOD_EMO = {'f-crab': '1f980', 'f-congee': '1f372'}
 foods = T['foods']
@@ -755,7 +755,7 @@ def credits_page():
         groups.setdefault((clean_author(c['author']), c['lic']), []).append(c['what'])
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
-            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、沙坡尾、嶼見閩南、金城模範街、金門鍋貼、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
+            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、南普陀寺、採耳、小埕戲、廈鼓碼頭、鼓浪嶼、泰印象 SPA、沙坡尾、嶼見閩南、金城模範街、金門鍋貼、海蠣煎、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
             '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。貼紙和圖示：Microsoft Fluent Emoji（MIT）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 
