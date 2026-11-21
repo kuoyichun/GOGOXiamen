@@ -435,3 +435,5 @@ img { display: block; }
 .in > .trivia { margin-top: auto; padding-top: 2.4mm; font-size: 10.5pt; line-height: 1.5; color: var(--ink2); }
 .trivia span { display: inline-block; font-family: "Huninn", sans-serif; font-size: 9pt; line-height: 1.5; color: var(--ink2);
   border: .3mm solid #9DB3C4; border-radius: 1.5mm; padding: 0 1.4mm; margin-right: 1.4mm; vertical-align: .1em; background: rgba(255,255,255,.6); }
+.steps li { padding: 1.6mm 2.4mm; }
+.steps li + li { margin-top: 2mm; }

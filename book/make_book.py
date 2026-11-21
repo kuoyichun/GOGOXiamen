@@ -53,7 +53,7 @@ def src(key):
 
 
 # 直的照片放進橫的框時，要看哪一部分（object-position）
-FOCUS = {'u-dmg': '50% 45%', 'u-cabin': '50% 62%', 'u-shuitou': '50% 30%', 'u-jc1': '50% 42%', 'u-yj1': '50% 55%', 'u-kmair1': '50% 30%',
+FOCUS = {'u-trail6': '50% 30%', 'u-dmg': '50% 45%', 'u-cabin': '50% 62%', 'u-shuitou': '50% 30%', 'u-jc1': '50% 42%', 'u-yj1': '50% 55%', 'u-kmair1': '50% 30%',
          'u-xiagu1': '50% 18%', 'u-zhcity': '50% 30%', 'u-npt1': '50% 40%', 'u-bashi1': '50% 72%',
          'u-zs2': '50% 35%', 'u-gly2': '50% 40%', 'u-xcx2': '50% 45%', 'u-spw2': '50% 60%', 'u-xiagu2': '50% 55%'}
 
@@ -158,10 +158,9 @@ SPOT = {
     'spa': dict(day='d4', t='14:00', title='泰印象主題 SPA', layout='one', place='foot',
                 photos=[('massage', '泰印象 SPA 的包廂')],
                 pts=['跟飯店同一條路，在 2 樓', '足療＋全身按摩，約 80 分鐘', '太大力就說「輕一點」']),
-    'trail': dict(day='d3', t='15:40', title='山海步道・看夕陽', layout='two',
-                  photos=[('sh1', '盼歸塔'), ('sh2', '步道上的夕陽'), ('sh3', '盼歸塔的觀景平台'), ('sh4', '一路看海')],
-                  pts=['15:15 叫車到<b>萬石滄海觀景台</b>（步道入口），約 20 分鐘', '只走<b>下坡</b>這一段，不用爬山', '17:15 左右到<b>盼歸塔</b>看夕陽，五點半前天黑', '再下坡 15 分鐘到天泉步道廣場，走 10 分鐘到曾厝垵'],
-                  tip='山海健康步道全長約 23 公里，把廈門島上的山和海串在一起。我們只走最漂亮、往下坡的一小段。天氣好的時候，在萬石滄海觀景台可以遠遠看到金門。',
+    'trail': dict(day='d3', t='15:10', title='山海步道・看夕陽', layout='one',
+                  photos=[('sh2', '步道上的夕陽')],
+                  pts=['14:40 叫車到<b>梅海花台</b>（6-1 號口），約 25 分鐘', '全程約 4 公里，幾乎一路<b>下坡</b>，約 2 個半小時', '17:25 左右在盼歸塔看日落', '山上風大帶外套；天快黑時打開手機手電筒', '走累了：在萬石滄海旁的三官道院叫車'],
                   place='trail'),
     'zcc': dict(day='d3', t='18:00', title='曾厝垵：逛小巷、吃晚餐', layout='two',
                 photos=[('zcc', '曾厝垵的牌坊'), ('zcc2', '晚上的小吃街'), ('zcc3', '巷子裡的小吃攤'), ('zcc4', '旁邊就是海灘'), ('zcc5', '村子裡的老廟')],
@@ -263,6 +262,23 @@ def spot_pair(a, b):
     s = SPOT[a]
     d = DAYS[s['day']]
     page(head('景點介紹', daykick(s['day'])) + sc_card(a) + sc_card(b), 'spot', d['color'], int(s['day'][1:]))
+
+
+def trail_steps():
+    """山海步道：一站一站怎麼走"""
+    d = DAYS['d3']
+    body = '<div class="kick">%s</div>' % daykick('d3')
+    body += '<h1 class="hd" style="font-size:17pt"><span>山海步道怎麼走</span></h1>'
+    body += steps([
+        ('15:10 梅海花台下車', '看到「6-1」柱子就是步道入口', 'u-trail6'),
+        ('往下走到萬石滄海', '約 1.6 公里，下坡為主，約 45 分鐘', 'u-mhht'),
+        ('萬石滄海：螺旋觀景梯', '往下看上李水庫和山景', 'u-trailspiral'),
+        ('走到盼歸塔', '中間有一小段上坡，慢慢走', 'sh3'),
+        ('17:00 盼歸塔看夕陽', '360 度看海，17:25 左右日落', 'sh1'),
+        ('下坡到天泉步道廣場', '約 20 分鐘，從 7 號口出來就是海邊', 'sh4'),
+    ])
+    body += '<p class="note" style="text-align:center;margin-top:2mm">出 7 號口後，沿環島路走 10 分鐘到曾厝垵吃晚餐。</p>'
+    page(body, 'spot', d['color'], 3)
 
 
 def spot(key):
@@ -601,7 +617,7 @@ DAY_NOTE = {
 ORDER = {
     'd1': [('one', 'plane'), ('one', 'gt'), ('two', 'ship'), ('two', 'zs')],
     'd2': [('one', 'peanut'), ('two', 'bashi'), ('two', 'zwy'), ('pair', 'lunch2', 'ear'), ('two', 'xcx')],
-    'd3': [('two', 'spw'), ('one', 'lunch4'), ('two', 'trail'), ('two', 'zcc')],
+    'd3': [('two', 'spw'), ('one', 'lunch4'), ('one', 'trail'), ('steps',), ('two', 'zcc')],
     'd4': [('one', 'sm'), ('one', 'spa'), ('one', 'pack')],
     'd5': [('one', 'back'), ('two', 'mofan'), ('one', 'home')],
 }
@@ -658,6 +674,8 @@ for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
     for o in ORDER[did]:
         if o[0] == 'pair':
             spot_pair(o[1], o[2])
+        elif o[0] == 'steps':
+            trail_steps()
         elif o[0] == 'gly':
             gly_pages()
         else:
@@ -755,7 +773,7 @@ def credits_page():
         groups.setdefault((clean_author(c['author']), c['lic']), []).append(c['what'])
     lines = ['<p><b>%s</b>（%s）：%s</p>' % (e(a), e(l), e('、'.join(dict.fromkeys(w)))) for (a, l), w in groups.items()]
     return (head('照片來源') + '<div class="card"><div class="cred">'
-            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、採耳、小埕戲、泰印象 SPA、沙坡尾、金城模範街、金門鍋貼、海蠣煎、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
+            '<p>金門機場、水頭碼頭、小三通的船、飯店、中山路、八市、採耳、小埕戲、泰印象 SPA、沙坡尾、山海步道入口、金城模範街、金門鍋貼、海蠣煎、紅蟳米糕、海鮮砂鍋粥、貢糖、沙茶醬、南普陀素餅的照片為自行提供。其他照片來自 Wikimedia Commons：</p>%s'
             '<p>地圖海岸線：© OpenStreetMap 貢獻者（ODbL）。貼紙和圖示：Microsoft Fluent Emoji（MIT）。字型：jf open 粉圓（SIL OFL）、思源黑體（SIL OFL）。</p>'
             '<p>完整來源：github.com/kuoyichun/GOGOXiamen 的 book/credits.json</p></div></div>') % ''.join(lines)
 
