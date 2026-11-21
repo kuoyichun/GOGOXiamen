@@ -13,6 +13,7 @@
 - `img/`：照片（Wikimedia Commons，來源列在網頁最下面）
 - `audio/`：每個喇叭按鈕的語音檔（台灣國語女聲 HsiaoChen）
 - `tools/make_audio.py`：重新產生語音檔
+- `tools/bump_version.py`：改完網頁後跑一次，手機才會抓到新版（快取版本加 1）
 - `sw.js`：沒網路時也能打開看過的頁面
 
 ## 常見修改
