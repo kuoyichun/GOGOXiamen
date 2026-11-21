@@ -77,5 +77,11 @@ window.IMG_CREDITS = [
   "author": "衔禾之鹭",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:%E5%8E%A6%E9%97%A8%E5%B1%B1%E6%B5%B7%E5%81%A5%E5%BA%B7%E6%AD%A5%E9%81%93004.jpg"
+ },
+ {
+  "what": "SM 城市廣場",
+  "author": "Daddynnoob",
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:SM_Xiamen_2026_2.jpg"
  }
 ];
