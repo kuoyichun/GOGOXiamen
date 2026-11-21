@@ -1,6 +1,6 @@
 /* 離線也能看：頁面、程式先上網拿最新的，沒網路就用存下來的；照片和語音存起來重複用 */
-var CACHE = 'xiamen-v44';
-var CORE = ['./', 'index.html', 'assets/style.css?v=44', 'assets/data.js?v=44', 'assets/audio-version.js?v=44', 'assets/credits.js?v=44', 'assets/land.js?v=44', 'assets/map.js?v=44', 'assets/app.js?v=44'];
+var CACHE = 'xiamen-v45';
+var CORE = ['./', 'index.html', 'assets/style.css?v=45', 'assets/data.js?v=45', 'assets/audio-version.js?v=45', 'assets/credits.js?v=45', 'assets/land.js?v=45', 'assets/map.js?v=45', 'assets/app.js?v=45'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) {
