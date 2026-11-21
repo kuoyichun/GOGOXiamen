@@ -19,12 +19,6 @@ window.IMG_CREDITS = [
   "page": "https://commons.wikimedia.org/wiki/File:Huang_Zehe_peanut_soup.jpg"
  },
  {
-  "what": "鼓浪嶼老洋房",
-  "author": "H2v5o68z",
-  "lic": "CC0",
-  "page": "https://commons.wikimedia.org/wiki/File:%E9%BC%93%E6%B5%AA%E5%B1%BF%E9%BB%84%E8%8D%A3%E8%BF%9C%E5%A0%82.jpg"
- },
- {
   "what": "中山路小吃攤",
   "author": "lienyuan lee",
   "lic": "CC BY 3.0",
@@ -71,5 +65,17 @@ window.IMG_CREDITS = [
   "author": "董辰兴",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E5%8E%9D%E5%9E%B5%E7%89%8C%E5%9D%8A%E5%86%85%E4%BE%A7.jpg"
+ },
+ {
+  "what": "植物園的多肉植物區",
+  "author": "Slyronit",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Cactii_at_Botanical_Garden,_Xiamen.jpg"
+ },
+ {
+  "what": "山海步道的夕陽",
+  "author": "衔禾之鹭",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:%E5%8E%A6%E9%97%A8%E5%B1%B1%E6%B5%B7%E5%81%A5%E5%BA%B7%E6%AD%A5%E9%81%93004.jpg"
  }
 ];

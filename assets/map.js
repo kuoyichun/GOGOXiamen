@@ -12,12 +12,11 @@
     hotel:   { n: '飯店・中山路', ll: [118.0749, 24.4561], pr: 0, hotel: true },
     heping:  { n: '小埕戲',   ll: [118.0726, 24.4521], pr: 4 },
     bashi:   { n: '八市',       ll: [118.0697, 24.4612], pr: 6 },
-    xiagu:   { n: '廈鼓碼頭',   ll: [118.0698, 24.4829], pr: 3 },
-    gly:     { n: '鼓浪嶼',     ll: [118.0632, 24.4470], pr: 1 },
+    zwy:     { n: '植物園',     ll: [118.0935, 24.4545], pr: 2 },
     spw:     { n: '沙坡尾',     ll: [118.0829, 24.4399], pr: 2 },
     zcc:     { n: '曾厝垵',     ll: [118.1200, 24.4295], pr: 5 },
-    yujian:  { n: '嶼見閩南',   ll: [118.0711, 24.4935], pr: 2 },
-    npt:     { n: '南普陀寺',   ll: [118.0915, 24.4433], pr: 2 }
+    wsch:    { n: '萬石滄海',   ll: [118.1285, 24.4415], pr: 3 },
+    pgt:     { n: '盼歸塔',     ll: [118.1319, 24.4263], pr: 2 }
   };
 
   // 每天的路線；via 是經過點，bend 是弧度；mode：car 坐車、ship 坐船、walk 走路
@@ -29,23 +28,19 @@
     ],
     d2: [
       { a: 'hotel', b: 'bashi', m: 'walk', bend: 0.3 },
-      { a: 'bashi', b: 'npt', m: 'car', via: [[118.0820, 24.4520]] },
-      { a: 'npt', b: 'hotel', m: 'car', bend: 0.25 },
+      { a: 'bashi', b: 'zwy', m: 'car', via: [[118.0840, 24.4600]] },
+      { a: 'zwy', b: 'hotel', m: 'car', bend: 0.25 },
       { a: 'hotel', b: 'heping', m: 'car', bend: 0.6 }
     ],
     d3: [
-      { a: 'hotel', b: 'xiagu', m: 'car', via: [[118.0772, 24.470]] },
-      { a: 'xiagu', b: 'gly', m: 'ship', via: [[118.0662, 24.4640], [118.0648, 24.4535]] },
-      { a: 'gly', b: 'xiagu', m: 'ship', via: [[118.0592, 24.4560], [118.0610, 24.4700]] },
-      { a: 'xiagu', b: 'hotel', m: 'car', bend: 0.2 },
-      { a: 'hotel', b: 'zcc', m: 'car', via: [[118.0840, 24.4425], [118.0990, 24.4345], [118.1100, 24.4290]] },
-      { a: 'zcc', b: 'hotel', m: 'car', via: [[118.1080, 24.4470], [118.0900, 24.4560]] }
-    ],
-    d4: [
       { a: 'hotel', b: 'spw', m: 'car', via: [[118.0800, 24.4480]] },
-      { a: 'spw', b: 'yujian', m: 'car', via: [[118.0880, 24.4700]] },
-      { a: 'yujian', b: 'hotel', m: 'car', bend: -0.3 }
+      { a: 'spw', b: 'hotel', m: 'car', via: [[118.0870, 24.4470]] },
+      { a: 'hotel', b: 'wsch', m: 'car', via: [[118.1000, 24.4560], [118.1200, 24.4480]] },
+      { a: 'wsch', b: 'pgt', m: 'walk', bend: 0.25 },
+      { a: 'pgt', b: 'zcc', m: 'walk', bend: 0.25 },
+      { a: 'zcc', b: 'hotel', m: 'car', via: [[118.1000, 24.4330], [118.0900, 24.4400]] }
     ],
+    d4: [],
     d5: [
       { a: 'hotel', b: 'wutong', m: 'car', via: [[118.1300, 24.4880]] },
       { a: 'wutong', b: 'shuitou', m: 'ship', bend: 0.12 },
