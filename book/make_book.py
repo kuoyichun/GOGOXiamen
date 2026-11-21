@@ -151,7 +151,7 @@ SPOT = {
                 pts=['和平碼頭 4 樓，閩南古厝裝潢', '靠窗正對鼓浪嶼，看夕陽和夜景', '招牌菜：紅蟳米糕、薑母鴨'],
                 story='這個碼頭很有故事：2001 年第一班小三通的船，就是從金門開到這個和平碼頭靠岸。我們第一天坐的小三通，就是從那一天開始的。',
                 place='xcx'),
-    'spa': dict(day='d4', t='14:00', title='泰印象主題 SPA', photo='massage', place='foot',
+    'spa': dict(day='d4', t='14:00', title='泰印象主題 SPA', layout='one', place='foot',
                 photos=[('massage', '泰印象 SPA 的包廂')],
                 pts=['跟飯店同一條路，在 2 樓', '足療＋全身按摩，約 80 分鐘', '太大力就說「輕一點」']),
     'trail': dict(day='d3', t='15:40', title='山海步道・看夕陽', layout='two',
@@ -172,11 +172,14 @@ SPOT = {
     'lunch4': dict(day='d3', t='11:30', title='沙坡尾找午餐', layout='one',
                    photos=[('u-spw4', '水邊步道，兩邊都是小吃和小店'), ('shacha', '沙茶麵'), ('u-oyster', '海蠣煎')],
                    pts=['不用訂位，看到想吃的就進去', '推薦吃：<b>沙茶麵、海蠣煎、魚丸湯、麵線糊</b>', '吃不下就少點一點，大家分著吃']),
-    'shop': dict(day='d4', t='09:30', title='中山路買伴手禮', photo='u-subing',
-                 pts=['慢慢挑：鐵觀音、芒果乾、南普陀素餅', '肉做的東西不能帶回台灣', '包裝寫「肉松」「肉」的不要買']),
+    'blz': dict(day='d4', t='09:45', title='白鷺洲公園', layout='two',
+                photos=[('blz', '公園旁的筼筜湖'), ('blz2', '公園裡的步道'), ('blz3', '湖邊的林蔭步道'), ('blz4', '公園裡的龍雕')],
+                pts=['坐車約 10 分鐘，不用門票', '沿著筼筜湖邊散步，路很平', '週末早上很多廈門人在運動、跳舞', '11:15 叫車回中山路吃午餐'],
+                tip='筼筜湖本來是連著海的港灣，後來築堤圍成湖，現在是廈門市中心的大湖。湖裡有一座白鷺女神雕像，就是廈門「鷺島」的象徵，散步時可以找找看。',
+                place='blz'),
     'pack': dict(day='d4', t='15:30', title='收行李・最後一晚', layout='one',
                  photos=[('u-zs2', '最後一晚的中山路')],
-                 pts=['15:30 回飯店收行李，<b>大袋子</b>拿出來裝伴手禮', '17:30 在中山路吃最後一頓晚餐', '隔天中午才坐船，早點休息', '肉做的東西不能帶回台灣（看第 {ban} 頁）']),
+                 pts=['15:30 回飯店收行李，<b>大袋子</b>拿出來裝伴手禮', '17:30 在中山路吃最後一頓晚餐', '伴手禮還沒買齊，晚上在中山路補買', '肉做的東西不能帶回台灣（看第 {ban} 頁）']),
     'back': dict(day='d5', t='13:30', title='坐船回金門', layout='one',
                  photos=[('u-cabin', '回金門的船艙'), ('u-shuitou', '水頭碼頭的「抵港」入口')],
                  pts=['11:30 退房，坐車約 40 分鐘到五通碼頭', '12:30 報到（開船前 1 小時）', '13:30 開船，船名「迅安」', '坐約 30 分鐘回到水頭碼頭'],
@@ -326,7 +329,7 @@ for did in ['d1', 'd2', 'd3', 'd4', 'd5']:
     rows += ('<div style="display:grid;grid-template-columns:auto 1fr;align-items:center;gap:2.4mm;padding:1.3mm 0;border-bottom:.3mm dashed #CFE0E6">'
              '<span class="pill" style="background:%s;text-align:center">%d/%d（%s）</span><span class="hn" style="font-size:15pt;line-height:1.3">%s</span></div>') % (
         d['color'], T['month'], d['d'], d['wk'], e(d['title']))
-page(head('五天總覽') + '<div class="card mapcard"><img class="mapimg" src="img/map-all.png" alt="" style="height:76mm;object-fit:cover"></div>'
+page(head('五天總覽') + '<div class="card mapcard"><img class="mapimg" src="img/map-all.png" alt="" style="height:70mm;object-fit:cover"></div>'
      '<div class="card" style="padding:1.6mm 4mm">%s</div>' % rows, 'info', PREP, mark='五天總覽')
 
 # 5 這樣玩最開心（出遊的心情，用「我們的約定」的口吻）
@@ -593,14 +596,14 @@ DAY_NOTE = {
     'd1': ['起飛前 1 小時到松山機場', '入境後<b>護照收好</b>，不要拿出來', '連飯店 Wi-Fi，LINE、YouTube、臉書不能用'],
     'd2': ['<b>台胞證</b>帶在身上，護照收好', '植物園門票怡君代訂', '植物園坐觀光車，不用走太多路'],
     'd3': ['傍晚山上風大，<b>帶件外套</b>', '步道只走下坡，走累了在涼亭坐一下', '曾厝垵人多、巷子窄，大家走在一起'],
-    'd4': ['今天比較輕鬆，可以睡飽一點', '伴手禮：包裝寫「肉松」「肉」的不要買', '晚上收行李，<b>大袋子</b>拿出來裝伴手禮'],
+    'd4': ['白鷺洲公園不用門票，湖邊路很平', '伴手禮：包裝寫「肉松」「肉」的不要買', '晚上收行李，<b>大袋子</b>拿出來裝伴手禮'],
     'd5': ['11:30 前退房，別忘了東西', '廈門出境用<b>台胞證</b>，到金門才拿護照', '肉做的東西不能帶回台灣'],
 }
 ORDER = {
     'd1': [('one', 'plane'), ('one', 'gt'), ('two', 'ship'), ('two', 'zs')],
     'd2': [('one', 'peanut'), ('two', 'bashi'), ('two', 'zwy'), ('pair', 'lunch2', 'ear'), ('two', 'xcx')],
     'd3': [('two', 'spw'), ('one', 'lunch4'), ('two', 'trail'), ('two', 'zcc')],
-    'd4': [('pair', 'shop', 'spa'), ('one', 'pack')],
+    'd4': [('two', 'blz'), ('one', 'spa'), ('one', 'pack')],
     'd5': [('one', 'back'), ('two', 'mofan'), ('one', 'home')],
 }
 
@@ -716,7 +719,7 @@ page(head('台灣說法・廈門說法') + '<div class="card tape"><table class=
      '<p class="note" style="text-align:center;margin-top:1.6mm">廈門人也講閩南話，跟台語很像，可以說說看！</p>', 'info', PREP, mark='台灣說法・廈門說法')
 
 # ---------------------------------------------------------------- 給司機看
-DRIVER = ['hotel', 'zsroad', 'zwy', 'xcx', 'spw', 'trail', 'zcc', 'wutong']
+DRIVER = ['hotel', 'zwy', 'xcx', 'spw', 'trail', 'zcc', 'blz', 'wutong']
 
 
 def drv(key):
@@ -826,7 +829,7 @@ TRIVIA = [
     ('2018 年起，金門有一部分自來水是從福建用海底水管送過來的。金門和廈門，連水都連在一起。',
      ['小三通：坐船到廈門', '午餐：佑昇生億鍋貼', '坐船回金門', '碼頭怎麼走・去程']),
     ('廈門以前有很多白鷺鷥，所以又叫「鷺島」，白鷺也是廈門的市鳥。在海邊看到白色的鳥，就是牠。',
-     ['中山路步行街', '住宿資訊', '五天總覽', '鼓浪嶼']),
+     ['白鷺洲公園', '中山路步行街', '住宿資訊', '五天總覽']),
     ('「沙茶」其實就是南洋烤肉串「沙嗲」的閩南話念法，是早年下南洋的人帶回來的味道。',
      ['img/u-shacha.jpg', 'img/shacha.jpg']),
     ('海蠣煎用台語念，就是「蚵仔煎」。廈門跟台灣寫法不一樣，念起來一模一樣。',

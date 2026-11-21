@@ -77,5 +77,11 @@ window.IMG_CREDITS = [
   "author": "衔禾之鹭",
   "lic": "CC BY-SA 4.0",
   "page": "https://commons.wikimedia.org/wiki/File:%E5%8E%A6%E9%97%A8%E5%B1%B1%E6%B5%B7%E5%81%A5%E5%BA%B7%E6%AD%A5%E9%81%93004.jpg"
+ },
+ {
+  "what": "白鷺洲公園旁的筼筜湖",
+  "author": "Slyronit",
+  "lic": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Yundang_Lake,_Bailuzhou_Park,_Xiamen_2.jpg"
  }
 ];
